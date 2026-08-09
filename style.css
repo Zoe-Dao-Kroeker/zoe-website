@@ -1,0 +1,33 @@
+/*
+Theme Name:   Mel·lif·lu·ous Custom Theme
+Theme URI:    https://mel-lif-lu-ous.com
+Description:  Bespoke WordPress theme built for Mel·lif·lu·ous. Hand-coded PHP templates,
+              no page builder, no dependencies.
+Author:       Lara Kroeker Interactive
+Author URI:   https://larakroekerinteractive.com
+Version:      1.8.0
+License:      GNU General Public License v2 or later
+Text Domain:  mel-theme
+*/
+
+/*
+  This file is the theme header only. WordPress requires it to exist and to
+  carry the metadata above; it deliberately contains no CSS.
+
+  STANDALONE as of August 8, 2026. There is no `Template:` line. Hello Elementor
+  is no longer the parent, which removes the load-order problem where its
+  reset.css was enqueued after this theme's stylesheet and overrode brand
+  colours (see WORKSPACE-file-management.md, Global Open Issues #1).
+
+  Header format is the workspace standard: see WORKSPACE-file-management.md →
+  Theme identity. Author and Author URI are LKI on every theme, because this
+  modal is the one piece of LKI branding living permanently in a site's admin.
+
+  Renamed from `mel-child` to `mel-theme` on August 8, 2026, once the theme went
+  standalone. The folder, the WordPress slug, and the GitHub repo's deploy path
+  all match this name now.
+
+  Actual styles live in:
+    colors_and_type.css   design tokens, byte-identical to Design Guidelines
+    mel.css               everything else
+*/

@@ -1,0 +1,17 @@
+# Workspace defaults
+.DS_Store
+.workspace/
+node_modules/
+dist/
+uploads/
+*.log
+
+# Assets and archives never belong in git.
+# Mel-lif-lu-ous once accumulated a 25 GB .git from 168 committed .MOV files.
+Global Assets/
+_Archives (DO NOT READ)/
+*.mov
+*.MOV
+*.mp4
+*.psd
+*.ai
