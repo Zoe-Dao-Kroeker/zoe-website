@@ -11,7 +11,7 @@ $id = 'search-' . wp_unique_id();
 <form role="search" method="get" class="search-form"
       action="<?php echo esc_url( home_url( '/' ) ); ?>">
   <label class="screen-reader-text" for="<?php echo esc_attr( $id ); ?>">
-    <?php echo esc_html_x( 'Search for:', 'label', 'mel-theme' ); ?>
+    <?php echo esc_html_x( 'Search for:', 'label', 'zoe-theme' ); ?>
   </label>
   <input type="search" id="<?php echo esc_attr( $id ); ?>"
          class="search-form__field" name="s"

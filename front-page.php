@@ -1,5 +1,19 @@
 <?php
 /**
+ * 🔴 SCAFFOLD ONLY — this entire file is Mel's, unrenamed on purpose.
+ *
+ * Zoe's site is 8 static pages plus categorised posts plus a `portfolio` CPT,
+ * not a one-pager. Every section below (hero slideshow, three album blocks,
+ * Bandcamp embeds, residency categories) is Mel-specific content logic that
+ * does not apply to Zoe's content model and needs a full rewrite, not a
+ * find-and-replace. Kept as a structural reference only — see mel-theme's own
+ * README.md for what each part does before reusing any of the patterns here
+ * (the hero deferred-loading technique and the "query, never hardcode"
+ * discipline are both worth carrying over; the content itself is not).
+ *
+ * Original file docblock follows, unmodified:
+ */
+/**
  * Mel·lif·lu·ous Custom Theme — front-page.php
  * The one-pager. The pre-footer CTA and footer live in footer.php.
  *

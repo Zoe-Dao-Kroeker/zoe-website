@@ -1,18 +1,19 @@
 <?php
 /**
- * Mel·lif·lu·ous Custom Theme — functions.php
+ * Zoe Dao-Kroeker Custom Theme — functions.php
  *
- * STANDALONE as of August 8, 2026. No parent theme.
+ * STANDALONE from the start. No parent theme.
  *
- * Originally a child of Hello Elementor. The parent contributed only
- * assets/css/reset.css and assets/css/theme.css, and those were actively
- * harmful: they enqueued after this theme's stylesheet and overrode brand
- * colours. Dropping the parent removed that whole class of problem and let the
- * enqueue below go back to the default priority.
- *
- * Cloned from lki-child, reduced to Mel's content model: pages plus posts
- * organised by category. LKI's client_logo/testimonial CPTs and its
- * portfolio/book routing are gone.
+ * 🔴 SCAFFOLD ONLY. Cloned from Mel-lif-lu-ous/Website/mel-theme (the workspace
+ * donor) as structure and naming only — the theme-supports block, the enqueue
+ * pattern, and the "no template_include filter" approach below are real and
+ * meant to be kept. The two helper functions at the bottom (`mel_residency_posts`,
+ * `mel_bandcamp_embed`) are NOT: they are Mel's actual content logic (a
+ * one-pager with album sections and Bandcamp embeds), left in place
+ * unrenamed on purpose so they read as obviously foreign rather than being
+ * quietly relabelled "zoe_" and mistaken for real. Zoe's site is 8 pages plus
+ * posts plus a `portfolio` CPT, not a one-pager — replace both functions with
+ * whatever front-page.php actually needs once that's built, and delete these.
  */
 
 // ── Theme supports ───────────────────────────────────────────────────────
@@ -48,31 +49,32 @@ add_action( 'after_setup_theme', function () {
 // Design Guidelines/colors_and_type.css. Never hand-edit it here. Edit the
 // canonical file, copy it over, and verify with `diff`.
 //
-// IMPORTANT: bump MEL_STYLE_VER on every mel.css change. The browser and CDN
+// IMPORTANT: bump ZOE_STYLE_VER on every zoe.css change. The browser and CDN
 // cache by ?ver= query string, not by file content, so a correct upload can
 // still render stale.
-define( 'MEL_STYLE_VER', '1.8.0' );
+define( 'ZOE_STYLE_VER', '0.1.0' );
 
 add_action( 'wp_enqueue_scripts', function () {
     wp_enqueue_style(
-        'mel-tokens',
+        'zoe-tokens',
         get_stylesheet_directory_uri() . '/colors_and_type.css',
         [],
-        MEL_STYLE_VER
+        ZOE_STYLE_VER
     );
 
     wp_enqueue_style(
-        'mel-style',
-        get_stylesheet_directory_uri() . '/mel.css',
-        [ 'mel-tokens' ],
-        MEL_STYLE_VER
+        'zoe-style',
+        get_stylesheet_directory_uri() . '/zoe.css',
+        [ 'zoe-tokens' ],
+        ZOE_STYLE_VER
     );
 } );
 
 // ── Nav appearance ───────────────────────────────────────────────────────
-// The front page opens on a full-bleed photo, so the nav sits transparent over
-// it and frosts on scroll. Every other view has no hero behind the nav and
-// needs the solid treatment instead.
+// Inherited from Mel, where the front page opens on a full-bleed photo, so the
+// nav sits transparent over it and frosts on scroll. Zoe's front-page.php isn't
+// built yet — revisit this once it exists; a plain nav-solid everywhere may be
+// the right call if there's no full-bleed hero.
 add_filter( 'body_class', function ( $classes ) {
     if ( ! is_front_page() ) {
         $classes[] = 'nav-solid';
@@ -81,12 +83,14 @@ add_filter( 'body_class', function ( $classes ) {
 } );
 
 // ── Template routing ────────────────────────────────────────────────────
-// Deliberately none. WordPress resolves every template this theme uses through
-// its own hierarchy: front-page.php, home.php, single-post.php, page.php,
-// archive.php, search.php, 404.php, index.php. lki-child needed a
+// Deliberately none, for now. WordPress resolves every template this theme
+// uses through its own hierarchy: front-page.php, home.php, single-post.php,
+// page.php, archive.php, search.php, 404.php, index.php. lki-child needed a
 // template_include filter because one of its post types had a typo'd key that
-// could not be renamed without breaking URLs. Mel has no such problem, so the
-// filter is gone and the hierarchy is left to do its job.
+// could not be renamed without breaking URLs. Zoe's `all-porfolio` category
+// slug has the same shape of typo (see ZOE-website-status.md); whether it
+// needs a filter depends on the decision about the `portfolio` CPT vs.
+// categorised posts, still open.
 
 // ── Helpers used by front-page.php ──────────────────────────────────────
 

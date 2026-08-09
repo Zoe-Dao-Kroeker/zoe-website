@@ -1,15 +1,20 @@
 <?php
 /**
- * Mel Custom Theme — header.php
+ * Zoe Dao-Kroeker Custom Theme — header.php
  * HTML document head + fixed navigation + mobile drawer.
  * Called by get_header() in every custom template.
  *
- * The wordmark is live text in Newsreader, not an image: no vector logo exists,
- * and a typographic name scales and recolours better as type anyway. Swapping in
- * a real mark later means replacing the <span> without touching layout.
+ * The wordmark is live text in Newsreader, not an image: reused from Mel as a
+ * structural default, not a font decision for Zoe. No vector logo exists yet
+ * for either brand.
  *
- * Nav links are on-page anchors, since this is a one-pager. The section IDs they
- * point at are defined in front-page.php.
+ * 🔴 $nav_items below is still Mel's: on-page anchors for a one-pager
+ * (music/about/writing sections in front-page.php). Zoe's site is 8 real
+ * pages, not anchors on one page — this needs to become either
+ * `wp_nav_menu()` against a registered menu location, or a hardcoded list of
+ * real page URLs resolved through a helper (see `loc_page_url()` in
+ * loc-theme/functions.php for that pattern). Left as-is so it's obviously
+ * unfinished rather than silently wrong.
  */
 
 $is_one_pager = is_front_page();
@@ -39,8 +44,8 @@ $nav_items = [
 <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
   <div class="nav__inner">
 
-    <a href="<?php echo $home; ?>" class="nav__logo-link" aria-label="Mel·lif·lu·ous — home">
-      <span class="nav__logo-text">Mel&middot;lif&middot;lu&middot;ous</span>
+    <a href="<?php echo $home; ?>" class="nav__logo-link" aria-label="Zoe Dao-Kroeker — home">
+      <span class="nav__logo-text">Zoe Dao-Kroeker</span>
     </a>
 
     <div class="nav__links">

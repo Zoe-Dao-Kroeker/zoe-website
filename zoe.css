@@ -1,4 +1,13 @@
-/* Mel Custom Theme — mel.css
+/* Zoe Dao-Kroeker Custom Theme — zoe.css
+   🔴 SCAFFOLD ONLY. Renamed from mel-theme's mel.css; every rule below is
+   still Mel's — layout, components, section content, all of it. Nothing in
+   this file has been rewritten for Zoe yet. Kept in place as a structural
+   starting point (the load-order discipline described below is real and
+   worth keeping), not as usable output.
+
+   Original file docblock follows, unmodified:
+   ---------------------------------------------------------------------
+   Mel Custom Theme — mel.css
    Cloned from lki-child/lki.css on August 7, 2026.
 
    Source of truth for all tokens: colors_and_type.css, which is a byte-identical

@@ -1,11 +1,14 @@
 <?php
 /**
- * Mel Custom Theme — footer.php
+ * Zoe Dao-Kroeker Custom Theme — footer.php
  * Pre-footer CTA + footer bar + JS + closing body/html.
  * Called by get_footer() in every custom template.
  *
- * LKI's Calendly CTA is replaced: Mel's terminal action is listen and follow,
- * not book a call.
+ * 🔴 SCAFFOLD ONLY. This whole file is still Mel's content, unrenamed on
+ * purpose: the CTA below ("Listen") and the four social circles further down
+ * (Instagram, Bandcamp, Spotify, Apple Music) are Mel's real profile links,
+ * not placeholders — do not just relabel them. Zoe's terminal action and
+ * actual social links are open questions, not something to guess at here.
  */
 ?>
 

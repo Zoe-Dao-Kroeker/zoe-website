@@ -21,7 +21,7 @@ $term  = get_search_query();
         <?php if ( $term ) : ?>
           <?php printf(
               /* translators: %s: search term */
-              esc_html__( 'Results for &ldquo;%s&rdquo;', 'mel-theme' ),
+              esc_html__( 'Results for &ldquo;%s&rdquo;', 'zoe-theme' ),
               esc_html( $term )
           ); ?>
         <?php else : ?>
@@ -30,7 +30,7 @@ $term  = get_search_query();
       </h1>
       <?php if ( $term ) : ?>
         <p class="meta">
-          <?php echo esc_html( sprintf( _n( '%s result', '%s results', $found, 'mel-theme' ), number_format_i18n( $found ) ) ); ?>
+          <?php echo esc_html( sprintf( _n( '%s result', '%s results', $found, 'zoe-theme' ), number_format_i18n( $found ) ) ); ?>
         </p>
       <?php endif; ?>
     </div>
