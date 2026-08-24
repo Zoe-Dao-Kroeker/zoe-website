@@ -1,5 +1,5 @@
 # Zoe Dao-Kroeker Custom Theme
-# Version 0.1.0 — Last updated: August 9, 2026
+# Version 0.1.0 — Last updated: August 24, 2026
 
 A **custom standalone WordPress theme** for Zoe Dao-Kroeker. No parent theme, no page builder,
 no build step. Hand-written PHP templates plus two stylesheets — once written.
@@ -22,23 +22,34 @@ anything here works for Zoe.
 
 ---
 
-## Status — what's real vs. still Mel's
+## Status — what's real vs. still open
+
+**Updated August 24, 2026.** Content architecture (Phase 2), header/footer (Phase 3), and a full
+brand + Design Guidelines pass are done and live on staging. Real brand colours (two greens,
+a yellow CTA, LKI's grey ramp borrowed by Lara's explicit instruction), Zoe's real logo, and a
+token/CSS system structurally copied from `larakroekerinteractive.com/design-guidelines/` are all
+in place — see `/design-guidelines/` on staging for the self-checking colour/type/spacing record.
 
 | | State |
 |---|---|
-| Folder name, repo shape, git history | ✅ Real. Fresh local repo, no Mel history carried over |
+| Folder name, repo shape, git history | ✅ Real. Pushed to `github.com/Zoe-Dao-Kroeker/zoe-website` |
 | `style.css` header (Theme Name, Text Domain, etc.) | ✅ Real |
-| `functions.php` — theme supports, enqueue, cache-busting constant | ✅ Real pattern, generic |
-| `functions.php` — `mel_residency_posts()` / `mel_bandcamp_embed()` | 🔴 Mel's content logic. Left unrenamed on purpose so they read as obviously foreign. Delete once `front-page.php` is rebuilt |
-| `header.php` — wordmark, structure | ✅ Wordmark renamed. Nav is still Mel's anchor-based one-pager nav (🔴 see banner in the file) |
-| `footer.php` | 🔴 Entirely Mel's: the "Listen" CTA and the Instagram/Bandcamp/Spotify/Apple Music social row are Mel's real links |
-| `front-page.php` | 🔴 Entirely Mel's one-pager (hero slideshow, three album sections). Zoe's site is 8 pages + posts + a `portfolio` CPT, not a one-pager |
-| `zoe.css` (renamed from `mel.css`) | 🔴 Every rule is still Mel's |
-| `colors_and_type.css` | 🔴 Mel's actual palette and `--qp-*` prefix. Zoe has no brand tokens on record — this is a placeholder, not a decision |
+| `functions.php` | ✅ Real. Registers `primary` nav menu location, custom logo support, noindex for the guidelines/icon-library templates; requires `inc/acf-fields.php` and `inc/template-helpers.php` |
+| `inc/acf-fields.php` | ✅ Real. One ACF field group per page template (Home/Research/Work/About) plus a Site Settings options page (email, LinkedIn, Instagram, résumé) |
+| `inc/template-helpers.php` | ✅ Real. `zoe_cta()` renders the real `.btn-pill`/`.btn-outline`/`.btn-ghost` markup (copied from LKI's guidelines page), `zoe_external_link_atts()` |
+| `header.php` | ✅ Real. Real logo (falls back to text wordmark if unset) + `wp_nav_menu()` against the `primary` location |
+| `footer.php` | ✅ Real. Email/LinkedIn/Instagram/Résumé/Media Kit + copyright — social links source from the Site Settings options page, LinkedIn/Instagram still blank pending real URLs |
+| `front-page.php` | ❌ **Deleted.** Was entirely Mel's one-pager; the new Home page is a regular Page on `page-home.php` |
+| `page-home.php`, `page-research.php`, `page-work.php`, `page-about.php` | ✅ Real. Content is ACF fields, not hardcoded — populated from `Website/zoe_dao_kroeker_wireframes_with_content.html` |
+| `page-design-guidelines.php` | ✅ Real. Mirrors LKI's guidelines page section-for-section (Foundation/Logo/Photography/Icons/Colour/Type/Spacing/Buttons), self-checking swatches via live `getComputedStyle()`, noindexed, footer-linked as "Media Kit" |
+| `page-icon-library.php` | ✅ Real. Globs `assets-icons/System Icons/` at render time — never a hardcoded list — with a client-side name filter |
+| `assets-icons/System Icons/` | ✅ Real. Full Phosphor Light set, 1,512 icons, MIT licensed, shallow-cloned per the design guidelines playbook |
+| `zoe.css` | ✅ Real brand CSS — `.container`/`.eyebrow`/`.btn-pill`/`.btn-outline`/`.btn-ghost`/`.card` copied class-for-class from LKI's guidelines page, plus the site's own nav/hero/card/process/footer layout, all reading the role-layer tokens below |
+| `colors_and_type.css` | ✅ Real brand tokens. Primitive → role architecture copied from LKI exactly; Zoe's own primitives: greens `#8CB120`/`#05704E`, surface `#042E33`, CTA `#F5CE12` (+derived dark/light states), LKI's grey ramp reused verbatim per Lara's instruction, plus additional/semantic colours. Type is LKI's exact system: Inter, Instrument Serif, JetBrains Mono |
 | `search.php` / `searchform.php` | ✅ Real (text domain updated, no brand content) |
 | `home.php`, `single-post.php`, `archive.php`, `page.php`, `404.php`, `index.php` | ✅ Real, brand-agnostic — carried no Mel references to begin with |
-| `screenshot.jpg` | 🔴 Still Mel's photo. Needs a real capture once there's something to capture |
-| `.github/workflows/deploy-staging.yml`, `.gitignore` | ✅ Real, generic (secrets-driven, no hardcoded paths) |
+| `screenshot.jpg` | ✅ Real — a photo of Zoe, replacing Mel's |
+| `.github/workflows/deploy-staging.yml`, `.gitignore` | ✅ Real, generic (secrets-driven, no hardcoded paths) — **not actually used**: deploy is zip → `novamira/create-upload-link`, see `../../../WORKSPACE-novamira-setup.md` |
 
 ---
 

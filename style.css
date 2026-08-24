@@ -5,7 +5,7 @@ Description:  Bespoke WordPress theme built for Zoe Dao-Kroeker. Hand-coded PHP 
               no page builder, no dependencies.
 Author:       Lara Kroeker Interactive
 Author URI:   https://larakroekerinteractive.com
-Version:      0.1.0
+Version:      0.4.0
 License:      GNU General Public License v2 or later
 Text Domain:  zoe-theme
 */
@@ -20,18 +20,17 @@ Text Domain:  zoe-theme
   Theme identity. Author and Author URI are LKI on every theme, because this
   modal is the one piece of LKI branding living permanently in a site's admin.
 
-  🔴 SCAFFOLD ONLY, not yet a built theme. Cloned from
-  Mel-lif-lu-ous/Website/mel-theme (the workspace donor) as folder structure
-  and naming only. Version is 0.1.0 to reflect that honestly; bump to 1.0.0
-  at the first real build milestone. See README.md → Status for what is still
-  Mel's content and needs rebuilding for Zoe's actual site (8 pages, a
-  `portfolio` CPT, category-heavy posts — not a one-pager).
+  Cloned from Mel-lif-lu-ous/Website/mel-theme (the workspace donor) as
+  folder structure and naming only. Content architecture (ACF-driven page
+  templates) and header/footer are real and live on staging as of
+  August 24, 2026. See README.md → Status for full detail.
 
   Actual styles live in:
-    colors_and_type.css   design tokens. Currently a byte-for-byte copy of
-                           Mel's tokens (--qp-* prefix, Mel's palette). Zoe
-                           has no brand tokens on record yet — this is a
-                           placeholder, not a decision.
-    zoe.css                everything else. Still Mel's actual rules
-                           (renamed from mel.css, content untouched)
+    colors_and_type.css   🟡 interim neutral tokens (--zoe-* prefix) —
+                           real layout, but the actual colours/fonts are a
+                           placeholder until Zoe has a brand. See that
+                           file's own header.
+    zoe.css                🟡 real, minimal structural CSS built against
+                           those tokens — not Mel's content, but not final
+                           brand styling either.
 */

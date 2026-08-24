@@ -1,1042 +1,462 @@
-/* Zoe Dao-Kroeker Custom Theme — zoe.css
-   🔴 SCAFFOLD ONLY. Renamed from mel-theme's mel.css; every rule below is
-   still Mel's — layout, components, section content, all of it. Nothing in
-   this file has been rewritten for Zoe yet. Kept in place as a structural
-   starting point (the load-order discipline described below is real and
-   worth keeping), not as usable output.
+/* Zoe Dao-Kroeker — structural + component CSS.
+   .container / .eyebrow / .btn-pill / .btn-outline / .btn-ghost / .card are
+   copied class-for-class from larakroekerinteractive.com/design-guidelines/
+   (structure and behaviour, not colour) per Lara's instruction to set this
+   site up exactly the same as LKI's. Everything reads colors_and_type.css's
+   role variables (--bg, --fg, --cta, etc.) — never a --zoe-* primitive
+   directly, and never a hardcoded hex. */
 
-   Original file docblock follows, unmodified:
-   ---------------------------------------------------------------------
-   Mel Custom Theme — mel.css
-   Cloned from lki-child/lki.css on August 7, 2026.
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
 
-   Source of truth for all tokens: colors_and_type.css, which is a byte-identical
-   copy of Design Guidelines/colors_and_type.css and is enqueued BEFORE this file.
-   Never redefine a --qp-* value here, and never redefine anything colors_and_type.css
-   already owns (--font-sans, --font-display, --fw-*, --radius-*, --ease-std, --dur-*,
-   --sp-*, --sz-*, --type-*, --ls-*). Doing so would silently override the brand system,
-   because this file loads second.
-
-   There is no alias layer. Every declaration below references a canonical --qp-* or
-   --type-* token directly. An earlier version carried a "token bridge" remapping the
-   --lki-* names inherited from lki-child; that was removed on August 8, 2026 so this
-   theme reads as Mel's own and can serve as a clean donor for future sites.
-   ============================================================= */
-
-/* No @import here. Fonts (Newsreader + Inter) are loaded by colors_and_type.css.
-   Duplicating the import would fetch the same stylesheet twice. */
-
-/* ============================================================
-   Reset + Base
-   ============================================================ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
 body {
-  margin: 0; padding: 0;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--font-sans);
-  font-weight: var(--fw-light);
-  background: var(--qp-white-solid);
-  color: var(--qp-ink);
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  font-size: var(--type-body);
+  line-height: var(--type-body-lh);
+  font-weight: var(--fw-regular);
 }
-img { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
-ul, ol { list-style: none; }
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--track-heading);
+}
 p { margin: 0; }
-button { font-family: inherit; }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+ul, ol { list-style: none; margin: 0; padding: 0; }
 
-/* ============================================================
-   Layout
-   ============================================================ */
-.container    { max-width: 1240px; margin: 0 auto; padding: 0 80px; }
-.sec          { padding: 112px 0; }
-.sec--tight   { padding: 44px 0; }
-.sec--neutral { background: var(--qp-canvas); }
-.sec--dark    { background: var(--qp-ink); }
-.sec-rule     { border: none; border-top: 1px solid var(--qp-hairline); margin: 0; }
+.body-copy ul, .post-content ul, .page-content ul { list-style: disc; padding-left: 1.25em; }
+.body-copy ol, .post-content ol, .page-content ol { list-style: decimal; padding-left: 1.25em; }
 
-/* ============================================================
-   Type
-   ------------------------------------------------------------
-   Mel's scale, from the design guidelines. LKI shouted at Inter 900; Mel is
-   Newsreader 400 for display and editorial headings, Inter for everything
-   structural. Sizes and leading come from the token file, not from LKI.
-   ============================================================ */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--bg-inverse);
+  color: var(--fg-on-dark);
+  padding: var(--sp-8) var(--sp-16);
+  z-index: 1000;
+}
+.skip-link:focus { left: var(--sp-12); top: var(--sp-12); }
 
-/* Micro caps. Inter 700 tracked, per the guidelines' micro spec. */
+.container { max-width: var(--wrap-max); margin: 0 auto; padding: 0 var(--sp-80); }
+
+@media (max-width: 760px) {
+  .container { padding: 0 var(--sp-20); }
+}
+
+/* ── Eyebrow ──────────────────────────────────────────────────────────── */
+
 .eyebrow {
   display: block;
-  font-family: var(--font-sans);
-  font-size: var(--type-micro-size); line-height: var(--type-micro-lh);
-  font-weight: var(--fw-bold);
-  letter-spacing: var(--ls-wide-md); text-transform: uppercase;
-  color: var(--qp-brand); margin-bottom: var(--sp-5);
-}
-.eyebrow--light  { color: var(--qp-brand-light); }
-.eyebrow--muted  { color: var(--qp-muted-soft); }
-
-/* The italic accent. Forest only, and ONE PER PAGE. Newsreader 300 italic. */
-.accent {
-  font-family: var(--font-display); font-style: italic;
-  font-weight: var(--fw-light); color: var(--qp-brand);
+  font-size: var(--type-micro);
+  line-height: var(--type-micro-lh);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--track-micro);
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  margin-bottom: var(--sp-20);
 }
 
-/* Section headings. Newsreader 400, scaling between Mel's H2 and H1. */
-h2.display-h2 {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3.4vw, 2.5rem);   /* 32px -> 40px */
-  line-height: 1.2; letter-spacing: var(--ls-tight-xs);
-  font-weight: var(--fw-regular);
-  color: var(--qp-ink); margin-bottom: var(--sp-5);
-}
+/* ── Buttons — one filled pill, one flash of CTA colour ──────────────── */
 
-/* Structural headings. Inter 600, per the guidelines' H3 definition. */
-h3.h3 {
-  font-family: var(--font-sans);
-  font-size: var(--type-ui-3xl); line-height: 1.4;
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--ls-tight-xs);
-  color: var(--qp-ink); margin-bottom: var(--sp-2_5);
-}
-
-/* Lead. Inter 300 at 24/36. */
-.lead {
-  font-family: var(--font-sans);
-  font-size: var(--type-lead-size); line-height: var(--type-lead-lh);
-  font-weight: var(--fw-light);
-  color: var(--qp-body); max-width: 46ch;
-}
-.lead--light { color: var(--qp-on-dark-soft); }
-
-/* Body. Inter 400 at 16/26, the default reading size. */
-.body-copy {
-  font-family: var(--font-sans);
-  font-size: var(--type-body-size); line-height: var(--type-body-lh);
-  font-weight: var(--fw-regular); color: var(--qp-body);
-}
-.body-copy p + p { margin-top: var(--sp-4); }
-.body-copy--light { color: var(--qp-on-dark-muted); }
-
-/* Small. Captions, metadata, attribution. */
-.meta {
-  font-family: var(--font-sans);
-  font-size: var(--type-small-size); line-height: var(--type-small-lh);
-  color: var(--qp-muted);
-}
-
-/* ============================================================
-   Grids
-   ============================================================ */
-.grid-2      { display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: start; }
-.grid-2-even { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
-.grid-3      { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-.grid-4      { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
-
-/* ============================================================
-   Scroll Reveal
-   ============================================================ */
-.reveal {
-  opacity: 0; transform: translateY(18px);
-  transition: opacity 520ms var(--ease-std), transform 520ms var(--ease-std);
-}
-.reveal.is-visible { opacity: 1; transform: none; }
-.reveal.d1 { transition-delay: 80ms; }
-.reveal.d2 { transition-delay: 160ms; }
-.reveal.d3 { transition-delay: 240ms; }
-
-/* ============================================================
-   Navigation
-   ============================================================ */
-.nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  height: 84px; display: flex; align-items: center;
-  transition: background var(--dur-std) var(--ease-std);
-}
-.nav.scrolled {
-  background: rgba(245,245,245,.93);
-  backdrop-filter: saturate(160%) blur(14px);
-  -webkit-backdrop-filter: saturate(160%) blur(14px);
-}
-.nav__inner {
-  width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 80px;
-  display: flex; align-items: center; justify-content: space-between; gap: 32px;
-}
-.nav__logo         { height: 56px; width: auto; display: block; }
-.nav__logo-light   { display: block; }
-.nav__logo-dark    { display: none; }
-.nav.scrolled .nav__logo-light { display: none; }
-.nav.scrolled .nav__logo-dark  { display: block; }
-.nav__logo-text {
-  font-size: 14px; font-weight: var(--fw-semibold); letter-spacing: -0.01em;
-  color: var(--qp-canvas); white-space: nowrap;
-}
-.nav.scrolled .nav__logo-text { color: var(--qp-ink); }
-.nav__links {
-  display: flex; align-items: center; gap: 32px;
-  font-size: 12px; font-weight: var(--fw-semibold);
-  letter-spacing: .06em; text-transform: uppercase;
-}
-.nav__link { color: rgba(245,245,245,.6); transition: color var(--dur-fast); }
-.nav__link:hover { color: var(--qp-canvas); }
-.nav.scrolled .nav__link       { color: var(--qp-muted); }
-.nav.scrolled .nav__link:hover { color: var(--qp-ink); }
-.nav .nav-pill {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 6px 6px 16px; border-radius: var(--radius-pill);
-  background: rgba(255,255,255,.1); border: 1px solid rgba(245,245,245,.28);
-  color: var(--qp-canvas);
-  font-family: var(--font-sans); font-size: 12px; font-weight: var(--fw-semibold);
-  letter-spacing: .04em; text-transform: uppercase;
-  cursor: pointer; text-decoration: none;
-  transition: background var(--dur-fast), border-color var(--dur-fast);
-}
-.nav .nav-pill:hover { background: rgba(255,255,255,.18); border-color: rgba(245,245,245,.6); }
-.nav .nav-pill .arr {
-  width: 28px; height: 28px; border-radius: 50%;
-  background: var(--qp-brand); color: #fff;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  transition: transform var(--dur-std) var(--ease-std);
-}
-.nav .nav-pill:hover .arr { transform: rotate(45deg); }
-.nav.scrolled .nav-pill { background: var(--qp-ink); color: var(--qp-canvas); border-color: transparent; }
-.nav.scrolled .nav-pill:hover { background: var(--qp-ink-deep); color: var(--qp-brand); }
-
-/* Hamburger */
-.nav__hamburger {
-  display: none; flex-direction: column; justify-content: space-between;
-  width: 24px; height: 18px;
-  background: none; border: none; cursor: pointer; padding: 0; flex-shrink: 0;
-}
-.nav__hamburger span {
-  display: block; height: 2px; border-radius: 2px;
-  background: rgba(245,245,245,.75);
-  transition: transform var(--dur-std) var(--ease-std), opacity var(--dur-fast), background var(--dur-std) var(--ease-std);
-}
-.nav.scrolled .nav__hamburger span,
-body:not(.home) .nav .nav__hamburger span { background: var(--qp-ink); }
-.nav__hamburger.is-open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-.nav__hamburger.is-open span:nth-child(2) { opacity: 0; }
-.nav__hamburger.is-open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-.nav__drawer {
-  position: fixed; top: 84px; left: 0; right: 0; z-index: 99;
-  background: rgba(245,245,245,.97);
-  backdrop-filter: saturate(160%) blur(14px); -webkit-backdrop-filter: saturate(160%) blur(14px);
-  display: flex; flex-direction: column;
-  max-height: 0; overflow: hidden;
-  transition: max-height var(--dur-std) var(--ease-std);
-}
-.nav__drawer.is-open { max-height: 400px; }
-.nav__drawer-link {
-  display: block; padding: 14px 28px;
-  font-size: 13px; font-weight: var(--fw-semibold); letter-spacing: .06em; text-transform: uppercase;
-  color: var(--qp-muted); text-decoration: none;
-  border-bottom: 1px solid rgba(49,49,49,.05);
-  transition: color var(--dur-fast), background var(--dur-fast);
-}
-.nav__drawer-link:hover { color: var(--qp-ink); background: rgba(49,49,49,.04); }
-.nav__drawer-cta {
-  display: block; margin: 16px 28px 20px; padding: 12px 20px;
-  background: var(--qp-ink); color: var(--qp-canvas);
-  border-radius: var(--radius-pill); text-align: center;
-  font-size: 13px; font-weight: var(--fw-semibold); letter-spacing: .04em; text-transform: uppercase;
-  text-decoration: none; transition: background var(--dur-fast);
-}
-.nav__drawer-cta:hover { background: var(--qp-ink-deep); }
-
-/* ============================================================
-   Hero
-   ============================================================ */
-.hero {
-  position: relative; min-height: 100vh;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  padding-bottom: 100px; background: var(--qp-ink); overflow: hidden;
-}
-.hero__bg { position: absolute; inset: 0; z-index: 0; background: var(--qp-ink); }
-
-/* ── Hero slideshow ──────────────────────────────────────────────
-   Eleven photos from Lara's posts, crossfading. Replaced the single
-   background-image on .hero__bg.
-
-   The slides all sit in the same place, stacked, and only .is-active is opaque,
-   so the crossfade is one opacity transition with nothing moving. The ink
-   background underneath means the first paint is never a white flash.
-
-   Ratios of the source photos run 1.33 to 1.78, so object-fit: cover is doing
-   real cropping on the squarer ones. object-position is centred, which suits
-   these particular images (landscape, subject near the middle). If one of them
-   crops badly, give that slide its own object-position rather than changing
-   this rule. */
-.hero__slides { position: absolute; inset: 0; z-index: 0; background: var(--qp-ink); }
-.hero__slide {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center center;
-  opacity: 0;
-  transition: opacity var(--dur-slow) var(--ease-std);
-  will-change: opacity;
-  user-select: none;
-}
-.hero__slide.is-active { opacity: 1; }
-
-/* The scrim used to be baked into .hero__bg's background shorthand. It has to be
-   its own layer now so it sits above whichever slide is showing, otherwise the
-   headline loses contrast every time a bright photo comes up. */
-.hero__scrim {
-  position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(to top,
-    rgba(49,49,49,.96) 0%,
-    rgba(49,49,49,.60) 45%,
-    rgba(49,49,49,.25) 100%);
-}
-
-/* Someone who asked for less motion gets the first photo and nothing else. The
-   handler in footer.php checks the same query and never starts its timer, so
-   this is belt and braces rather than the only guard. */
-@media (prefers-reduced-motion: reduce) {
-  .hero__slide { transition: none; }
-}
-
-.hero__body {
-  position: relative; z-index: 2;
-  width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 80px;
-}
-.hero__h1 {
-  font-size: clamp(3rem, 6.8vw, 6.2rem);
-  line-height: 1.0; letter-spacing: -.038em;
-  font-weight: var(--fw-semibold); color: var(--qp-canvas);
-  max-width: 16ch; margin-bottom: 28px;
-}
-.hero__h1 .accent { color: var(--qp-brand-light); }
-.hero__lead {
-  font-size: 18px; line-height: 1.68; color: rgba(245,245,245,.68);
-  max-width: 54ch; margin-bottom: 44px; font-weight: var(--fw-light);
-}
-.hero__ctas { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
-
-/* ============================================================
-   Buttons
-   ------------------------------------------------------------
-   Mel's guidelines put button radii at 8px and reserve pill radii for tags
-   and chips, so LKI's pill system is replaced rather than recoloured. The
-   circular arrow that rotated 45 degrees on hover is gone too: rotation is
-   outside Mel's motion contract.
-   ============================================================ */
-.btn {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 13px 24px; border-radius: var(--radius-sm);   /* 8px */
-  background: var(--qp-brand); color: var(--qp-white-solid);
-  font-family: var(--font-sans); font-size: var(--type-ui-xl);
-  font-weight: var(--fw-semibold); letter-spacing: var(--ls-wide-xs);
-  cursor: pointer; border: 1px solid transparent; text-decoration: none;
-  white-space: nowrap;
-  transition: background var(--dur-fast) var(--ease-std),
-              border-color var(--dur-fast) var(--ease-std),
-              color var(--dur-fast) var(--ease-std);
-}
-.btn:hover { background: var(--qp-brand-dark); }
-.btn svg { flex-shrink: 0; }
-
-/* Ghost: quiet secondary action on a light ground. */
-.btn--ghost {
-  background: transparent; color: var(--qp-ink);
-  border-color: var(--qp-hairline-strong);
-}
-.btn--ghost:hover {
-  background: var(--qp-surface-strong);
-  border-color: var(--qp-muted-soft);
-  color: var(--qp-ink);
-}
-
-/* On a dark or photographic ground: hero, dark bands. */
-.btn--on-dark {
-  background: rgba(255,255,255,.12); color: var(--qp-canvas);
-  border-color: rgba(245,245,245,.32);
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-}
-.btn--on-dark:hover {
-  background: rgba(255,255,255,.2); border-color: rgba(245,245,245,.6);
-}
-
-/* Text-only link action. */
-.btn--text {
-  padding: 0; background: none; border: none; border-radius: 0;
-  color: var(--qp-brand);
-}
-.btn--text:hover { background: none; color: var(--qp-brand-dark); }
-.btn--text-on-dark { padding: 0; background: none; border: none; color: rgba(245,245,245,.72); }
-.btn--text-on-dark:hover { background: none; color: var(--qp-canvas); }
-
-/* Focus: visible for keyboard users, using the token ring. */
-.btn:focus-visible,
-.stream-link:focus-visible {
-  outline: none; box-shadow: 0 0 0 3px var(--qp-focus-ring);
-}
-
-/* ============================================================
-   Proof Strip
-   ============================================================ */
-.proof {
-  overflow: hidden; display: flex; padding: 8px 0 16px;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-}
-.proof__track {
-  display: flex; flex-shrink: 0; gap: 64px; align-items: center;
-  height: 96px; padding-right: 64px; animation: marquee 32s linear infinite;
-}
-.proof:hover .proof__track { animation-play-state: paused; }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-100%); } }
-.proof__item { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; }
-.proof__logo { height: 44px; width: auto; max-width: 220px; filter: brightness(0) opacity(0.45); display: block; }
-
-/* ============================================================
-   About
-   ============================================================ */
-.about-grid  { display: grid; grid-template-columns: 2fr 3fr; gap: 88px; align-items: start; }
-.about-photo { aspect-ratio: 4/5; overflow: hidden; border-radius: 2px; }
-.about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-.about-photo.no-img {
-  background: var(--qp-canvas); border: 1px solid var(--qp-hairline);
-  background-image:
-    linear-gradient(to top right, transparent calc(50% - .5px), var(--qp-hairline) calc(50% - .5px), var(--qp-hairline) calc(50% + .5px), transparent calc(50% + .5px)),
-    linear-gradient(to bottom right, transparent calc(50% - .5px), var(--qp-hairline) calc(50% - .5px), var(--qp-hairline) calc(50% + .5px), transparent calc(50% + .5px));
-}
-.about-note  { margin-top: 22px; font-size: 15px; font-weight: var(--fw-semibold); color: var(--qp-ink); letter-spacing: -.005em; }
-.about-btns  { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 28px; }
-
-/* ============================================================
-   CTA Section
-   ============================================================ */
-.cta-sec { text-align: center; padding: 128px 0; position: relative; overflow: hidden; background: var(--qp-ink); }
-.cta-sec__flowers { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
-.cta-sec__flowers img { width: min(900px, 120%); opacity: .06; filter: brightness(0) invert(1); }
-.cta-sec .display-h2 { max-width: 26ch; margin: 0 auto 44px; color: var(--qp-canvas); font-size: clamp(1.8rem, 3.8vw, 3.2rem); }
-.cta-sec .eyebrow { color: var(--qp-brand-light); }
-/* The section is text-align:center, but .stream-row is a flex container and
-   text-align does not reach flex children. It needs its own centring. */
-.cta-sec .stream-row { justify-content: center; align-items: center; }
-
-/* ============================================================
-   Footer
-   ============================================================ */
-.footer { background: var(--qp-ink); border-top: 1px solid rgba(245,245,245,.07); padding: 44px 0 40px; }
-/* Two children now (brand block, links block), so two columns. Was 1fr auto auto
-   back when the footer nav sat between them. */
-.footer__inner { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
-.footer__logo { height: 56px; width: auto; opacity: .9; }
-.footer__copy { font-size: 12px; color: rgba(245,245,245,.32); margin-top: 10px; }
-
-/* NOTE: the .footer__nav, .footer__socials and icon-circle .footer__social rules
-   that used to live here were deleted in 1.7.1. They came from lki-child, where
-   the socials were 34px circles holding <img> icons.
-   The bug they caused: .footer__social was declared twice in this file — here as
-   a 34px circle, and again further down as a plain text link. The later block won
-   on colour and font but never reset width/height/border-radius, so the footer
-   rendered small circles with the words "Instagram" and "Bandcamp" spilling out
-   of them and overlapping each other. Do not reintroduce a second
-   .footer__social block; the only one now is .footer__social--circle below. */
-
-/* ============================================================
-   Interior nav — solid on non-hero pages
-   body.nav-solid is added via body_class filter in functions.php
-   ============================================================ */
-body.nav-solid .nav {
-  background: rgba(245,245,245,.93);
-  backdrop-filter: saturate(160%) blur(14px);
-  -webkit-backdrop-filter: saturate(160%) blur(14px);
-}
-body.nav-solid .nav .nav__logo-light { display: none; }
-body.nav-solid .nav .nav__logo-dark  { display: block; }
-body.nav-solid .nav .nav__logo-text  { color: var(--qp-ink); }
-body.nav-solid .nav .nav__link       { color: var(--qp-muted); }
-body.nav-solid .nav .nav__link:hover { color: var(--qp-ink); }
-body.nav-solid .nav .nav-pill        { background: var(--qp-ink); color: var(--qp-canvas); border-color: transparent; }
-body.nav-solid .nav .nav-pill:hover  { background: var(--qp-ink-deep); color: var(--qp-brand); }
-body.nav-solid .nav .nav__hamburger span { background: var(--qp-ink); }
-
-/* ============================================================
-   Generic Page (About, Guest Teaching, etc.)
-   ============================================================ */
-.page-main { padding-top: 84px; min-height: 60vh; }
-.page-header {
-  padding: 72px 0 56px;
-  margin-bottom: 72px;
-}
-.page-title {
-  font-size: clamp(2.6rem, 5.5vw, 4.8rem);
-  font-weight: var(--fw-semibold); letter-spacing: -.035em; line-height: 1.06;
-  color: var(--qp-ink); max-width: 22ch; margin: 0;
-}
-.page-content {
-  max-width: 760px;
-  padding-bottom: 120px;
-}
-.page-content h2 {
-  font-size: 1.75rem; font-weight: var(--fw-semibold); line-height: 1.25; letter-spacing: -.015em;
-  margin-top: 2.2em; margin-bottom: 0.5em;
-}
-.page-content h3 {
-  font-size: 1.25rem; font-weight: var(--fw-semibold); line-height: 1.3; letter-spacing: -.01em;
-  margin-top: 1.8em; margin-bottom: 0.4em;
-}
-.page-content p { margin-bottom: 1.4em; }
-.page-content ul, .page-content ol { padding-left: 1.5em; margin-bottom: 1.4em; }
-.page-content li { margin-bottom: 0.5em; }
-.page-content img { max-width: 100%; height: auto; border-radius: var(--radius-sm); margin: 2em 0; }
-.page-content a { color: var(--qp-brand); text-decoration: underline; text-decoration-thickness: 1px; }
-.page-content blockquote {
-  border-left: 3px solid var(--qp-brand);
-  padding-left: 24px; margin: 2em 0;
-  font-size: 1.1em; color: var(--qp-muted); font-style: italic;
-}
-
-/* ============================================================
-   Blog Archive (home.php / archive.php)
-   ============================================================ */
-.blog-archive { padding-top: 84px; }
-.blog-archive__header {
-  padding: 72px 0 56px;
-}
-.blog-archive__title {
-  font-size: clamp(2.6rem, 5.5vw, 4.8rem);
-  font-weight: var(--fw-semibold); letter-spacing: -.035em; line-height: 1.06;
-  color: var(--qp-ink); margin: 0;
-}
-.blog-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 56px 32px; padding-bottom: 80px;
-}
-.blog-card { display: block; }
-.blog-card__link { display: block; text-decoration: none; }
-.blog-card__img-wrap {
-  position: relative;
-  aspect-ratio: 4 / 3; border-radius: var(--radius-sm);
-  overflow: hidden; background: var(--qp-ink);
-}
-.blog-card__img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%; object-fit: cover; display: block;
-  transition: transform 480ms var(--ease-std);
-}
-.blog-card__link:hover .blog-card__img { transform: scale(1.04); }
-.blog-card__body {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(49,49,49,.95) 0%, rgba(49,49,49,.5) 45%, transparent 75%);
-  display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 28px;
-}
-.blog-card__eyebrow {
-  font-size: 10px; font-weight: var(--fw-semibold); letter-spacing: .1em;
-  text-transform: uppercase; color: var(--qp-brand-light);
-  margin-bottom: 8px; display: block;
-}
-.blog-card__title {
-  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
-  font-weight: var(--fw-semibold); letter-spacing: -.02em; line-height: 1.22;
-  color: var(--qp-canvas); margin: 0 0 10px;
-}
-.blog-card__excerpt {
-  font-size: 13px; line-height: 1.65; color: rgba(245,245,245,.68); margin: 0 0 12px;
-  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-}
-.blog-card__meta {
-  font-size: 11px; font-weight: var(--fw-semibold); letter-spacing: .06em;
-  text-transform: uppercase; color: rgba(245,245,245,.4);
-}
-.blog-pagination { padding: 24px 0 80px; display: flex; justify-content: center; }
-.blog-pagination .nav-links { display: flex; gap: 8px; align-items: center; }
-.blog-pagination .page-numbers {
-  display: flex; align-items: center; justify-content: center;
-  width: 38px; height: 38px; border-radius: 50%;
-  font-size: 13px; font-weight: var(--fw-semibold); color: var(--qp-muted);
-  border: 1px solid var(--qp-hairline); text-decoration: none;
-  transition: background var(--dur-fast), color var(--dur-fast);
-}
-.blog-pagination .page-numbers:hover,
-.blog-pagination .page-numbers.current { background: var(--qp-ink); color: var(--qp-canvas); border-color: transparent; }
-.blog-pagination .page-numbers.dots { border: none; width: auto; }
-
-/* ============================================================
-   Blog Single Post (single.php)
-   ============================================================ */
-.post-title-header { padding-top: 84px; background: var(--qp-white-solid); }
-.post-title-header .container { padding-top: 72px; padding-bottom: 56px; border-bottom: 1px solid var(--qp-hairline); }
-.post-title {
-  font-size: clamp(2.2rem, 4.5vw, 4rem);
-  font-weight: var(--fw-semibold); letter-spacing: -.032em; line-height: 1.08;
-  color: var(--qp-ink); margin: 12px 0 20px; max-width: 22ch;
-}
-.post-meta-bar {
-  font-size: 12px; font-weight: var(--fw-semibold); letter-spacing: .05em;
-  text-transform: uppercase; color: var(--qp-muted);
-}
-.post-meta-bar .post-cat { color: var(--qp-brand); }
-.post-main { padding: 72px 0 120px; }
-.hero + .post-main { padding-top: 80px; }
-.post-content { max-width: 760px; }
-.post-content h2 {
-  font-size: 1.75rem; font-weight: var(--fw-semibold); line-height: 1.25; letter-spacing: -.015em;
-  margin-top: 2.2em; margin-bottom: 0.5em;
-}
-.post-content h3 {
-  font-size: 1.25rem; font-weight: var(--fw-semibold); line-height: 1.3; letter-spacing: -.01em;
-  margin-top: 1.8em; margin-bottom: 0.4em;
-}
-.post-content p { margin-bottom: 1.4em; }
-.post-content ul, .post-content ol { padding-left: 1.5em; margin-bottom: 1.4em; }
-.post-content li { margin-bottom: 0.5em; }
-.post-content img { max-width: 100%; height: auto; border-radius: var(--radius-sm); margin: 2em 0; }
-.post-content a { color: var(--qp-brand); text-decoration: underline; text-decoration-thickness: 1px; }
-.post-content blockquote {
-  border-left: 3px solid var(--qp-brand);
-  padding-left: 24px; margin: 2em 0;
-  font-size: 1.15em; color: var(--qp-muted); font-style: italic;
-}
-
-/* ============================================================
-   Hero — Mel overrides
-   ------------------------------------------------------------
-   Same structure as LKI (full-bleed photo, content bottom-left) but the
-   headline is Newsreader 400 rather than Inter 900, and the scrim leans on
-   Mel's ink rather than LKI's navy.
-   ============================================================ */
-.hero { background: var(--qp-ink); padding-bottom: var(--sp-12); }
-.hero__bg { background: var(--qp-ink); }
-.hero__h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2.75rem, 6vw, 5rem);
-  line-height: 1.05; letter-spacing: var(--ls-tight-md);
-  font-weight: var(--fw-regular);
-  color: var(--qp-canvas);
-  max-width: 22ch; margin-bottom: var(--sp-6);
-}
-.hero__h1 .accent { color: var(--qp-brand-light); }
-.hero__lead {
-  font-family: var(--font-sans);
-  font-size: var(--type-ui-4xl); line-height: 1.65;
-  font-weight: var(--fw-light);
-  color: var(--qp-on-dark-soft);
-  /* 54ch rather than 48: the lead is now a full bio sentence, and at 48 it wrapped
-     to five lines in the hero. */
-  max-width: 54ch; margin-bottom: var(--sp-7);
-}
-
-/* ============================================================
-   Streaming Links
-   ------------------------------------------------------------
-   The Listen strip. Reuses the .proof marquee container from LKI but with
-   text-and-icon links instead of client logos.
-   ============================================================ */
-.stream-row {
-  display: flex; flex-wrap: wrap; align-items: center;
-  gap: var(--sp-3) var(--sp-5);
-}
-.stream-link {
-  display: inline-flex; align-items: center; gap: var(--sp-2);
-  padding: var(--sp-2_5) var(--sp-4);
-  border: 1px solid var(--qp-hairline-strong); border-radius: var(--radius-sm);
-  font-family: var(--font-sans); font-size: var(--type-ui-xl);
-  font-weight: var(--fw-medium); color: var(--qp-ink);
-  text-decoration: none; background: var(--qp-surface-card);
-  transition: border-color var(--dur-fast) var(--ease-std),
-              color var(--dur-fast) var(--ease-std);
-}
-.stream-link:hover { border-color: var(--qp-brand); color: var(--qp-brand); }
-.stream-link svg { width: 16px; height: 16px; flex-shrink: 0; }
-
-/* ============================================================
-   Tags
-   ------------------------------------------------------------
-   The ONE place pill radii are allowed, per the guidelines.
-   ============================================================ */
-.tag {
-  display: inline-flex; align-items: center;
-  padding: var(--sp-1) var(--sp-3);
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-8);
+  padding: var(--sp-8) var(--sp-8) var(--sp-8) var(--sp-24);
   border-radius: var(--radius-pill);
-  background: var(--qp-annotate-bg); border: 1px solid var(--qp-annotate-border);
-  font-family: var(--font-sans); font-size: var(--type-ui-sm);
-  font-weight: var(--fw-semibold); letter-spacing: var(--ls-wide-xs);
-  text-transform: uppercase; color: var(--qp-annotate-fg);
-}
-.tag-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-4); }
-
-/* ============================================================
-   Album Section
-   ------------------------------------------------------------
-   One per album. Art and player on one side, editorial copy on the other,
-   with the album's residency posts underneath. Categories map to albums:
-   japan-2025 to Wildroot & Amber, iceland-2023 to Spákonufell.
-   ============================================================ */
-/* min-width: 0 on the columns is load-bearing, not tidying.
-   Grid columns default to min-width: auto, so a column will refuse to shrink
-   below its content's minimum size. The Bandcamp iframe is 350px wide, so the
-   media column had a 350px floor: once the viewport got narrow enough, the album
-   grid grew wider than its .container, the container's 80/48/28px gutters stopped
-   lining up with the rest of the page, and the whole document scrolled sideways.
-   That was the "margins are wrong" bug (August 9, 2026) — the gutters were never
-   the problem, the overflow was. */
-.album { display: grid; grid-template-columns: 5fr 6fr; gap: var(--sp-9); align-items: start; }
-.album > * { min-width: 0; }
-.album--reverse .album__media { order: 2; }
-.album__media { position: sticky; top: var(--sp-11); }
-.album__art {
-  width: 100%; height: auto; display: block;
-  border-radius: var(--radius-card);
-  border: 1px solid var(--qp-hairline);
-}
-
-/* The About portrait is square, so at full column width it would stand a good
-   deal taller than the copy next to it. Cap the height and let object-fit crop
-   rather than letting the section grow to fit a photograph. */
-.about__portrait {
-  max-height: 560px;
-  object-fit: cover;
-  object-position: center top;
-}
-.album__title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3.4vw, 2.5rem); line-height: 1.15;
-  letter-spacing: var(--ls-tight-xs); font-weight: var(--fw-regular);
-  color: var(--qp-ink); margin-bottom: var(--sp-3);
-}
-/* One line under the album title, before the year. Lead-weight so it reads as
-   part of the title block rather than the start of the body copy. */
-.album__subtitle {
+  background: var(--bg-inverse);
+  color: var(--fg-on-dark);
   font-family: var(--font-sans);
-  font-size: var(--type-ui-4xl); line-height: 1.5;
-  font-weight: var(--fw-light);
-  color: var(--qp-body);
-  max-width: 42ch;
-  margin-bottom: var(--sp-3);
-}
-.album__meta {
-  font-family: var(--font-sans); font-size: var(--type-small-size);
-  color: var(--qp-muted); margin-bottom: var(--sp-5);
-}
-.album__body { margin-bottom: var(--sp-6); }
-.album__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-bottom: var(--sp-7); }
-
-/* ============================================================
-   Audio Embed
-   ------------------------------------------------------------
-   The real Bandcamp player, embedded directly (Lara's call, August 9, 2026).
-   It replaced a click-to-load facade, so the tracklist and controls are visible
-   on arrival rather than after a click.
-
-   `loading="lazy"` on the iframe keeps the cost off first paint: the player is
-   only fetched as it nears the viewport. That is the compromise that keeps the
-   top of the page fast while still showing three real players.
-
-   Height is set per album as an HTML attribute, never here. Bandcamp's large
-   player does not reflow, and the right number is whatever its own embed code
-   says for that album.
-   ============================================================ */
-.audio-embed { margin-bottom: var(--sp-5); }
-
-.audio-embed__player {
-  width: 100%; max-width: 350px; border: 0; display: block;
-  /* Height is set per-album as an HTML attribute. Bandcamp's large player does
-     not reflow, so it needs an exact pixel height. Do not set it here. */
-}
-
-/* ============================================================
-   Residency Post List
-   ------------------------------------------------------------
-   The posts belonging to an album. Editorial list, not cards: these are
-   writing, and a list reads faster than a grid of thumbnails.
-   ============================================================ */
-.post-list { border-top: 1px solid var(--qp-hairline); }
-.post-list__item { border-bottom: 1px solid var(--qp-hairline); }
-.post-list__link {
-  display: flex; align-items: baseline; justify-content: space-between;
-  gap: var(--sp-5); padding: var(--sp-4) 0; text-decoration: none;
-  transition: color var(--dur-fast) var(--ease-std);
-}
-
-/* Rows carrying a featured image. Vertically centred rather than baseline
-   aligned, because an 80px thumbnail next to baseline-aligned text sits wrong. */
-.post-list--thumbs .post-list__link {
-  align-items: center;
-  gap: var(--sp-4);
-  padding: var(--sp-3) 0;
-}
-.post-list__thumb {
-  flex: 0 0 80px; width: 80px; height: 80px;
-  border-radius: var(--radius-s);
-  overflow: hidden; background: var(--qp-surface-strong);
-  border: 1px solid var(--qp-hairline);
-}
-/* Forced square with cover. These images run from 0.71 to 1.79 in ratio inside
-   one list, so honouring the real aspect would make the rows ragged. */
-.post-list__thumb img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-  transition: transform var(--dur-slow) var(--ease-std);
-}
-.post-list__link:hover .post-list__thumb img { transform: scale(1.04); }
-/* The title takes the slack so the date stays hard right. */
-.post-list--thumbs .post-list__title { flex: 1 1 auto; }
-.post-list__link:hover .post-list__title { color: var(--qp-brand); }
-.post-list__title {
-  font-family: var(--font-sans); font-size: var(--type-ui-3xl);
-  font-weight: var(--fw-medium); line-height: 1.4; color: var(--qp-ink);
-  transition: color var(--dur-fast) var(--ease-std);
-}
-.post-list__date {
-  font-family: var(--font-sans); font-size: var(--type-small-size);
-  color: var(--qp-muted-soft); white-space: nowrap; flex-shrink: 0;
-}
-.post-list__more { margin-top: var(--sp-5); }
-
-/* ============================================================
-   Shell — Mel overrides
-   ------------------------------------------------------------
-   Wordmark is live text in Newsreader rather than an SVG. Nav CTA and footer
-   drop LKI's pill shapes and icon boxes.
-   ============================================================ */
-
-/* Keyboard skip link. Off-screen until focused. */
-.skip-link {
-  position: absolute; left: -9999px; top: 0; z-index: 200;
-  padding: var(--sp-3) var(--sp-4);
-  background: var(--qp-ink); color: var(--qp-canvas);
-  font-family: var(--font-sans); font-size: var(--type-ui-xl);
-  border-radius: 0 0 var(--radius-sm) 0;
-}
-.skip-link:focus { left: 0; }
-
-/* Wordmark. Newsreader, not the inherited Inter 600. */
-.nav__logo-text {
-  font-family: var(--font-display);
-  font-size: var(--type-ui-5xl);          /* 22px */
-  font-weight: var(--fw-regular);
-  letter-spacing: var(--ls-tight-xs);
-  color: var(--qp-canvas);
+  font-size: var(--type-small);
+  font-weight: var(--fw-black);
+  letter-spacing: 0.01em;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
   white-space: nowrap;
+  transition: background var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard);
 }
-.nav.scrolled .nav__logo-text,
-body.nav-solid .nav__logo-text { color: var(--qp-ink); }
+.btn-pill .arr {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--cta);
+  color: var(--fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--dur-std) var(--ease-standard);
+}
+.btn-pill:hover { background: var(--cta); color: var(--fg); }
+.btn-pill:active { background: var(--cta-hover); color: var(--fg); }
+.btn-pill:hover .arr { background: var(--bg-inverse); color: var(--fg-on-dark); transform: rotate(45deg); }
 
-/* Nav links: Inter, sentence case rather than LKI's tracked uppercase. */
-.nav__links {
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-8);
+  padding: var(--sp-12) var(--sp-24);
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--fg);
+  background: transparent;
+  color: var(--fg);
   font-family: var(--font-sans);
-  font-size: var(--type-ui-xl);
-  font-weight: var(--fw-medium);
-  letter-spacing: 0; text-transform: none;
-  gap: var(--sp-6);
+  font-size: var(--type-small);
+  font-weight: var(--fw-black);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+}
+.btn-outline:hover { background: var(--cta); border-color: var(--cta); color: var(--fg); }
+.btn-outline:active { background: var(--cta-hover); border-color: var(--cta-hover); color: var(--fg); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-8);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: var(--type-small);
+  font-weight: var(--fw-black);
+  color: var(--fg-on-dark-muted);
+  transition: color var(--dur-fast);
+}
+.btn-ghost:hover { color: var(--cta); }
+.btn-ghost--dark { color: var(--fg-muted); }
+.btn-ghost--dark:hover {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: var(--cta);
+  text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
 }
 
-/* Small button, for the nav bar. */
-.btn--sm {
-  padding: var(--sp-2) var(--sp-4);
-  font-size: var(--type-ui-lg);
-}
-.nav.scrolled .nav__cta,
-body.nav-solid .nav__cta {
-  background: var(--qp-brand); color: var(--qp-white-solid);
-  border-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none;
-}
-.nav.scrolled .nav__cta:hover,
-body.nav-solid .nav__cta:hover { background: var(--qp-brand-dark); }
+/* ── Card ─────────────────────────────────────────────────────────────── */
 
-/* Footer wordmark and links. */
-.footer__wordmark {
-  display: block;
-  font-family: var(--font-display);
-  font-size: var(--type-ui-5xl);
-  font-weight: var(--fw-regular);
-  letter-spacing: var(--ls-tight-xs);
-  color: var(--qp-canvas);
-  margin-bottom: var(--sp-3);
+.card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-32) var(--sp-24);
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-raised);
+  transition: transform var(--dur-std) var(--ease-standard), box-shadow var(--dur-std) var(--ease-standard);
 }
-/* The second .footer__social block that used to be here is gone too — see the
-   note in the Footer section above. Every footer link is a circle now, so
-   .footer__social--circle below is the only rule that styles them. */
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xs); }
 
-/* Footer links: social profiles and streaming platforms, as circles. These are
-   the only links in the footer now; the in-page nav was removed because on a
-   one-pager it just scrolled back up the page. */
-.footer__links { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: center; }
-.footer__social--circle {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 44px; height: 44px; border-radius: var(--radius-circle);
-  border: 1px solid rgba(245,245,245,.28);
-  background: rgba(255,255,255,.06);
-  font-family: var(--font-sans); font-size: var(--type-ui-lg);
-  font-weight: var(--fw-semibold); letter-spacing: var(--ls-wide-xs);
-  color: var(--qp-on-dark-soft); text-decoration: none;
-  transition: background var(--dur-fast) var(--ease-std),
-              border-color var(--dur-fast) var(--ease-std),
-              color var(--dur-fast) var(--ease-std);
+/* ── Nav ──────────────────────────────────────────────────────────────── */
+
+.zoe-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-raised);
+  border-bottom: 1px solid var(--border);
 }
-.footer__social--circle:hover {
-  background: var(--qp-brand); border-color: var(--qp-brand);
-  color: var(--qp-white-solid);
-}
-.footer__social--circle:focus-visible {
-  outline: none; box-shadow: 0 0 0 3px var(--qp-focus-ring);
-}
-
-/* ============================================================
-   Accessibility Utilities
-   ============================================================ */
-.screen-reader-text {
-  position: absolute !important;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px; overflow: hidden;
-  clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
-}
-.screen-reader-text:focus {
-  position: static !important;
-  width: auto; height: auto; margin: 0; overflow: visible;
-  clip: auto; white-space: normal;
-}
-
-/* ============================================================
-   Search Form
-   ============================================================ */
-.search-form { display: flex; gap: var(--sp-2); flex-wrap: wrap; max-width: 34rem; }
-.search-form__field {
-  flex: 1 1 16rem; min-width: 0;
-  padding: var(--sp-3) var(--sp-4);
-  font-family: var(--font-sans); font-size: var(--type-body-size);
-  color: var(--qp-ink); background: var(--qp-surface-card);
-  border: 1px solid var(--qp-hairline-strong); border-radius: var(--radius-sm);
-  transition: border-color var(--dur-fast) var(--ease-std),
-              box-shadow var(--dur-fast) var(--ease-std);
-}
-.search-form__field::placeholder { color: var(--qp-muted-soft); }
-.search-form__field:focus {
-  outline: none; border-color: var(--qp-brand);
-  box-shadow: 0 0 0 3px var(--qp-focus-ring-soft);
-}
-.search-form__submit { flex: 0 0 auto; }
-
-/* ============================================================
-   404
-   ============================================================ */
-.error-404__body { max-width: 52ch; margin-bottom: var(--sp-6); }
-.error-404__actions {
-  display: flex; flex-wrap: wrap; gap: var(--sp-3);
-  margin-bottom: var(--sp-8);
-}
-.error-404__search { margin-bottom: var(--sp-9); }
-
-/* ============================================================
-   Search Results Page
-   ============================================================ */
-.search-page__form  { margin-bottom: var(--sp-8); }
-.search-page__empty { max-width: 52ch; padding: var(--sp-6) 0 var(--sp-10); }
-.search-page__empty a { color: var(--qp-brand); text-decoration: underline; }
-.search-page__empty a:hover { color: var(--qp-brand-dark); }
-
-/* ============================================================
-   Prose lists
-   ------------------------------------------------------------
-   The global reset kills list markers, which is correct for nav and for the
-   card/post lists that are semantically lists but visually not. Inside actual
-   writing, bullets and numbers carry meaning: a materials list without them
-   reads as loose lines. Restore them for prose only.
-   ============================================================ */
-.post-content ul,
-.body-copy ul,
-.page-content ul { list-style: disc outside; padding-left: var(--sp-5); margin-bottom: var(--sp-5); }
-.post-content ol,
-.body-copy ol,
-.page-content ol { list-style: decimal outside; padding-left: var(--sp-5); margin-bottom: var(--sp-5); }
-.post-content li,
-.body-copy li,
-.page-content li { display: list-item; margin-bottom: var(--sp-2); }
-.post-content ul ul, .body-copy ul ul { list-style: circle outside; margin-bottom: 0; }
-
-/* But never inside the component lists, which are lists only semantically. */
-.post-list, .post-list li,
-.nav__links { list-style: none; padding-left: 0; }
-.post-list li { display: block; margin-bottom: 0; }
-
-/* ============================================================
-   Intro
-   ------------------------------------------------------------
-   The block directly under the hero photo. Centred, mirroring the previous
-   site's layout, but on Mel's canvas rather than that build's lime green.
-
-   Note on the italic accent: the guidelines allow the 300-italic forest accent
-   ONCE per page, and the hero headline already spends it. The example sentence
-   below is therefore Newsreader italic in ink, not forest, so the rule holds.
-   If the accent belongs here instead, move it off the hero rather than adding
-   a second one.
-   ============================================================ */
-.intro { background: var(--qp-canvas); }
-.intro__inner {
-  max-width: 60ch;
+.zoe-nav__inner {
+  max-width: var(--wrap-max);
   margin: 0 auto;
-  text-align: center;
+  padding: var(--sp-12) var(--sp-80);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-24);
 }
-.intro__q {
-  font-size: clamp(2.1rem, 4vw, 3.1rem);
-  line-height: 1.12;
-  margin-bottom: var(--sp-6);
+.zoe-nav__logo-link { text-decoration: none; display: flex; align-items: center; }
+.zoe-nav__logo-link img { max-height: 84px; width: auto; }
+.zoe-nav__logo-text { font-weight: var(--fw-black); font-size: var(--type-lead); color: var(--fg); }
+
+.zoe-nav__links { display: flex; align-items: center; gap: var(--sp-32); flex-wrap: wrap; }
+.zoe-nav__links a {
+  text-decoration: none;
+  font-size: var(--type-small);
+  font-weight: var(--fw-black);
+  color: var(--fg-muted);
+  transition: color var(--dur-fast);
 }
-.intro__example {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: var(--fw-light);
-  font-size: var(--type-italic-size);
-  line-height: 1.35;
-  color: var(--qp-ink);
-  max-width: none;
-  margin: 0 auto var(--sp-7);
+.zoe-nav__links a:hover { color: var(--accent-deep); }
+
+.zoe-nav__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
 }
-.intro__bio {
-  max-width: 56ch;
-  margin: 0 auto;
-}
-/* The hero's only call to action, replacing the old button pair. White pills
-   read cleanly against the dark scrim over the photo, and the eyebrow uses the
-   --light variant because brand forest is too dark on this ground. */
-.hero__streams {
-  gap: var(--sp-3) var(--sp-4);
+.zoe-nav__hamburger span { display: block; height: 2px; background: var(--fg); }
+
+/* ── Layout shell ─────────────────────────────────────────────────────── */
+
+.zoe-main { max-width: var(--wrap-max); margin: 0 auto; padding: 0 var(--sp-80); }
+@media (max-width: 760px) { .zoe-main { padding: 0 var(--sp-20); } }
+
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+
+.zoe-hero {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: var(--sp-56);
+  padding: var(--sp-96) 0;
+  border-bottom: 1px solid var(--border);
   align-items: center;
 }
+.zoe-hero__heading {
+  font-size: var(--type-h1);
+  line-height: var(--type-h1-lh);
+  letter-spacing: var(--track-display);
+  max-width: 20ch;
+}
+.zoe-hero__intro {
+  color: var(--fg-muted);
+  max-width: 60ch;
+  margin-top: var(--sp-20);
+  font-size: var(--type-lead);
+  line-height: var(--type-lead-lh);
+  font-weight: var(--fw-regular);
+}
+.zoe-hero__media img { border-radius: var(--radius-lg); }
 
-/* ============================================================
-   Responsive
-   ============================================================ */
-@media (max-width: 700px) {
-  .intro__inner { text-align: left; }
+/* ── CTAs ─────────────────────────────────────────────────────────────── */
+
+.zoe-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-16); margin-top: var(--sp-32); }
+.zoe-ctas--center { justify-content: center; }
+
+/* ── Stat bar ─────────────────────────────────────────────────────────── */
+
+.zoe-statbar { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); }
+.zoe-stat { padding: var(--sp-32) var(--sp-24); border-right: 1px solid var(--border); }
+.zoe-stat:last-child { border-right: 0; }
+.zoe-stat b { display: block; font-size: var(--type-h3); font-weight: var(--fw-black); color: var(--fg); }
+.zoe-stat span {
+  font-family: var(--font-mono);
+  font-size: var(--type-micro);
+  color: var(--fg-muted);
+  letter-spacing: var(--track-tight);
 }
-@media (max-width: 1024px) {
-  .container, .nav__inner, .hero__body { padding-left: 48px; padding-right: 48px; }
-  .grid-2, .grid-2-even { grid-template-columns: 1fr; gap: 40px; }
-  .grid-4 { grid-template-columns: repeat(2,1fr); }
-  .caps   { grid-template-columns: repeat(2,1fr); gap: 28px; }
-  .about-grid { grid-template-columns: 1fr 1.6fr; gap: 56px; }
-  .blog-grid  { grid-template-columns: repeat(2,1fr); }
-  .chapter-gallery   { grid-template-columns: repeat(2, 1fr); }
-  .nav__links .nav__link { display: none; }
-  .nav .nav-pill { display: none; }
-  .nav__hamburger { display: flex; }
+@media (max-width: 760px) {
+  .zoe-statbar { grid-template-columns: repeat(2, 1fr); }
+  .zoe-stat:nth-child(2) { border-right: 0; }
 }
-@media (max-width: 768px) {
-  .container, .nav__inner, .hero__body { padding-left: 28px; padding-right: 28px; }
-  .sec { padding: 80px 0; }
-  .grid-3, .caps, .about-grid, .ai-items { grid-template-columns: 1fr; }
-  .grid-4 { grid-template-columns: 1fr 1fr; }
-  .nav__links .nav__link:not(.nav__link--cta) { display: none; }
-  .footer__inner { grid-template-columns: 1fr; gap: 24px; }
-  .t-masonry { grid-template-columns: repeat(2,1fr); }
-  .t-col--3 { display: none; }
-  .blog-grid { grid-template-columns: 1fr; gap: 40px; }
-  .chapter-nav__inner { grid-template-columns: 1fr 1fr; }
-  .chapter-nav__back { display: none; }
-  .page-title, .blog-archive__title, .post-title { font-size: 2.4rem; }
-  .page-header, .blog-archive__header { padding: 48px 0 40px; margin-bottom: 48px; }
+
+/* ── Sections ─────────────────────────────────────────────────────────── */
+
+.zoe-section { padding: var(--sp-96) 0; border-bottom: 1px solid var(--border); }
+.zoe-section--intro { padding-top: var(--sp-120); }
+.zoe-section--center { text-align: center; }
+.zoe-section__heading {
+  font-size: var(--type-h2);
+  line-height: var(--type-h2-lh);
+  letter-spacing: var(--track-heading);
+  margin-bottom: var(--sp-16);
 }
-@media (max-width: 480px) {
-  .grid-4 { grid-template-columns: 1fr; }
-  .t-masonry { grid-template-columns: 1fr; max-height: 520px; }
-  .t-col--2 { display: none; }
-  .chapter-gallery   { grid-template-columns: 1fr 1fr; }
-  .chapter-nav__inner { grid-template-columns: 1fr; }
-  .chapter-nav__link--right { align-items: flex-start; }
+.zoe-section__intro { color: var(--fg-muted); max-width: 65ch; font-size: var(--type-lead); line-height: var(--type-lead-lh); }
+.zoe-section--center .zoe-section__intro { margin: 0 auto; }
+
+.zoe-note {
+  margin-top: var(--sp-24);
+  padding: var(--sp-16) var(--sp-24);
+  border-left: 3px solid var(--accent-deep);
+  background: var(--bg-accent);
+  font-size: var(--type-small);
+  border-radius: var(--radius-sm);
 }
+
+/* ── Card grids ───────────────────────────────────────────────────────── */
+
+.zoe-card-grid, .zoe-feature {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--sp-24);
+  margin-top: var(--sp-32);
+}
+.zoe-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-32) var(--sp-24);
+  background: var(--bg-raised);
+  transition: transform var(--dur-std) var(--ease-standard), box-shadow var(--dur-std) var(--ease-standard);
+}
+.zoe-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xs); }
+.zoe-card__tag {
+  font-family: var(--font-mono);
+  font-size: var(--type-micro);
+  text-transform: uppercase;
+  letter-spacing: var(--track-tight);
+  color: var(--accent-deep);
+  font-weight: var(--fw-black);
+}
+.zoe-card__title { font-size: var(--type-h3); line-height: var(--type-h3-lh); margin: var(--sp-8) 0; }
+.zoe-card__description { color: var(--fg-muted); font-size: var(--type-small); line-height: var(--type-small-lh); }
+
+/* ── Process / step grids ─────────────────────────────────────────────── */
+
+.zoe-process {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  margin-top: var(--sp-32);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.zoe-process__step { background: var(--bg-raised); padding: var(--sp-32) var(--sp-24); }
+.zoe-process__step b {
+  font-family: var(--font-mono);
+  font-size: var(--type-micro);
+  letter-spacing: var(--track-tight);
+  color: var(--accent-deep);
+  font-weight: var(--fw-black);
+}
+.zoe-process__step h4 { font-size: var(--type-h3); margin: var(--sp-8) 0; }
+.zoe-process__step p { color: var(--fg-muted); font-size: var(--type-small); line-height: var(--type-small-lh); }
+
+/* ── Footer ───────────────────────────────────────────────────────────── */
+
+.zoe-footer { padding: var(--sp-48) 0; border-top: 1px solid var(--border); }
+.zoe-footer__inner {
+  max-width: var(--wrap-max);
+  margin: 0 auto;
+  padding: 0 var(--sp-80);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-24);
+}
+.zoe-footer__link { font-size: var(--type-small); font-weight: var(--fw-black); text-decoration: none; color: var(--fg-muted); }
+.zoe-footer__link:hover { color: var(--accent-deep); }
+.zoe-footer__copy { margin-left: auto; font-family: var(--font-mono); font-size: var(--type-micro); color: var(--fg-muted); }
+
+@media (max-width: 760px) {
+  .zoe-footer__inner { padding: 0 var(--sp-20); }
+  .zoe-footer__copy { margin-left: 0; }
+}
+
+/* ── Mobile nav ───────────────────────────────────────────────────────── */
+
+@media (max-width: 760px) {
+  .zoe-hero { grid-template-columns: 1fr; padding: var(--sp-56) 0; }
+  .zoe-nav__inner { padding: var(--sp-16) var(--sp-20); }
+  .zoe-nav__hamburger { display: flex; }
+  .zoe-nav__links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-raised);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--sp-16) var(--sp-20);
+    gap: var(--sp-16);
+  }
+  .zoe-nav__links.is-open { display: flex; }
+}
+
+/* ── Design Guidelines page ───────────────────────────────────────────── */
+
+.dg-header { padding: var(--sp-80) 0 var(--sp-48); border-bottom: 1px solid var(--border); }
+.dg-h1 { font-size: var(--type-h1); line-height: var(--type-h1-lh); max-width: 16ch; margin: var(--sp-16) 0; }
+.dg-lede { color: var(--fg-muted); max-width: 60ch; font-size: var(--type-lead); line-height: var(--type-lead-lh); }
+.dg-tagline { font-family: var(--font-serif); font-style: italic; font-size: var(--type-h3); color: var(--accent-deep); margin-top: var(--sp-24); }
+.dg-meta {
+  display: flex; flex-wrap: wrap; gap: var(--sp-16);
+  margin-top: var(--sp-32); padding-top: var(--sp-24); border-top: 1px solid var(--border);
+  font-family: var(--font-mono); font-size: var(--type-micro); color: var(--fg-muted);
+}
+.dg-meta a { color: var(--accent-deep); }
+
+.dg-section { padding: var(--sp-80) 0; border-bottom: 1px solid var(--border); }
+
+.dg-pvm { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--sp-32); margin-top: var(--sp-24); }
+.dg-pvm__item { border-left: 3px solid var(--accent); padding-left: var(--sp-16); }
+.dg-pvm__item h3 { font-size: var(--type-h4); margin-bottom: var(--sp-8); }
+.dg-pvm__item p { color: var(--fg-muted); font-size: var(--type-small); line-height: var(--type-small-lh); }
+
+.dg-values h4 { font-size: var(--type-h4); margin-bottom: var(--sp-8); }
+.dg-values p { color: var(--fg-muted); font-size: var(--type-small); line-height: var(--type-small-lh); }
+
+.dg-tags { display: flex; flex-wrap: wrap; gap: var(--sp-8); margin-top: var(--sp-16); }
+.dg-tag {
+  border: 1px solid var(--border); border-radius: var(--radius-pill);
+  padding: var(--sp-8) var(--sp-16); font-size: var(--type-small); color: var(--fg-muted);
+}
+
+.dg-logo-card {
+  border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-raised);
+  padding: var(--sp-56); display: flex; flex-direction: column; align-items: center; gap: var(--sp-24);
+  margin-top: var(--sp-24);
+}
+
+.dg-photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--sp-16); margin-top: var(--sp-24); }
+.dg-photo-grid img { border-radius: var(--radius-md); aspect-ratio: 4/3; object-fit: cover; }
+
+.dg-icon-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: var(--sp-24);
+  margin-top: var(--sp-24); padding: var(--sp-32); border: 1px solid var(--border); border-radius: var(--radius-md);
+}
+.dg-icon-cell { display: flex; flex-direction: column; align-items: center; gap: var(--sp-8); text-align: center; }
+.dg-icon-cell span { font-family: var(--font-mono); font-size: var(--type-micro); color: var(--fg-muted); word-break: break-word; }
+
+.dg-swatch-group { margin-top: var(--sp-48); }
+.dg-swatch-group h3 { font-size: var(--type-h4); margin-bottom: var(--sp-16); }
+.dg-swatch-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--sp-16); }
+.dg-swatch-row--5 { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+.dg-swatch {
+  height: 100px; border-radius: var(--radius-md) var(--radius-md) 0 0; border: 1px solid var(--border);
+  border-bottom: none;
+}
+.dg-swatch__meta {
+  border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius-md) var(--radius-md);
+  padding: var(--sp-12) var(--sp-16); margin-top: -1px; display: flex; flex-direction: column; gap: var(--sp-4);
+  background: var(--bg-raised);
+}
+.dg-swatch__meta b { font-size: var(--type-small); }
+.dg-swatch__meta code { font-family: var(--font-mono); font-size: var(--type-micro); color: var(--fg-muted); }
+.dg-swatch__ratio { font-family: var(--font-mono); font-size: var(--type-micro); color: var(--accent-deep); }
+.dg-swatch__note { font-size: var(--type-micro); color: var(--fg-subtle); }
+
+.dg-type-families { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--sp-32); padding-bottom: var(--sp-32); border-bottom: 1px solid var(--border); }
+.dg-type-label { font-family: var(--font-mono); font-size: var(--type-micro); text-transform: uppercase; letter-spacing: var(--track-tight); color: var(--fg-muted); }
+.dg-type-glyph { font-size: 64px; margin: var(--sp-8) 0; }
+.dg-type-sub { font-family: var(--font-mono); font-size: var(--type-micro); color: var(--fg-muted); }
+
+.dg-type-scale { margin-top: var(--sp-32); }
+.dg-type-row {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-24);
+  padding: var(--sp-24) 0; border-bottom: 1px solid var(--border);
+}
+.dg-type-meta { font-family: var(--font-mono); font-size: var(--type-micro); color: var(--fg-muted); white-space: nowrap; }
+
+.dg-sub { font-size: var(--type-h3); margin: var(--sp-48) 0 var(--sp-16); }
+
+.dg-spacing-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--sp-24); }
+.dg-sp-item { display: flex; flex-direction: column; align-items: center; gap: var(--sp-8); }
+.dg-sp-bar { background: var(--bg-inverse); border-radius: var(--radius-sm); }
+.dg-sp-item b { font-size: var(--type-small); }
+.dg-sp-item span { font-size: var(--type-micro); color: var(--fg-muted); text-align: center; max-width: 90px; }
+
+.dg-radius-row { display: flex; flex-wrap: wrap; gap: var(--sp-32); }
+.dg-radius-item { display: flex; flex-direction: column; align-items: center; gap: var(--sp-8); }
+.dg-radius-box { width: 64px; height: 64px; background: var(--fill); }
+.dg-radius-item b { font-size: var(--type-small); }
+.dg-radius-item span { font-size: var(--type-micro); color: var(--fg-muted); }
+
+.dg-btn-demo__panel { padding: var(--sp-32); border: 1px solid var(--border); border-radius: var(--radius-md); margin-top: var(--sp-16); }

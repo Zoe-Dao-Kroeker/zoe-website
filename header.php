@@ -1,33 +1,24 @@
 <?php
 /**
  * Zoe Dao-Kroeker Custom Theme — header.php
- * HTML document head + fixed navigation + mobile drawer.
- * Called by get_header() in every custom template.
+ * HTML document head + fixed navigation.
+ * Called by get_header() in every page template.
  *
- * The wordmark is live text in Newsreader, not an image: reused from Mel as a
- * structural default, not a font decision for Zoe. No vector logo exists yet
- * for either brand.
+ * Nav items come from the "primary" registered menu location
+ * (Appearance → Menus), not a hardcoded list, so Zoe/Lara can add, reorder,
+ * or rename items — including the external Résumé link — without touching
+ * code. One <ul> serves both the desktop bar and the mobile menu: the
+ * hamburger button in footer.php's script toggles a single "is-open" class
+ * on it rather than rendering the menu twice, so there's one place for its
+ * styling to drift instead of two (see the design playbook's "Rollover/hover
+ * states — consistent, not per-component" note for why that matters).
  *
- * 🔴 $nav_items below is still Mel's: on-page anchors for a one-pager
- * (music/about/writing sections in front-page.php). Zoe's site is 8 real
- * pages, not anchors on one page — this needs to become either
- * `wp_nav_menu()` against a registered menu location, or a hardcoded list of
- * real page URLs resolved through a helper (see `loc_page_url()` in
- * loc-theme/functions.php for that pattern). Left as-is so it's obviously
- * unfinished rather than silently wrong.
+ * Logo: renders the real uploaded logo (Appearance → Customize → Site
+ * Identity) when one is set, falling back to the live-text wordmark
+ * otherwise — so this keeps working even if the logo is ever unset.
  */
 
-$is_one_pager = is_front_page();
-$home         = esc_url( home_url( '/' ) );
-
-// On interior views the anchors need to travel home first.
-$prefix = $is_one_pager ? '' : $home;
-
-$nav_items = [
-    'music'   => 'Music',
-    'about'   => 'About',
-    'writing' => 'Writing',
-];
+$home = esc_url( home_url( '/' ) );
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -41,31 +32,32 @@ $nav_items = [
 
 <a class="skip-link" href="#main">Skip to content</a>
 
-<nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
-  <div class="nav__inner">
+<nav class="zoe-nav" id="nav" role="navigation" aria-label="Main navigation">
+  <div class="zoe-nav__inner">
 
-    <a href="<?php echo $home; ?>" class="nav__logo-link" aria-label="Zoe Dao-Kroeker — home">
-      <span class="nav__logo-text">Zoe Dao-Kroeker</span>
-    </a>
-
-    <div class="nav__links">
-      <?php foreach ( $nav_items as $anchor => $label ) : ?>
-        <a href="<?php echo esc_url( $prefix . '#' . $anchor ); ?>" class="nav__link">
-          <?php echo esc_html( $label ); ?>
-        </a>
-      <?php endforeach; ?>
-
-      <a href="https://open.spotify.com/artist/3p646805chFAeNt3WasIYY"
-         target="_blank" rel="noopener noreferrer"
-         class="btn btn--on-dark btn--sm nav__cta">
-        Listen
+    <?php if ( has_custom_logo() ) : ?>
+      <div class="zoe-nav__logo-link"><?php the_custom_logo(); ?></div>
+    <?php else : ?>
+      <a href="<?php echo $home; ?>" class="zoe-nav__logo-link"
+         aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) . ' — home' ); ?>">
+        <span class="zoe-nav__logo-text"><?php bloginfo( 'name' ); ?></span>
       </a>
-    </div>
+    <?php endif; ?>
 
-    <button class="nav__hamburger" id="navHamburger"
+    <?php
+    wp_nav_menu( [
+        'theme_location' => 'primary',
+        'container'      => false,
+        'menu_id'        => 'primary-menu',
+        'menu_class'     => 'zoe-nav__links',
+        'depth'          => 1,
+    ] );
+    ?>
+
+    <button class="zoe-nav__hamburger" id="navHamburger"
             aria-label="Open navigation menu"
             aria-expanded="false"
-            aria-controls="navDrawer">
+            aria-controls="primary-menu">
       <span></span>
       <span></span>
       <span></span>
@@ -73,14 +65,3 @@ $nav_items = [
 
   </div>
 </nav>
-
-<div class="nav__drawer" id="navDrawer" aria-hidden="true" role="dialog" aria-label="Navigation menu">
-  <?php foreach ( $nav_items as $anchor => $label ) : ?>
-    <a href="<?php echo esc_url( $prefix . '#' . $anchor ); ?>" class="nav__drawer-link">
-      <?php echo esc_html( $label ); ?>
-    </a>
-  <?php endforeach; ?>
-  <a href="https://open.spotify.com/artist/3p646805chFAeNt3WasIYY"
-     target="_blank" rel="noopener noreferrer"
-     class="nav__drawer-cta">Listen on Spotify</a>
-</div>

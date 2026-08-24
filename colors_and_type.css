@@ -1,217 +1,164 @@
-/* 🔴 PLACEHOLDER — this is Mel's token file, copied as-is. Zoe has no design
-   guidelines, palette, or token prefix decided yet (see ZOE-website-status.md
-   → "No brand on record"). Everything below, including the --qp- prefix, is
-   Mel's and must not be treated as Zoe's brand. Do not build real pages
-   against these colours; replace this whole file once Zoe's tokens exist. */
+/* Zoe Dao-Kroeker — design tokens.
+   Structure mirrors LKI's token architecture exactly (larakroekerinteractive.com
+   /design-guidelines/), per Lara's instruction: primitive layer (--zoe-*) feeds
+   a role layer (bare names — --bg, --fg, --cta, etc.), and everything else in
+   the theme reads the role layer only. See Website/zoe-theme/README.md and
+   the Design Guidelines page (page-design-guidelines.php) for how each colour
+   is meant to be used.
 
-/* Mel-lif-lu-ous tokens mirrored from Design Guidelines/MEL-design-guidelines.html */
-
-@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500;600;700&display=swap");
+   Brand colours are Zoe/Lara's decision, August 24, 2026:
+   - Primary: two greens, #8CB120 and #05704E
+   - Surface dark: #042E33; white and one added light surface (no existing
+     brand light surface, so this one's new)
+   - CTA: #F5CE12 (dark/pressed and light-tint states derived from it)
+   - Greys: reused verbatim from LKI — Zoe has no greyscale of her own, and
+     Lara asked to borrow LKI's five steps rather than derive a new ramp.
+     This is a deliberate exception to the usual "derive greys from Primary"
+     rule, not an oversight.
+   - Additional and Semantic groups are Lara's picks, kept distinct from
+     Primary/CTA hues per the naming convention.
+   Fonts (Inter / Instrument Serif / JetBrains Mono) and the whole scale
+   system below (type, spacing, radius, shadow, easing) are copied from LKI
+   as structure, not a brand colour — Lara asked for this site's system to
+   be set up exactly the same as LKI's. */
 
 :root {
-  --qp-canvas: #f5f5f5;
-  --qp-canvas-soft: #fafafa;
-  --qp-surface-card: #ffffff;
-  --qp-surface-strong: #f0efed;
-  --qp-surface-dark: #0c0a09;
+  /* ── Primitives ─────────────────────────────────────────────────────── */
+  --zoe-dark: #042E33;
+  --zoe-white: #FFFFFF;
+  --zoe-neutral: #F5F7F2;
 
-  --qp-ink: #313131;
-  --qp-ink-deep: #292524;
-  --qp-body: #4e4e4e;
-  --qp-muted: #777169;
-  --qp-muted-soft: #a8a29e;
-  --qp-hairline: #e7e5e4;
-  --qp-hairline-strong: #d6d3d1;
+  --zoe-green-primary: #8CB120;
+  --zoe-green-deep: #05704E;
+  --zoe-green-wash: #EEF3DE;
 
-  --qp-brand: #4d7a5c;
-  --qp-brand-light: #89a998;
-  --qp-brand-dark: #3a6148;
+  --zoe-grey-1: #203B53;
+  --zoe-grey-2: #4D6275;
+  --zoe-grey-3: #798998;
+  --zoe-grey-4: #A6B1BA;
+  --zoe-grey-5: #D2D8DD;
 
-  --qp-success: #16a34a;
-  --qp-error: #dc2626;
+  --zoe-cta: #F5CE12;
+  --zoe-cta-dark: #C4A408;
+  --zoe-cta-light: #FDF5CE;
 
-  --qp-mist: var(--qp-canvas);
-  --qp-white: var(--qp-surface-card);
-  --qp-white-solid: #ffffff;
-  --qp-grey-1: var(--qp-muted);
-  --qp-grey-2: var(--qp-muted-soft);
-  --qp-grey-3: var(--qp-hairline);
-  --qp-forest: var(--qp-brand);
-  --qp-forest-lt: var(--qp-brand-light);
-  --qp-forest-dk: var(--qp-brand-dark);
-  --qp-icon-surface: #1a1a18;
+  --zoe-coral: #E8734A;
+  --zoe-sky: #4FA8D8;
+  --zoe-plum: #8B5FBF;
 
-  --qp-toc-bg: rgba(245, 245, 245, 0.92);
-  --qp-toc-bg-dark: rgba(13, 20, 16, 0.88);
-  --qp-dark-toggle-bg: #1e2e22;
-  --qp-border-on-dark: rgba(255, 255, 255, 0.18);
+  --zoe-error: #C4351E;
+  --zoe-info: #2D6CDF;
 
-  --qp-on-dark-muted: rgba(245, 245, 245, 0.6);
-  --qp-on-dark-soft: rgba(245, 245, 245, 0.72);
+  /* ── Roles — everything else in the theme reads these, never a primitive
+     directly ────────────────────────────────────────────────────────── */
+  --bg: var(--zoe-neutral);
+  --bg-raised: var(--zoe-white);
+  --bg-inverse: var(--zoe-dark);
+  --bg-accent: var(--zoe-green-wash);
 
-  --qp-annotate-fg: #4d7a5c;
-  --qp-annotate-bg: rgba(77, 122, 92, 0.1);
-  --qp-annotate-border: rgba(77, 122, 92, 0.28);
+  --fg: var(--zoe-dark);
+  --fg-muted: var(--zoe-grey-1);
+  --fg-subtle: var(--zoe-grey-2);
+  --fg-on-dark: var(--zoe-neutral);
+  --fg-on-dark-muted: rgba(245, 247, 242, 0.65);
+  --fg-on-dark-subtle: rgba(245, 247, 242, 0.45);
 
-  --qp-focus-ring: rgba(49, 49, 49, 0.18);
-  --qp-focus-ring-soft: rgba(49, 49, 49, 0.14);
+  --accent: var(--zoe-green-primary);
+  --accent-deep: var(--zoe-green-deep);
+  --cta: var(--zoe-cta);
+  --cta-hover: var(--zoe-cta-dark);
 
-  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
+  --border: var(--zoe-grey-5);
+  --border-strong: var(--zoe-grey-4);
+  --fill-subtle: var(--zoe-grey-5);
+  --fill: var(--zoe-grey-4);
+  --fill-strong: var(--zoe-grey-1);
+
+  --border-on-dark: rgba(245, 247, 242, 0.16);
+  --border-on-dark-strong: rgba(245, 247, 242, 0.28);
+  --bg-raised-on-dark: rgba(255, 255, 255, 0.10);
+  --bg-raised-on-dark-hover: rgba(255, 255, 255, 0.18);
+
+  --bg-scrim: rgba(245, 247, 242, 0.93);
+  --bg-scrim-solid: rgba(245, 247, 242, 0.97);
+  --bg-hover-tint: rgba(4, 46, 51, 0.04);
+
+  --scrim-hero-strong: rgba(4, 46, 51, 0.97);
+  --scrim-hero-mid: rgba(4, 46, 51, 0.55);
+  --scrim-hero-soft: rgba(4, 46, 51, 0.20);
+  --scrim-hero-dense: rgba(4, 46, 51, 0.78);
+
+  /* ── Type ───────────────────────────────────────────────────────────── */
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-serif: "Instrument Serif", "Georgia", serif;
+  --font-mono: "JetBrains Mono", "Menlo", ui-monospace, monospace;
 
   --fw-light: 300;
-  --fw-regular: 400;
+  --fw-regular: 300;
   --fw-medium: 500;
-  --fw-semibold: 600;
-  --fw-bold: 700;
+  --fw-semibold: 500;
+  --fw-bold: 900;
+  --fw-black: 900;
 
-  --type-display-size: 56px;
-  --type-display-lh: 1.1;
-  --type-display-ls: -0.03em;
-  --type-h1-size: 40px;
-  --type-h1-lh: 48px;
-  --type-h2-size: 32px;
-  --type-h2-lh: 40px;
-  --type-h3-size: 24px;
-  --type-h3-lh: 32px;
-  --type-h4-size: 20px;
-  --type-h4-lh: 28px;
-  --type-h5-size: 16px;
-  --type-h5-lh: 24px;
-  --type-lead-size: 24px;
-  --type-lead-lh: 36px;
-  --type-body-size: 16px;
-  --type-body-lh: 26px;
-  --type-small-size: 12px;
-  --type-small-lh: 18px;
-  --type-micro-size: 11px;
-  --type-micro-lh: 16px;
-  --type-ui-2xs: 9px;
-  --type-ui-xs: 10px;
-  --type-ui-sm: 11px;
-  --type-ui-md: 12px;
-  --type-ui-lg: 13px;
-  --type-ui-xl: 14px;
-  --type-ui-2xl: 15px;
-  --type-ui-3xl: 17px;
-  --type-ui-4xl: 18px;
-  --type-ui-5xl: 22px;
-  --type-ui-6xl: 28px;
-  --type-ui-7xl: 56px;
-  --type-ui-8xl: 82px;
-  --type-italic-size: 36px;
+  --type-display: clamp(3rem, 1.4rem + 5.3333vw, 6.2rem);
+  --type-h1: clamp(2.6rem, 1.5rem + 3.6667vw, 4.8rem);
+  --type-h2: clamp(1.9rem, 1.4rem + 1.6667vw, 2.9rem);
+  --type-h3: clamp(1.375rem, 1.1875rem + 0.625vw, 1.75rem);
+  --type-h4: clamp(1.125rem, 1.0625rem + 0.2083vw, 1.25rem);
+  --type-lead: clamp(1.25rem, 1.1875rem + 0.2083vw, 1.375rem);
+  --type-body-lg: 1.125rem;
+  --type-body: 1rem;
+  --type-small: 0.875rem;
+  --type-micro: 0.75rem;
 
-  --ls-tight-lg: -0.04em;
-  --ls-tight-md: -0.03em;
-  --ls-tight-sm: -0.025em;
-  --ls-tight-xs: -0.02em;
-  --ls-wide-xs: 0.02em;
-  --ls-wide-sm: 0.08em;
-  --ls-wide-md: 0.1em;
-  --ls-wide-lg: 0.12em;
-  --ls-wide-xl: 0.14em;
-  --ls-code-xs: 0.2px;
-  --ls-code-sm: 0.3px;
-  --ls-code-md: 0.5px;
-  --ls-code-lg: 0.6px;
-  --ls-code-xl: 0.8px;
-  --ls-code-2xl: 1.2px;
+  --type-display-lh: 1.02;
+  --type-h1-lh: 1.06;
+  --type-h2-lh: 1.08;
+  --type-h3-lh: 1.25;
+  --type-h4-lh: 1.35;
+  --type-lead-lh: 1.55;
+  --type-body-lg-lh: 1.65;
+  --type-body-lh: 1.75;
+  --type-small-lh: 1.6;
+  --type-micro-lh: 1.4;
 
-  --sp-1: 4px;
-  --sp-0_5: 2px;
-  --sp-0_25: 1px;
-  --sp-2: 8px;
-  --sp-3: 12px;
-  --sp-4: 16px;
-  --sp-5: 24px;
-  --sp-6: 32px;
-  --sp-7: 40px;
-  --sp-8: 48px;
-  --sp-9: 64px;
-  --sp-10: 80px;
-  --sp-11: 96px;
-  --sp-12: 128px;
-  --sp-13: 160px;
-  --sp-14: 200px;
-  --sp-15: 220px;
-  --sp-16: 240px;
-  --sp-1_5: 6px;
-  --sp-2_5: 10px;
-  --sp-3_5: 14px;
-  --sp-4_5: 18px;
-  --sp-5_5: 22px;
-  --sp-6_5: 28px;
-  --sp-7_5: 56px;
-  --sp-8_5: 72px;
-  --sp-9_5: 88px;
-  --sp-neg-2_5: -10px;
+  --track-display: -0.028em;
+  --track-heading: -0.02em;
+  --track-tight: -0.01em;
+  --track-micro: 0.18em;
 
-  --sz-wrap-max: 1280px;
-  --sz-content-max: 640px;
-  --sz-icon: 40px;
-  --sz-icon-lg: 56px;
-  --sz-swatch-chip-h: 140px;
-  --sz-spec-col: 200px;
-  --sz-hero-h: 240px;
-  --sz-family-min: 160px;
-  --sz-card-min: 180px;
-  --sz-card-shell-min: 176px;
-  --sz-elev-card-min: 220px;
-  --sz-elev-shell-min: 120px;
-  --sz-radii-box: 96px;
-  --sz-pill-demo-w: 180px;
-  --sz-spacebar-h: 56px;
-  --sz-space-bar-h: var(--sz-spacebar-h);
-  --sz-toggle-w: 38px;
-  --sz-toggle-h: 22px;
-  --sz-toggle-knob: 16px;
-  --sz-toggle-knob-left: 19px;
-  --sz-slider-thumb: 18px;
-  --sz-nav-btn-h: 34px;
-  --sz-form-btn-h: 40px;
-  --sz-textarea-min: 100px;
-  --sz-slider-track-h: 6px;
+  /* ── Spacing (biggest to smallest — reads better as a visual scale) ──── */
+  --sp-2: 2px;
+  --sp-4: 4px;
+  --sp-8: 8px;
+  --sp-12: 12px;
+  --sp-16: 16px;
+  --sp-20: 20px;
+  --sp-24: 24px;
+  --sp-32: 32px;
+  --sp-40: 40px;
+  --sp-48: 48px;
+  --sp-56: 56px;
+  --sp-64: 64px;
+  --sp-80: 80px;
+  --sp-96: 96px;
+  --sp-120: 120px;
 
   --radius-none: 0;
-  --radius-2xs: 3px;
-  --radius-xs: 4px;
-  --radius-s: 6px;
-  --radius-sm: 8px;
-  --radius-m: 10px;
-  --radius-md: 12px;
-  --radius-card: 14px;
-  --radius-lg: 16px;
-  --radius-feature: 20px;
-  --radius-shell: 22px;
-  --radius-xl: 24px;
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
   --radius-pill: 999px;
-  --radius-circle: 50%;
 
-  --shadow-lift: rgba(0, 0, 0, 0) 0 0 0 0, rgba(0, 0, 0, 0) 0 0 0 0, rgba(0, 0, 0, 0.15) 0 15px 35px -5px;
-  --shadow-deep: rgba(0, 0, 0, 0) 0 0 0 0, rgba(0, 0, 0, 0) 0 0 0 0, rgba(0, 0, 0, 0.25) 0 15px 35px -5px;
-  --shadow-xs: 0 1px 2px rgba(23, 23, 23, 0.08);
-  --shadow-sm: 0 1px 3px rgba(12, 10, 9, 0.15);
-  --shadow-float: 0 8px 24px rgba(23, 23, 23, 0.12), 0 1px 2px rgba(23, 23, 23, 0.08);
+  --shadow-xs: 0 1px 2px rgba(4, 46, 51, 0.06);
+  --shadow-inset-hairline: inset 0 -1px 0 rgba(4, 46, 51, 0.08);
 
-  --gradient-shell: linear-gradient(135deg, rgba(41, 37, 36, 0.3) 0%, rgba(12, 10, 9, 0.12) 50%, rgba(41, 37, 36, 0.2) 100%);
-
-  --ease-std: ease;
+  --ease-standard: cubic-bezier(0.32, 0.72, 0.24, 1);
+  --ease-out: cubic-bezier(0.22, 0.8, 0.36, 1);
   --dur-fast: 140ms;
   --dur-std: 220ms;
   --dur-slow: 400ms;
-}
 
-body.dark {
-  --qp-canvas: #0f0e0e;
-  --qp-surface-card: #1a1817;
-  --qp-ink: #f5f4f2;
-  --qp-muted: #a8a29e;
-  --qp-muted-soft: #57534e;
-  --qp-hairline: rgba(255, 255, 255, 0.1);
-  --qp-mist: var(--qp-canvas);
-  --qp-white: var(--qp-surface-card);
-  --qp-grey-1: var(--qp-muted);
-  --qp-grey-2: var(--qp-muted-soft);
-  --qp-grey-3: var(--qp-hairline);
+  --wrap-max: 1240px;
 }
-
