@@ -322,13 +322,28 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   margin-top: var(--sp-32);
 }
 .zoe-card {
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: var(--sp-32) var(--sp-24);
   background: var(--bg-raised);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
   transition: transform var(--dur-std) var(--ease-standard), box-shadow var(--dur-std) var(--ease-standard);
 }
 .zoe-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xs); }
+/* Bleeds a card's featured image to the card's own edges (undoing its
+   padding), flush with the top border — used by zoe_portfolio_grid()'s
+   real post thumbnails on the Work page. */
+.zoe-card__image {
+  width: calc(100% + var(--sp-24) * 2);
+  max-width: none;
+  margin: calc(-1 * var(--sp-32)) calc(-1 * var(--sp-24)) var(--sp-16);
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
 .zoe-card__tag {
   font-family: var(--font-sans);
   font-size: var(--type-micro);

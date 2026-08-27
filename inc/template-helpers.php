@@ -65,3 +65,55 @@ function zoe_cta( $cta, $variant = 'pill' ) {
         $href, $atts, $label
     );
 }
+
+/**
+ * Renders a .zoe-card-grid of real `portfolio` posts in one category —
+ * featured image, category name as the tag, title, trimmed excerpt — each
+ * card a clickable link to its own single-portfolio.php page. Used by the
+ * Work page's two sections (August 24, 2026): these used to be hand-entered
+ * ACF repeater rows with no images or links; Lara asked for the real
+ * content instead — every published post in the category, not a curated
+ * selection.
+ *
+ * No tags exist on any of these posts (checked directly, not assumed), so
+ * the card's small tag line uses the post's real category name rather than
+ * inventing a sub-label ("Curriculum"/"Kit") that isn't backed by data.
+ *
+ * @param string $category_slug
+ */
+function zoe_portfolio_grid( $category_slug ) {
+    $posts = get_posts( [
+        'post_type'      => 'portfolio',
+        'category_name'  => $category_slug,
+        'numberposts'    => -1,
+        'post_status'    => 'publish',
+        'orderby'        => 'menu_order date',
+        'order'          => 'DESC',
+    ] );
+
+    if ( ! $posts ) {
+        return;
+    }
+
+    echo '<div class="zoe-card-grid">';
+    foreach ( $posts as $p ) {
+        $cats = get_the_category( $p->ID );
+        $tag  = $cats ? $cats[0]->name : '';
+        $excerpt = wp_trim_words( wp_strip_all_tags( get_the_excerpt( $p ) ), 20 );
+        ?>
+        <a class="zoe-card" href="<?php echo esc_url( get_permalink( $p ) ); ?>">
+          <?php if ( has_post_thumbnail( $p ) ) : ?>
+            <img class="zoe-card__image" src="<?php echo esc_url( get_the_post_thumbnail_url( $p, 'medium_large' ) ); ?>" alt="<?php echo esc_attr( get_the_title( $p ) ); ?>" loading="lazy">
+          <?php endif; ?>
+          <?php if ( $tag ) : ?>
+            <div class="zoe-card__tag"><?php echo esc_html( $tag ); ?></div>
+          <?php endif; ?>
+          <h3 class="zoe-card__title"><?php echo esc_html( get_the_title( $p ) ); ?></h3>
+          <?php if ( $excerpt ) : ?>
+            <p class="zoe-card__description"><?php echo esc_html( $excerpt ); ?></p>
+          <?php endif; ?>
+        </a>
+        <?php
+    }
+    echo '</div>';
+}

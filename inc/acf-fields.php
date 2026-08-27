@@ -62,10 +62,15 @@ function zoe_acf_cta_subfields( $key_prefix ) {
             'type'  => 'text',
         ],
         [
-            'key'   => $key_prefix . '_url',
-            'label' => 'URL',
-            'name'  => 'url',
-            'type'  => 'url',
+            'key'          => $key_prefix . '_url',
+            'label'        => 'URL',
+            'name'         => 'url',
+            // Plain text, not ACF's 'url' type: that type's own validation
+            // requires a scheme://host shape and rejects mailto: links
+            // (no "//"), which broke saving the whole About page the
+            // moment "Get in touch" used one. Text accepts any scheme.
+            'type'         => 'text',
+            'instructions' => 'Any link — https://, mailto:, or a page on this site.',
         ],
     ];
 }
@@ -287,29 +292,17 @@ acf_add_local_field_group( [
         zoe_acf_cta_field( 'field_zw_featured_cta_primary', 'featured_cta_primary', 'Primary CTA' ),
         zoe_acf_cta_field( 'field_zw_featured_cta_secondary', 'featured_cta_secondary', 'Secondary CTA' ),
 
+        // stem_cards / learning_cards (repeaters) removed August 24, 2026 —
+        // these two sections now query real `portfolio` posts by category
+        // (see page-work.php) instead of hand-entered rows, per Lara's
+        // request for real featured images/excerpts/permalinks and "all
+        // projects in the category, not a selection." The eyebrow fields
+        // stay editable since they're still real section headings.
         [ 'key' => 'field_zw_stem_tab', 'label' => 'STEM curriculum & kits', 'type' => 'tab' ],
         [ 'key' => 'field_zw_stem_eyebrow', 'label' => 'Eyebrow', 'name' => 'stem_eyebrow', 'type' => 'text' ],
-        [
-            'key'          => 'field_zw_stem_cards',
-            'label'        => 'Cards',
-            'name'         => 'stem_cards',
-            'type'         => 'repeater',
-            'layout'       => 'table',
-            'button_label' => 'Add card',
-            'sub_fields'   => zoe_acf_card_subfields( 'field_zw_stem_card', false ),
-        ],
 
         [ 'key' => 'field_zw_learning_tab', 'label' => 'Learning design & guides', 'type' => 'tab' ],
         [ 'key' => 'field_zw_learning_eyebrow', 'label' => 'Eyebrow', 'name' => 'learning_eyebrow', 'type' => 'text' ],
-        [
-            'key'          => 'field_zw_learning_cards',
-            'label'        => 'Cards',
-            'name'         => 'learning_cards',
-            'type'         => 'repeater',
-            'layout'       => 'table',
-            'button_label' => 'Add card',
-            'sub_fields'   => zoe_acf_card_subfields( 'field_zw_learning_card', false ),
-        ],
     ],
     'location' => [
         [ [ 'param' => 'page_template', 'operator' => '==', 'value' => 'page-work.php' ] ],

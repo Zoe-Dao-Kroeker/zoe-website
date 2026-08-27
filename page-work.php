@@ -49,32 +49,14 @@ if ( have_posts() ) :
     <?php if ( $eyebrow = get_field( 'stem_eyebrow' ) ) : ?>
       <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
-    <?php if ( have_rows( 'stem_cards' ) ) : ?>
-      <div class="zoe-card-grid">
-        <?php while ( have_rows( 'stem_cards' ) ) : the_row(); ?>
-          <div class="zoe-card">
-            <div class="zoe-card__tag"><?php echo esc_html( get_sub_field( 'tag' ) ); ?></div>
-            <h3 class="zoe-card__title"><?php echo esc_html( get_sub_field( 'title' ) ); ?></h3>
-          </div>
-        <?php endwhile; ?>
-      </div>
-    <?php endif; ?>
+    <?php zoe_portfolio_grid( 'stem-curriculum-kits' ); ?>
   </section>
 
   <section class="zoe-section">
     <?php if ( $eyebrow = get_field( 'learning_eyebrow' ) ) : ?>
       <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
-    <?php if ( have_rows( 'learning_cards' ) ) : ?>
-      <div class="zoe-card-grid">
-        <?php while ( have_rows( 'learning_cards' ) ) : the_row(); ?>
-          <div class="zoe-card">
-            <div class="zoe-card__tag"><?php echo esc_html( get_sub_field( 'tag' ) ); ?></div>
-            <h3 class="zoe-card__title"><?php echo esc_html( get_sub_field( 'title' ) ); ?></h3>
-          </div>
-        <?php endwhile; ?>
-      </div>
-    <?php endif; ?>
+    <?php zoe_portfolio_grid( 'learning-design-instructional-guides' ); ?>
   </section>
 
 </main>
