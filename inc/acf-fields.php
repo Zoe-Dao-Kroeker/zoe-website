@@ -411,9 +411,11 @@ acf_add_local_field_group( [
 
         [ 'key' => 'field_za_background_tab', 'label' => 'Background', 'type' => 'tab' ],
         [ 'key' => 'field_za_background_eyebrow', 'label' => 'Eyebrow', 'name' => 'background_eyebrow', 'type' => 'text' ],
+        [ 'key' => 'field_za_background_heading', 'label' => 'Heading', 'name' => 'background_heading', 'type' => 'text' ],
+        [ 'key' => 'field_za_background_intro', 'label' => 'Intro', 'name' => 'background_intro', 'type' => 'textarea', 'rows' => 2 ],
         [
             'key'          => 'field_za_background_blocks',
-            'label'        => 'Blocks (Education / Experience / Technical)',
+            'label'        => 'Blocks — last one renders as the dark closing panel, the rest as an alternating photo/text timeline',
             'name'         => 'background_blocks',
             'type'         => 'repeater',
             'layout'       => 'block',
@@ -422,23 +424,32 @@ acf_add_local_field_group( [
                 [ 'key' => 'field_za_bg_kicker', 'label' => 'Kicker', 'name' => 'kicker', 'type' => 'text' ],
                 [ 'key' => 'field_za_bg_title', 'label' => 'Title', 'name' => 'title', 'type' => 'text' ],
                 [ 'key' => 'field_za_bg_body', 'label' => 'Body', 'name' => 'body', 'type' => 'wysiwyg', 'media_upload' => 0, 'toolbar' => 'basic' ],
+                [ 'key' => 'field_za_bg_image', 'label' => 'Photo', 'name' => 'image', 'type' => 'image', 'return_format' => 'array', 'instructions' => 'Optional. Ignored on the last (dark panel) block.' ],
             ],
         ],
+        [ 'key' => 'field_za_background_final_tags', 'label' => 'Closing panel tags', 'name' => 'background_final_tags', 'type' => 'text', 'instructions' => 'Comma-separated, e.g. "AI, Creative Learning, Learner Autonomy, STEAM". Shown as pills under the last block.' ],
 
         [ 'key' => 'field_za_publications_tab', 'label' => 'Publications & awards', 'type' => 'tab' ],
         [ 'key' => 'field_za_publications_eyebrow', 'label' => 'Eyebrow', 'name' => 'publications_eyebrow', 'type' => 'text' ],
+        [ 'key' => 'field_za_publications_heading', 'label' => 'Heading', 'name' => 'publications_heading', 'type' => 'text' ],
+        [ 'key' => 'field_za_publications_featured_image', 'label' => 'Featured card image', 'name' => 'publications_featured_image', 'type' => 'image', 'return_format' => 'array', 'instructions' => 'Shown inside the first card only, which renders larger than the rest.' ],
         [
             'key'          => 'field_za_publications_cards',
-            'label'        => 'Cards',
+            'label'        => 'Cards — the first one is the large featured card',
             'name'         => 'publications_cards',
             'type'         => 'repeater',
             'layout'       => 'block',
             'button_label' => 'Add card',
-            'sub_fields'   => zoe_acf_card_subfields( 'field_za_pub_card' ),
+            'sub_fields'   => array_merge( zoe_acf_card_subfields( 'field_za_pub_card' ), [
+                [ 'key' => 'field_za_pub_card_highlight', 'label' => 'Highlight (coloured border)', 'name' => 'highlight', 'type' => 'true_false', 'ui' => 1 ],
+            ] ),
         ],
 
         [ 'key' => 'field_za_facilitation_tab', 'label' => 'Facilitation & community', 'type' => 'tab' ],
         [ 'key' => 'field_za_facilitation_eyebrow', 'label' => 'Eyebrow', 'name' => 'facilitation_eyebrow', 'type' => 'text' ],
+        [ 'key' => 'field_za_facilitation_heading', 'label' => 'Heading', 'name' => 'facilitation_heading', 'type' => 'text' ],
+        [ 'key' => 'field_za_facilitation_intro', 'label' => 'Intro', 'name' => 'facilitation_intro', 'type' => 'textarea', 'rows' => 2 ],
+        [ 'key' => 'field_za_facilitation_image', 'label' => 'Photo', 'name' => 'facilitation_image', 'type' => 'image', 'return_format' => 'array' ],
         [
             'key'          => 'field_za_facilitation_cards',
             'label'        => 'Cards',
@@ -446,7 +457,9 @@ acf_add_local_field_group( [
             'type'         => 'repeater',
             'layout'       => 'block',
             'button_label' => 'Add card',
-            'sub_fields'   => zoe_acf_card_subfields( 'field_za_fac_card' ),
+            'sub_fields'   => array_merge( zoe_acf_card_subfields( 'field_za_fac_card' ), [
+                [ 'key' => 'field_za_fac_card_highlight', 'label' => 'Highlight (coloured border)', 'name' => 'highlight', 'type' => 'true_false', 'ui' => 1 ],
+            ] ),
         ],
 
         [ 'key' => 'field_za_closing_tab', 'label' => 'Closing', 'type' => 'tab' ],

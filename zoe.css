@@ -481,6 +481,73 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 }
 .zoe-card__title { font-size: var(--type-h4); line-height: var(--type-h4-lh); margin: var(--sp-8) 0; }
 .zoe-card__description { color: var(--fg-muted); font-size: var(--type-small); line-height: var(--type-small-lh); }
+/* A card called out from its siblings — About's one time-sensitive
+   facilitation item so far, but usable anywhere zoe_acf_card_subfields()
+   is used (its new optional "highlight" sub-field). */
+.zoe-card--highlight { border-color: var(--accent-deep); }
+
+/* ── About: timeline (Background section) ────────────────────────────────
+   A centred intro, then every background_blocks row except the last as
+   an alternating photo/text pair, then the last row as a dark closing
+   panel (reuses .zoe-section--dark's token overrides). Rows without a
+   photo (none are uploaded yet) fall back to full-width text via :has(). */
+.zoe-timeline-intro { text-align: center; max-width: 640px; margin: 0 auto var(--sp-56); }
+.zoe-timeline { display: flex; flex-direction: column; }
+.zoe-timeline__row {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--sp-56);
+  align-items: center;
+  padding: var(--sp-48) 0;
+  border-bottom: 1px solid var(--border);
+}
+.zoe-timeline__row:last-child { border-bottom: none; }
+.zoe-timeline__row--reverse .zoe-timeline__copy { order: 2; }
+.zoe-timeline__row--reverse .zoe-timeline__media { order: 1; }
+.zoe-timeline__row:not(:has(.zoe-timeline__media)) .zoe-timeline__copy { grid-column: 1 / -1; max-width: 65ch; }
+.zoe-timeline__title { font-size: var(--type-h4); margin: var(--sp-8) 0 var(--sp-12); }
+.zoe-timeline__media img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-lg); display: block; }
+@media (max-width: 760px) {
+  .zoe-timeline__row { grid-template-columns: 1fr; }
+  .zoe-timeline__row--reverse .zoe-timeline__copy,
+  .zoe-timeline__row--reverse .zoe-timeline__media { order: initial; }
+}
+
+.zoe-timeline__final { margin-top: var(--sp-40); text-align: center; }
+.zoe-timeline__final .zoe-section__heading { max-width: none; }
+.zoe-timeline__final-body { max-width: 65ch; margin: 0 auto; color: var(--fg-on-dark-muted); }
+.zoe-tag-list { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-12); margin-top: var(--sp-32); }
+.zoe-tag { border: 1px solid var(--border-on-dark); border-radius: var(--radius-pill); padding: var(--sp-8) var(--sp-20); font-size: var(--type-small); color: var(--fg-on-dark); }
+
+/* ── About: Publications & awards — one large featured card, the rest
+   stacked beside it ─────────────────────────────────────────────────── */
+.zoe-publications-split { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--sp-24); margin-top: var(--sp-32); align-items: start; }
+.zoe-card--featured img { width: 100%; border-radius: var(--radius-md); margin-top: var(--sp-16); display: block; }
+.zoe-publications-split__list { display: flex; flex-direction: column; gap: var(--sp-24); }
+@media (max-width: 760px) { .zoe-publications-split { grid-template-columns: 1fr; } }
+
+/* ── About: Facilitation & community — a fixed intro/photo column beside
+   a stacked list of cards, instead of a grid ─────────────────────────── */
+.zoe-facilitation-split { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: var(--sp-56); margin-top: var(--sp-32); align-items: start; }
+.zoe-facilitation-split__photo { width: 100%; margin-top: var(--sp-24); aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--radius-lg); display: block; }
+.zoe-facilitation-split__list { display: flex; flex-direction: column; gap: var(--sp-16); }
+@media (max-width: 760px) { .zoe-facilitation-split { grid-template-columns: 1fr; } }
+
+/* ── About: closing CTA bar — one bordered strip, text left, buttons
+   right, instead of the sitewide centred/stacked section treatment ──── */
+.zoe-cta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-24);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-32) var(--sp-40);
+}
+.zoe-cta-bar__heading { font-size: var(--type-h3); margin-bottom: var(--sp-8); }
+.zoe-cta-bar__text { color: var(--fg-muted); max-width: 50ch; }
+.zoe-cta-bar .zoe-ctas { margin-top: 0; }
 
 /* Two labelled numbered lists side by side — Research's "Piloting the
    tool" section (what the trials showed / where else the framework
