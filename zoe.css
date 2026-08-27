@@ -519,18 +519,17 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .zoe-tag-list { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-12); margin-top: var(--sp-32); }
 .zoe-tag { border: 1px solid var(--border-on-dark); border-radius: var(--radius-pill); padding: var(--sp-8) var(--sp-20); font-size: var(--type-small); color: var(--fg-on-dark); }
 
-/* ── About: Publications & awards — one large featured card, the rest
-   stacked beside it ─────────────────────────────────────────────────── */
-.zoe-publications-split { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--sp-24); margin-top: var(--sp-32); align-items: start; }
-.zoe-card--featured img { width: 100%; border-radius: var(--radius-md); margin-top: var(--sp-16); display: block; }
-.zoe-publications-split__list { display: flex; flex-direction: column; gap: var(--sp-24); }
-@media (max-width: 760px) { .zoe-publications-split { grid-template-columns: 1fr; } }
-
 /* ── About: Facilitation & community — a fixed intro/photo column beside
-   a stacked list of cards, instead of a grid ─────────────────────────── */
+   a plain stacked list of text (no boxes — Lara's call; was the same
+   .zoe-card treatment as everywhere else). Divider between items instead
+   of a border; the one time-dated item gets a left accent rule instead
+   of the coloured box-border .zoe-card--highlight used elsewhere. */
 .zoe-facilitation-split { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: var(--sp-56); margin-top: var(--sp-32); align-items: start; }
 .zoe-facilitation-split__photo { width: 100%; margin-top: var(--sp-24); aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--radius-lg); display: block; }
-.zoe-facilitation-split__list { display: flex; flex-direction: column; gap: var(--sp-16); }
+.zoe-facilitation-split__list { display: flex; flex-direction: column; }
+.zoe-facilitation-split__item { padding: var(--sp-24) 0; border-bottom: 1px solid var(--border); }
+.zoe-facilitation-split__list .zoe-facilitation-split__item:last-child { border-bottom: none; }
+.zoe-facilitation-split__item--highlight { border-left: 3px solid var(--accent-deep); padding-left: var(--sp-16); }
 @media (max-width: 760px) { .zoe-facilitation-split { grid-template-columns: 1fr; } }
 
 /* ── About: closing CTA bar — one bordered strip, text left, buttons

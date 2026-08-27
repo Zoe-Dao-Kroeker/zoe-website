@@ -125,40 +125,33 @@ if ( have_posts() ) :
     $pub_featured_image = get_field( 'publications_featured_image' );
     ?>
     <?php if ( $pub_featured || $pub_cards ) : ?>
-      <div class="zoe-publications-split">
-        <?php if ( $pub_featured ) : ?>
-          <div class="zoe-card zoe-card--featured<?php echo ! empty( $pub_featured['highlight'] ) ? ' zoe-card--highlight' : ''; ?>">
-            <?php if ( ! empty( $pub_featured['tag'] ) ) : ?>
-              <div class="zoe-card__tag"><?php echo esc_html( $pub_featured['tag'] ); ?></div>
+      <?php
+      // Back to one uniform grid, all cards the same size — the
+      // asymmetric featured-card layout left an awkward empty gap under
+      // the first card whenever it had no image, which is every card
+      // right now. array_unshift puts the featured one back at the
+      // front instead of losing its position.
+      if ( $pub_featured ) {
+          array_unshift( $pub_cards, $pub_featured );
+      }
+      ?>
+      <div class="zoe-card-grid">
+        <?php foreach ( $pub_cards as $i => $card ) : ?>
+          <div class="zoe-card<?php echo ! empty( $card['highlight'] ) ? ' zoe-card--highlight' : ''; ?>">
+            <?php if ( ! empty( $card['tag'] ) ) : ?>
+              <div class="zoe-card__tag"><?php echo esc_html( $card['tag'] ); ?></div>
             <?php endif; ?>
-            <?php if ( ! empty( $pub_featured['title'] ) ) : ?>
-              <h3 class="zoe-card__title"><?php echo esc_html( $pub_featured['title'] ); ?></h3>
+            <?php if ( ! empty( $card['title'] ) ) : ?>
+              <h3 class="zoe-card__title"><?php echo esc_html( $card['title'] ); ?></h3>
             <?php endif; ?>
-            <?php if ( ! empty( $pub_featured['description'] ) ) : ?>
-              <p class="zoe-card__description"><?php echo esc_html( $pub_featured['description'] ); ?></p>
+            <?php if ( ! empty( $card['description'] ) ) : ?>
+              <p class="zoe-card__description"><?php echo esc_html( $card['description'] ); ?></p>
             <?php endif; ?>
-            <?php if ( $pub_featured_image ) : ?>
-              <img src="<?php echo esc_url( $pub_featured_image['url'] ); ?>" alt="<?php echo esc_attr( $pub_featured_image['alt'] ); ?>" loading="lazy">
+            <?php if ( $i === 0 && $pub_featured_image ) : ?>
+              <img src="<?php echo esc_url( $pub_featured_image['url'] ); ?>" alt="<?php echo esc_attr( $pub_featured_image['alt'] ); ?>" style="width:100%; border-radius: var(--radius-md); margin-top: var(--sp-16);" loading="lazy">
             <?php endif; ?>
           </div>
-        <?php endif; ?>
-        <?php if ( $pub_cards ) : ?>
-          <div class="zoe-publications-split__list">
-            <?php foreach ( $pub_cards as $card ) : ?>
-              <div class="zoe-card<?php echo ! empty( $card['highlight'] ) ? ' zoe-card--highlight' : ''; ?>">
-                <?php if ( ! empty( $card['tag'] ) ) : ?>
-                  <div class="zoe-card__tag"><?php echo esc_html( $card['tag'] ); ?></div>
-                <?php endif; ?>
-                <?php if ( ! empty( $card['title'] ) ) : ?>
-                  <h3 class="zoe-card__title"><?php echo esc_html( $card['title'] ); ?></h3>
-                <?php endif; ?>
-                <?php if ( ! empty( $card['description'] ) ) : ?>
-                  <p class="zoe-card__description"><?php echo esc_html( $card['description'] ); ?></p>
-                <?php endif; ?>
-              </div>
-            <?php endforeach; ?>
-          </div>
-        <?php endif; ?>
+        <?php endforeach; ?>
       </div>
     <?php endif; ?>
   </section>
@@ -182,7 +175,7 @@ if ( have_posts() ) :
       <?php if ( $fac_cards = get_field( 'facilitation_cards' ) ) : ?>
         <div class="zoe-facilitation-split__list">
           <?php foreach ( $fac_cards as $card ) : ?>
-            <div class="zoe-card<?php echo ! empty( $card['highlight'] ) ? ' zoe-card--highlight' : ''; ?>">
+            <div class="zoe-facilitation-split__item<?php echo ! empty( $card['highlight'] ) ? ' zoe-facilitation-split__item--highlight' : ''; ?>">
               <?php if ( ! empty( $card['tag'] ) ) : ?>
                 <div class="zoe-card__tag"><?php echo esc_html( $card['tag'] ); ?></div>
               <?php endif; ?>
