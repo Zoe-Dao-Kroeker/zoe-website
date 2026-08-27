@@ -443,8 +443,12 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .zoe-closing-cta__heading {
   font-family: var(--font-sans);
   font-weight: var(--fw-black);
-  font-size: var(--type-display);
-  line-height: var(--type-display-lh);
+  /* Was --type-display (48-99px) — at that size a full sentence wrapped
+     to 8+ lines on a phone-width screen. --type-h1 (35-67px) is still
+     the biggest size in real use anywhere on the site, just not the
+     absolute largest token that exists. */
+  font-size: var(--type-h1);
+  line-height: var(--type-h1-lh);
   letter-spacing: var(--track-heading);
   color: var(--fg-on-dark);
 }
