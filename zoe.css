@@ -515,6 +515,26 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
    is used (its new optional "highlight" sub-field). */
 .zoe-card--highlight { border-color: var(--accent-deep); }
 
+/* Publications & awards cards (About page) — a small type icon (set by the
+   card's Type field, publication or award), and an optional outside link.
+   Rendered via <img src="....svg">, not inline, so it can't pick up
+   currentColor from this stylesheet (a separate document context) — same
+   plain-black treatment the Icon Library page already uses for the same
+   files, kept deliberately muted here with opacity instead of a colour
+   swap. */
+.zoe-card__type-icon { opacity: 0.35; margin-bottom: var(--sp-8); }
+.zoe-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-4);
+  margin-top: var(--sp-16);
+  font-size: var(--type-small);
+  font-weight: var(--fw-black);
+  color: var(--accent-deep);
+  text-decoration: none;
+}
+.zoe-card__link:hover { text-decoration: underline; }
+
 /* ── About: timeline (Background section) ────────────────────────────────
    A centred intro, then every background_blocks row except the last as
    an alternating photo/text pair, then the last row as a dark closing
@@ -543,6 +563,18 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 }
 
 .zoe-timeline__final { margin-top: var(--sp-40); text-align: center; }
+/* The dark closing panel is always the last thing in its .zoe-section, but
+   that outer section still carried its own 96px bottom padding + hairline
+   border AFTER the panel's own 40px margin — on top of the NEXT section's
+   96px top padding, the gap below the panel was ~230px vs ~40px above it
+   (Lara, August 27, 2026: "the spacing top and bottom ... is different").
+   Zeroing the outer section's own bottom edge here makes the panel's
+   margin the only thing between it and its neighbours on both sides,
+   matching the top, which was never touching that padding to begin with. */
+.zoe-section:has(> .zoe-timeline__final:last-child) {
+  padding-bottom: 0;
+  border-bottom: none;
+}
 .zoe-timeline__final .zoe-section__heading { max-width: none; }
 .zoe-timeline__final-body { max-width: 65ch; margin: 0 auto; color: var(--fg-on-dark-muted); }
 .zoe-tag-list { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-12); margin-top: var(--sp-32); }

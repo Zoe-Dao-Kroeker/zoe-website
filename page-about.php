@@ -112,6 +112,17 @@ if ( have_posts() ) :
     <?php endif; ?>
   </section>
 
+  <?php
+  // One icon per card, set by its Type field (publication or award) rather
+  // than a manual per-card icon picker (Lara, August 27, 2026: "it's either
+  // a publication or an award, add icons from the icon library"). Files
+  // live in assets-icons/System Icons, same set the Icon Library page uses.
+  $zoe_pub_icons = [
+      'publication' => [ 'file' => 'article-light.svg', 'alt' => 'Publication' ],
+      'award'       => [ 'file' => 'trophy-light.svg', 'alt' => 'Award' ],
+  ];
+  $zoe_icon_dir_uri = get_theme_file_uri( 'assets-icons/System Icons' );
+  ?>
   <section class="zoe-section">
     <?php if ( $eyebrow = get_field( 'publications_eyebrow' ) ) : ?>
       <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
@@ -119,25 +130,16 @@ if ( have_posts() ) :
     <?php if ( $heading = get_field( 'publications_heading' ) ) : ?>
       <h2 class="zoe-section__heading"><?php echo esc_html( $heading ); ?></h2>
     <?php endif; ?>
-    <?php
-    $pub_cards          = get_field( 'publications_cards' ) ?: [];
-    $pub_featured       = array_shift( $pub_cards );
-    $pub_featured_image = get_field( 'publications_featured_image' );
-    ?>
-    <?php if ( $pub_featured || $pub_cards ) : ?>
-      <?php
-      // Back to one uniform grid, all cards the same size — the
-      // asymmetric featured-card layout left an awkward empty gap under
-      // the first card whenever it had no image, which is every card
-      // right now. array_unshift puts the featured one back at the
-      // front instead of losing its position.
-      if ( $pub_featured ) {
-          array_unshift( $pub_cards, $pub_featured );
-      }
-      ?>
+    <?php if ( $pub_cards = get_field( 'publications_cards' ) ) : ?>
       <div class="zoe-card-grid">
-        <?php foreach ( $pub_cards as $i => $card ) : ?>
+        <?php foreach ( $pub_cards as $card ) :
+            $icon = $zoe_pub_icons[ $card['card_type'] ?? 'publication' ] ?? $zoe_pub_icons['publication'];
+        ?>
           <div class="zoe-card<?php echo ! empty( $card['highlight'] ) ? ' zoe-card--highlight' : ''; ?>">
+            <?php if ( ! empty( $card['image']['url'] ) ) : ?>
+              <img class="zoe-card__image" src="<?php echo esc_url( $card['image']['url'] ); ?>" alt="<?php echo esc_attr( $card['image']['alt'] ); ?>" loading="lazy">
+            <?php endif; ?>
+            <img class="zoe-card__type-icon" src="<?php echo esc_url( $zoe_icon_dir_uri . '/' . rawurlencode( $icon['file'] ) ); ?>" width="20" height="20" alt="<?php echo esc_attr( $icon['alt'] ); ?>" loading="lazy">
             <?php if ( ! empty( $card['tag'] ) ) : ?>
               <div class="zoe-card__tag"><?php echo esc_html( $card['tag'] ); ?></div>
             <?php endif; ?>
@@ -147,8 +149,8 @@ if ( have_posts() ) :
             <?php if ( ! empty( $card['description'] ) ) : ?>
               <p class="zoe-card__description"><?php echo esc_html( $card['description'] ); ?></p>
             <?php endif; ?>
-            <?php if ( $i === 0 && $pub_featured_image ) : ?>
-              <img src="<?php echo esc_url( $pub_featured_image['url'] ); ?>" alt="<?php echo esc_attr( $pub_featured_image['alt'] ); ?>" style="width:100%; border-radius: var(--radius-md); margin-top: var(--sp-16);" loading="lazy">
+            <?php if ( ! empty( $card['link_url'] ) && ! empty( $card['link_label'] ) ) : ?>
+              <a class="zoe-card__link" href="<?php echo esc_url( $card['link_url'] ); ?>"<?php echo zoe_external_link_atts( $card['link_url'] ); ?>><?php echo esc_html( $card['link_label'] ); ?><svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
             <?php endif; ?>
           </div>
         <?php endforeach; ?>

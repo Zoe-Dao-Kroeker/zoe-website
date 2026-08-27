@@ -433,15 +433,43 @@ acf_add_local_field_group( [
         [ 'key' => 'field_za_publications_tab', 'label' => 'Publications & awards', 'type' => 'tab' ],
         [ 'key' => 'field_za_publications_eyebrow', 'label' => 'Eyebrow', 'name' => 'publications_eyebrow', 'type' => 'text' ],
         [ 'key' => 'field_za_publications_heading', 'label' => 'Heading', 'name' => 'publications_heading', 'type' => 'text' ],
-        [ 'key' => 'field_za_publications_featured_image', 'label' => 'Featured card image', 'name' => 'publications_featured_image', 'type' => 'image', 'return_format' => 'array', 'instructions' => 'Shown inside the first card only, which renders larger than the rest.' ],
         [
             'key'          => 'field_za_publications_cards',
-            'label'        => 'Cards — the first one is the large featured card',
+            'label'        => 'Cards',
             'name'         => 'publications_cards',
             'type'         => 'repeater',
             'layout'       => 'block',
             'button_label' => 'Add card',
-            'sub_fields'   => array_merge( zoe_acf_card_subfields( 'field_za_pub_card' ), [
+            'instructions' => 'Every part of a card is editable here — photo, type (sets the icon shown), tag, title, excerpt, and an optional outside link (opens in a new tab automatically).',
+            // zoe_acf_card_subfields() labels this sub-field "Description" —
+            // relabelled to "Excerpt" here only (Lara, August 27, 2026: "add
+            // a place for an excerpt"), since it already does exactly that;
+            // Research's and Facilitation's cards keep the original label,
+            // not asked to change.
+            'sub_fields'   => array_merge( array_map( function ( $f ) {
+                if ( 'field_za_pub_card_description' === $f['key'] ) {
+                    $f['label'] = 'Excerpt';
+                }
+                return $f;
+            }, zoe_acf_card_subfields( 'field_za_pub_card' ) ), [
+                [ 'key' => 'field_za_pub_card_image', 'label' => 'Photo', 'name' => 'image', 'type' => 'image', 'return_format' => 'array', 'instructions' => 'Optional — shown at the top of the card.' ],
+                [
+                    'key'           => 'field_za_pub_card_type',
+                    'label'         => 'Type',
+                    'name'          => 'card_type',
+                    'type'          => 'select',
+                    'choices'       => [ 'publication' => 'Publication', 'award' => 'Award' ],
+                    'default_value' => 'publication',
+                    'instructions'  => 'Sets which icon shows on the card.',
+                ],
+                [
+                    'key'          => 'field_za_pub_card_link_url',
+                    'label'        => 'Link URL',
+                    'name'         => 'link_url',
+                    'type'         => 'text',
+                    'instructions' => 'Optional. A link to the outside publication or award page — opens in a new tab automatically.',
+                ],
+                [ 'key' => 'field_za_pub_card_link_label', 'label' => 'Link label', 'name' => 'link_label', 'type' => 'text', 'default_value' => 'View', 'conditional_logic' => [ [ [ 'field' => 'field_za_pub_card_link_url', 'operator' => '!=empty' ] ] ] ],
                 [ 'key' => 'field_za_pub_card_highlight', 'label' => 'Highlight (coloured border)', 'name' => 'highlight', 'type' => 'true_false', 'ui' => 1 ],
             ] ),
         ],
