@@ -25,12 +25,15 @@
      rule, not an oversight.
    - Additional and Semantic groups are Lara's picks, kept distinct from
      Primary hues per the naming convention (CTA is the one exception, above).
-   Fonts and the whole scale system below (type, spacing, radius, shadow,
-   easing) are copied from LKI as structure, not a brand colour — Lara asked
-   for this site's system to be set up exactly the same as LKI's, with two
-   font changes of her own, both August 24, 2026: the sans is Open Sans, not
-   Inter, and Fontdiner Swanky is a new h1-only display face (Instrument
-   Serif and JetBrains Mono are unchanged from LKI). */
+   The scale system below (type, spacing, radius, shadow, easing) is copied
+   from LKI as structure, not a brand colour — Lara asked for this site's
+   system to be set up exactly the same as LKI's. Type itself has diverged,
+   all Lara's calls on August 24, 2026: sans is Open Sans, not Inter;
+   Fontdiner Swanky is a new h1-only display face; and LKI's third and
+   fourth families — Instrument Serif (editorial accent) and JetBrains Mono
+   — are dropped entirely. Every former mono/serif usage (eyebrows, stat
+   labels, card tags, the footer copyright line, swatch metadata) now reads
+   --font-sans, so there are only two families in the whole theme. */
 
 :root {
   /* ── Primitives ─────────────────────────────────────────────────────── */
@@ -99,8 +102,6 @@
 
   /* ── Type ───────────────────────────────────────────────────────────── */
   --font-sans: "Open Sans", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-  --font-serif: "Instrument Serif", "Georgia", serif;
-  --font-mono: "JetBrains Mono", "Menlo", ui-monospace, monospace;
   /* Display — h1 only (hero headings, page titles), Lara's pick, August 24,
      2026. h2 (section headings) reverted to --font-sans the same day —
      Fontdiner Swanky is a one-tier accent, not the whole heading system. */

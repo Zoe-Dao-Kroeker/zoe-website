@@ -206,13 +206,12 @@ get_header();
        ============================================================ -->
   <section class="dg-section" id="type">
     <div class="eyebrow">06 — Type</div>
-    <h2 class="zoe-section__heading">Open Sans, Instrument Serif, JetBrains Mono, Fontdiner Swanky.</h2>
+    <h2 class="zoe-section__heading">Open Sans, Fontdiner Swanky.</h2>
+    <p class="zoe-section__intro">Two families, on purpose — Instrument Serif and JetBrains Mono (both carried over from LKI's system at first) were dropped August 24, 2026.</p>
 
     <div class="dg-type-families">
       <div><span class="dg-type-label">Display / H1 only</span><div class="dg-type-glyph" style="font-family: var(--font-display); font-weight: 400;">Aa</div><span class="dg-type-sub">Fontdiner Swanky · 400</span></div>
       <div><span class="dg-type-label">UI / body / H2+</span><div class="dg-type-glyph" style="font-family: var(--font-sans); font-weight: var(--fw-black);">Aa</div><span class="dg-type-sub">Open Sans · Light 300 / Black 800</span></div>
-      <div><span class="dg-type-label">Editorial accent</span><div class="dg-type-glyph" style="font-family: var(--font-serif); font-style: italic;">Aa</div><span class="dg-type-sub">Instrument Serif · 400 italic</span></div>
-      <div><span class="dg-type-label">Mono</span><div class="dg-type-glyph" style="font-family: var(--font-mono);">Aa</div><span class="dg-type-sub">JetBrains Mono · 400/500</span></div>
     </div>
 
     <div class="dg-type-scale">

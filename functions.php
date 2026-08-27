@@ -56,14 +56,16 @@ add_action( 'after_setup_theme', function () {
 // IMPORTANT: bump ZOE_STYLE_VER on every zoe.css change. The browser and CDN
 // cache by ?ver= query string, not by file content, so a correct upload can
 // still render stale.
-define( 'ZOE_STYLE_VER', '0.9.0' );
+define( 'ZOE_STYLE_VER', '0.10.0' );
 
 add_action( 'wp_enqueue_scripts', function () {
-    // Google Fonts. Sans is Open Sans (switched from Inter, August 24,
-    // 2026); Fontdiner Swanky is h1 only, not the whole heading system.
+    // Google Fonts — two families only. Sans is Open Sans (switched from
+    // Inter, August 24, 2026); Fontdiner Swanky is h1 only, not the whole
+    // heading system. Instrument Serif and JetBrains Mono, both from the
+    // original LKI-copied system, were dropped the same day.
     wp_enqueue_style(
         'zoe-google-fonts',
-        'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Fontdiner+Swanky&display=swap',
+        'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Fontdiner+Swanky&display=swap',
         [],
         null
     );
