@@ -108,6 +108,9 @@ if ( have_posts() ) :
     <?php if ( $heading = get_field( 'findings_heading' ) ) : ?>
       <h2 class="zoe-section__heading"><?php echo esc_html( $heading ); ?></h2>
     <?php endif; ?>
+    <?php if ( $findings_intro = get_field( 'findings_intro' ) ) : ?>
+      <p class="zoe-section__intro"><?php echo esc_html( $findings_intro ); ?></p>
+    <?php endif; ?>
     <?php if ( have_rows( 'findings_cards' ) ) : ?>
       <div class="zoe-feature">
         <?php while ( have_rows( 'findings_cards' ) ) : the_row(); ?>
@@ -122,8 +125,34 @@ if ( have_posts() ) :
   </section>
 
   <section class="zoe-section">
+    <?php if ( $eyebrow = get_field( 'prototype_eyebrow' ) ) : ?>
+      <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+    <?php endif; ?>
+    <?php if ( $heading = get_field( 'prototype_heading' ) ) : ?>
+      <h2 class="zoe-section__heading"><?php echo esc_html( $heading ); ?></h2>
+    <?php endif; ?>
+    <?php if ( $intro = get_field( 'prototype_intro' ) ) : ?>
+      <p class="zoe-section__intro"><?php echo esc_html( $intro ); ?></p>
+    <?php endif; ?>
+    <?php if ( have_rows( 'prototype_cards' ) ) : ?>
+      <div class="zoe-card-grid">
+        <?php while ( have_rows( 'prototype_cards' ) ) : the_row(); ?>
+          <div class="zoe-card">
+            <div class="zoe-card__tag"><?php echo esc_html( get_sub_field( 'tag' ) ); ?></div>
+            <h3 class="zoe-card__title"><?php echo esc_html( get_sub_field( 'title' ) ); ?></h3>
+            <p class="zoe-card__description"><?php echo esc_html( get_sub_field( 'description' ) ); ?></p>
+          </div>
+        <?php endwhile; ?>
+      </div>
+    <?php endif; ?>
+  </section>
+
+  <section class="zoe-section">
     <?php if ( $eyebrow = get_field( 'matters_eyebrow' ) ) : ?>
       <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+    <?php endif; ?>
+    <?php if ( $matters_heading = get_field( 'matters_heading' ) ) : ?>
+      <h2 class="zoe-section__heading"><?php echo esc_html( $matters_heading ); ?></h2>
     <?php endif; ?>
     <?php if ( have_rows( 'matters_cards' ) ) : ?>
       <div class="zoe-card-grid">
@@ -134,6 +163,46 @@ if ( have_posts() ) :
             <p class="zoe-card__description"><?php echo esc_html( get_sub_field( 'description' ) ); ?></p>
           </div>
         <?php endwhile; ?>
+      </div>
+    <?php endif; ?>
+  </section>
+
+  <section class="zoe-section">
+    <?php if ( $eyebrow = get_field( 'piloting_eyebrow' ) ) : ?>
+      <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+    <?php endif; ?>
+    <?php if ( $heading = get_field( 'piloting_heading' ) ) : ?>
+      <h2 class="zoe-section__heading"><?php echo esc_html( $heading ); ?></h2>
+    <?php endif; ?>
+    <?php if ( $intro = get_field( 'piloting_intro' ) ) : ?>
+      <p class="zoe-section__intro"><?php echo esc_html( $intro ); ?></p>
+    <?php endif; ?>
+    <?php if ( have_rows( 'piloting_trials' ) || have_rows( 'piloting_apply' ) ) : ?>
+      <div class="zoe-piloting-cols">
+        <?php if ( have_rows( 'piloting_trials' ) ) : ?>
+          <div>
+            <?php if ( $trials_label = get_field( 'piloting_trials_label' ) ) : ?>
+              <h3><?php echo esc_html( $trials_label ); ?></h3>
+            <?php endif; ?>
+            <ol>
+              <?php while ( have_rows( 'piloting_trials' ) ) : the_row(); ?>
+                <li><?php echo esc_html( get_sub_field( 'item' ) ); ?></li>
+              <?php endwhile; ?>
+            </ol>
+          </div>
+        <?php endif; ?>
+        <?php if ( have_rows( 'piloting_apply' ) ) : ?>
+          <div>
+            <?php if ( $apply_label = get_field( 'piloting_apply_label' ) ) : ?>
+              <h3><?php echo esc_html( $apply_label ); ?></h3>
+            <?php endif; ?>
+            <ol>
+              <?php while ( have_rows( 'piloting_apply' ) ) : the_row(); ?>
+                <li><?php echo esc_html( get_sub_field( 'item' ) ); ?></li>
+              <?php endwhile; ?>
+            </ol>
+          </div>
+        <?php endif; ?>
       </div>
     <?php endif; ?>
   </section>

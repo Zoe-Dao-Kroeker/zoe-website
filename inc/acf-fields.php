@@ -280,6 +280,7 @@ acf_add_local_field_group( [
         [ 'key' => 'field_zr_findings_tab', 'label' => 'Findings', 'type' => 'tab' ],
         [ 'key' => 'field_zr_findings_eyebrow', 'label' => 'Eyebrow', 'name' => 'findings_eyebrow', 'type' => 'text' ],
         [ 'key' => 'field_zr_findings_heading', 'label' => 'Heading', 'name' => 'findings_heading', 'type' => 'text' ],
+        [ 'key' => 'field_zr_findings_intro', 'label' => 'Intro (methodology)', 'name' => 'findings_intro', 'type' => 'textarea', 'rows' => 2 ],
         [
             'key'          => 'field_zr_findings_cards',
             'label'        => 'Cards (Worked / Needs work)',
@@ -290,8 +291,23 @@ acf_add_local_field_group( [
             'sub_fields'   => zoe_acf_card_subfields( 'field_zr_find_card' ),
         ],
 
+        [ 'key' => 'field_zr_prototype_tab', 'label' => 'The prototype', 'type' => 'tab' ],
+        [ 'key' => 'field_zr_prototype_eyebrow', 'label' => 'Eyebrow', 'name' => 'prototype_eyebrow', 'type' => 'text' ],
+        [ 'key' => 'field_zr_prototype_heading', 'label' => 'Heading', 'name' => 'prototype_heading', 'type' => 'text' ],
+        [ 'key' => 'field_zr_prototype_intro', 'label' => 'Intro', 'name' => 'prototype_intro', 'type' => 'textarea', 'rows' => 2 ],
+        [
+            'key'          => 'field_zr_prototype_cards',
+            'label'        => 'Cards (how it\'s built)',
+            'name'         => 'prototype_cards',
+            'type'         => 'repeater',
+            'layout'       => 'block',
+            'button_label' => 'Add card',
+            'sub_fields'   => zoe_acf_card_subfields( 'field_zr_proto_card' ),
+        ],
+
         [ 'key' => 'field_zr_matters_tab', 'label' => 'Why it matters', 'type' => 'tab' ],
         [ 'key' => 'field_zr_matters_eyebrow', 'label' => 'Eyebrow', 'name' => 'matters_eyebrow', 'type' => 'text' ],
+        [ 'key' => 'field_zr_matters_heading', 'label' => 'Heading', 'name' => 'matters_heading', 'type' => 'text' ],
         [
             'key'          => 'field_zr_matters_cards',
             'label'        => 'Cards (Theoretical / Methodological / Practical)',
@@ -300,6 +316,35 @@ acf_add_local_field_group( [
             'layout'       => 'block',
             'button_label' => 'Add card',
             'sub_fields'   => zoe_acf_card_subfields( 'field_zr_matters_card' ),
+        ],
+
+        [ 'key' => 'field_zr_piloting_tab', 'label' => 'Piloting the tool', 'type' => 'tab' ],
+        [ 'key' => 'field_zr_piloting_eyebrow', 'label' => 'Eyebrow', 'name' => 'piloting_eyebrow', 'type' => 'text' ],
+        [ 'key' => 'field_zr_piloting_heading', 'label' => 'Heading', 'name' => 'piloting_heading', 'type' => 'text' ],
+        [ 'key' => 'field_zr_piloting_intro', 'label' => 'Intro', 'name' => 'piloting_intro', 'type' => 'textarea', 'rows' => 2 ],
+        [ 'key' => 'field_zr_piloting_trials_label', 'label' => 'Left column label', 'name' => 'piloting_trials_label', 'type' => 'text', 'default_value' => 'What the trials showed' ],
+        [
+            'key'          => 'field_zr_piloting_trials',
+            'label'        => 'Left column items',
+            'name'         => 'piloting_trials',
+            'type'         => 'repeater',
+            'layout'       => 'table',
+            'button_label' => 'Add item',
+            'sub_fields'   => [
+                [ 'key' => 'field_zr_pt_item', 'label' => 'Item', 'name' => 'item', 'type' => 'textarea', 'rows' => 2 ],
+            ],
+        ],
+        [ 'key' => 'field_zr_piloting_apply_label', 'label' => 'Right column label', 'name' => 'piloting_apply_label', 'type' => 'text', 'default_value' => 'Applying the framework elsewhere' ],
+        [
+            'key'          => 'field_zr_piloting_apply',
+            'label'        => 'Right column items',
+            'name'         => 'piloting_apply',
+            'type'         => 'repeater',
+            'layout'       => 'table',
+            'button_label' => 'Add item',
+            'sub_fields'   => [
+                [ 'key' => 'field_zr_pa_item', 'label' => 'Item', 'name' => 'item', 'type' => 'textarea', 'rows' => 2 ],
+            ],
         ],
     ],
     'location' => [

@@ -434,6 +434,17 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .zoe-card__title { font-size: var(--type-h4); line-height: var(--type-h4-lh); margin: var(--sp-8) 0; }
 .zoe-card__description { color: var(--fg-muted); font-size: var(--type-small); line-height: var(--type-small-lh); }
 
+/* Two labelled numbered lists side by side — Research's "Piloting the
+   tool" section (what the trials showed / where else the framework
+   applies). */
+.zoe-piloting-cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-56); margin-top: var(--sp-32); }
+.zoe-piloting-cols h3 { font-size: var(--type-h4); margin-bottom: var(--sp-16); }
+.zoe-piloting-cols ol { list-style: decimal; padding-left: 1.25em; }
+.zoe-piloting-cols li { margin-bottom: var(--sp-12); color: var(--fg-muted); font-size: var(--type-small); line-height: var(--type-small-lh); }
+@media (max-width: 760px) {
+  .zoe-piloting-cols { grid-template-columns: 1fr; gap: var(--sp-32); }
+}
+
 /* ── Process / step grids ─────────────────────────────────────────────── */
 
 .zoe-process {
