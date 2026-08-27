@@ -45,6 +45,17 @@ acf_add_local_field_group( [
             'type'          => 'url',
             'instructions'  => 'Link to the hosted résumé PDF. Leave blank to hide the Résumé link in the footer and nav.',
         ],
+
+        [ 'key' => 'field_zso_closing_tab', 'label' => 'Closing CTA (every page, above the footer)', 'type' => 'tab' ],
+        [ 'key' => 'field_zso_closing_eyebrow', 'label' => 'Eyebrow', 'name' => 'closing_eyebrow', 'type' => 'text' ],
+        [ 'key' => 'field_zso_closing_heading', 'label' => 'Heading', 'name' => 'closing_heading', 'type' => 'textarea', 'rows' => 2 ],
+        [
+            'key'          => 'field_zso_closing_cta_label',
+            'label'        => 'Button label',
+            'name'         => 'closing_cta_label',
+            'type'         => 'text',
+            'instructions' => 'The button always links to the LinkedIn URL above — there\'s no separate URL field here on purpose. Leave the heading blank to hide this whole section.',
+        ],
     ],
     'location' => [
         [ [ 'param' => 'options_page', 'operator' => '==', 'value' => 'zoe-site-settings' ] ],

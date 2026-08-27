@@ -10,13 +10,41 @@
  * link only renders if its field is filled in, so a blank résumé URL (it
  * hasn't been supplied yet) just omits that link rather than pointing
  * nowhere.
+ *
+ * Closing CTA: one dark banner above the footer bar, on every page —
+ * structurally copied from larakroekerinteractive.com's own closing
+ * section, repainted in Zoe's tokens (see zoe.css's .zoe-closing-cta
+ * comment). Always links to LinkedIn specifically, not a generic CTA —
+ * Lara's call, August 27, 2026 — so it renders only when both the
+ * heading and the LinkedIn URL are filled in.
  */
 
 $contact_email = get_field( 'contact_email', 'option' );
 $linkedin_url  = get_field( 'linkedin_url', 'option' );
 $instagram_url = get_field( 'instagram_url', 'option' );
 $resume_url    = get_field( 'resume_url', 'option' );
+
+$closing_eyebrow   = get_field( 'closing_eyebrow', 'option' );
+$closing_heading   = get_field( 'closing_heading', 'option' );
+$closing_cta_label = get_field( 'closing_cta_label', 'option' );
 ?>
+
+<?php if ( $closing_heading && $linkedin_url ) : ?>
+  <section class="zoe-closing-cta">
+    <div class="zoe-closing-cta__inner">
+      <?php if ( $closing_eyebrow ) : ?>
+        <div class="eyebrow"><?php echo esc_html( $closing_eyebrow ); ?></div>
+      <?php endif; ?>
+      <h2 class="zoe-closing-cta__heading"><?php echo esc_html( $closing_heading ); ?></h2>
+      <div class="zoe-ctas zoe-ctas--center">
+        <a class="btn-pill btn-pill--cta" href="<?php echo esc_url( $linkedin_url ); ?>" target="_blank" rel="noopener noreferrer">
+          <?php echo esc_html( $closing_cta_label ?: 'Connect on LinkedIn' ); ?>
+          <span class="arr" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 11.5L11.5 2.5M11.5 2.5H4.5M11.5 2.5V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+<?php endif; ?>
 
 <footer class="zoe-footer" role="contentinfo">
   <div class="zoe-footer__inner">

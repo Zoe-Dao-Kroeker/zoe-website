@@ -420,6 +420,40 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 }
 .zoe-process--plain .zoe-process__step { background: none; padding: 0; }
 
+/* ── Closing CTA ──────────────────────────────────────────────────────────
+   One dark banner, every page, right above the footer bar — structurally
+   copied from larakroekerinteractive.com's own closing "Let's talk"
+   section (same idea: a full-bleed dark strip, an eyebrow, one big
+   statement, one button), repainted in Zoe's own tokens rather than
+   LKI's navy/pink. --type-display was otherwise unused outside the
+   guidelines page's own specimen row; this is its first real job. The
+   button is its own colour treatment (amber fill, not the usual dark
+   pill) since the surrounding section is already dark — .btn-pill's
+   default dark-on-dark would have no separation here. */
+.zoe-closing-cta {
+  background: var(--bg-inverse);
+  padding: var(--sp-96) var(--sp-80);
+  text-align: center;
+}
+@media (max-width: 760px) {
+  .zoe-closing-cta { padding: var(--sp-64) var(--sp-20); }
+}
+.zoe-closing-cta__inner { max-width: 760px; margin: 0 auto; }
+.zoe-closing-cta .eyebrow { margin-bottom: var(--sp-24); }
+.zoe-closing-cta__heading {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-black);
+  font-size: var(--type-display);
+  line-height: var(--type-display-lh);
+  letter-spacing: var(--track-heading);
+  color: var(--fg-on-dark);
+}
+
+.btn-pill--cta { background: var(--cta); color: var(--fg); }
+.btn-pill--cta .arr { background: var(--bg-inverse); color: var(--fg-on-dark); }
+.btn-pill--cta:hover { background: var(--cta-hover); color: var(--fg); }
+.btn-pill--cta:hover .arr { transform: rotate(45deg); }
+
 /* ── Footer ───────────────────────────────────────────────────────────── */
 
 .zoe-footer { padding: var(--sp-48) 0; border-top: 1px solid var(--border); }
