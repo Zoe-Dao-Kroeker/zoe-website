@@ -277,6 +277,15 @@ acf_add_local_field_group( [
             'sub_fields'   => zoe_acf_card_subfields( 'field_zr_fw_card' ),
         ],
 
+        [ 'key' => 'field_zr_demo_tab', 'label' => 'Demo', 'type' => 'tab' ],
+        [ 'key' => 'field_zr_demo_eyebrow', 'label' => 'Eyebrow', 'name' => 'demo_eyebrow', 'type' => 'text' ],
+        [ 'key' => 'field_zr_demo_heading', 'label' => 'Heading', 'name' => 'demo_heading', 'type' => 'text' ],
+        [ 'key' => 'field_zr_demo_intro', 'label' => 'Intro', 'name' => 'demo_intro', 'type' => 'textarea', 'rows' => 2 ],
+        [ 'key' => 'field_zr_demo_photo', 'label' => 'Photo (students using the tool)', 'name' => 'demo_photo', 'type' => 'image', 'return_format' => 'array' ],
+        [ 'key' => 'field_zr_demo_gif_1', 'label' => 'GIF 1', 'name' => 'demo_gif_1', 'type' => 'image', 'return_format' => 'array', 'instructions' => 'Upload as a .gif to keep it animated.' ],
+        [ 'key' => 'field_zr_demo_gif_2', 'label' => 'GIF 2', 'name' => 'demo_gif_2', 'type' => 'image', 'return_format' => 'array' ],
+        [ 'key' => 'field_zr_demo_gif_3', 'label' => 'GIF 3', 'name' => 'demo_gif_3', 'type' => 'image', 'return_format' => 'array' ],
+
         [ 'key' => 'field_zr_findings_tab', 'label' => 'Findings', 'type' => 'tab' ],
         [ 'key' => 'field_zr_findings_eyebrow', 'label' => 'Eyebrow', 'name' => 'findings_eyebrow', 'type' => 'text' ],
         [ 'key' => 'field_zr_findings_heading', 'label' => 'Heading', 'name' => 'findings_heading', 'type' => 'text' ],

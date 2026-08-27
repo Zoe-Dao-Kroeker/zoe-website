@@ -418,9 +418,18 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
    hero. Currently just Home's research teaser (the airship). */
 .zoe-section--split { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: var(--sp-56); align-items: center; }
 .zoe-section--split .zoe-section__media svg { width: 100%; height: auto; display: block; }
+/* A third child (e.g. a card grid) that should span both columns below
+   the copy/media row instead of squeezing into one of them. */
+.zoe-section--split .zoe-section__full { grid-column: 1 / -1; margin-top: var(--sp-16); }
 @media (max-width: 760px) {
   .zoe-section--split { grid-template-columns: 1fr; }
 }
+
+/* Research's "Demo" section — a real photo of students using the tool
+   plus its own GIFs, side by side, image + no caption (the surrounding
+   section copy carries the context). */
+.zoe-demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--sp-24); margin-top: var(--sp-32); }
+.zoe-demo-grid img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-lg); display: block; }
 
 .zoe-note {
   margin-top: var(--sp-24);
@@ -520,6 +529,13 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   gap: var(--sp-32);
 }
 .zoe-process--plain .zoe-process__step { background: none; padding: 0; }
+/* Fixed 2 columns instead of auto-fit — Research's framework_steps, so
+   Build/Scan land beside each other and Discuss/Fly below rather than
+   the 3-then-1 wrap auto-fit produced at this content width. */
+.zoe-process--cols2 { grid-template-columns: repeat(2, 1fr); row-gap: var(--sp-32); }
+@media (max-width: 600px) {
+  .zoe-process--cols2 { grid-template-columns: 1fr; }
+}
 
 /* ── Closing CTA ──────────────────────────────────────────────────────────
    One dark banner, every page, right above the footer bar — structurally
