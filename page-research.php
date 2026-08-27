@@ -78,7 +78,7 @@ if ( have_posts() ) :
       <p class="zoe-section__intro"><?php echo esc_html( $intro ); ?></p>
     <?php endif; ?>
     <?php if ( have_rows( 'framework_steps' ) ) : ?>
-      <div class="zoe-process zoe-process--plain zoe-process--cols2">
+      <div class="zoe-process zoe-process--plain zoe-process--cols4">
         <?php while ( have_rows( 'framework_steps' ) ) : the_row(); ?>
           <div class="zoe-process__step">
             <b><?php echo esc_html( get_sub_field( 'kicker' ) ); ?></b>
@@ -154,31 +154,37 @@ if ( have_posts() ) :
       <?php endif; ?>
     </div>
     <div class="zoe-section__media">
-      <?php
-      /* Same airship illustration used on Home's research teaser
-         (page-home.php) — reused here rather than redrawn, since this
-         section is literally about that prototype. */
-      ?>
-      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a 1930s airship">
-        <defs>
-          <clipPath id="airshipBodyPrototype">
-            <path d="M20,130 C20,78 110,52 210,58 C295,63 355,92 388,122 C396,127 396,133 388,138 C355,168 295,197 210,202 C110,208 20,182 20,130 Z" />
-          </clipPath>
-        </defs>
-        <g clip-path="url(#airshipBodyPrototype)">
-          <rect x="0" y="0" width="420" height="260" fill="#F4EFE4" />
-          <polygon points="0,190 420,70 420,130 0,250" fill="#EDC24E" />
-          <rect x="0" y="66" width="420" height="14" fill="#FFFFFF" opacity="0.55" />
-          <line x1="0" y1="150" x2="420" y2="150" stroke="#C9BFA8" stroke-width="2" opacity="0.6" />
-        </g>
-        <path d="M20,130 C20,78 110,52 210,58 C295,63 355,92 388,122 C396,127 396,133 388,138 C355,168 295,197 210,202 C110,208 20,182 20,130 Z"
-              fill="none" stroke="#2B1810" stroke-width="4" stroke-linejoin="round" />
-        <path d="M348,92 L402,34 L388,100 Z" fill="#E8A15C" stroke="#2B1810" stroke-width="4" stroke-linejoin="round" />
-        <rect x="168" y="196" width="72" height="30" rx="12" fill="#D9B25A" stroke="#2B1810" stroke-width="4" />
-        <circle cx="186" cy="211" r="4" fill="#2B1810" />
-        <circle cx="204" cy="211" r="4" fill="#2B1810" />
-        <circle cx="222" cy="211" r="4" fill="#2B1810" />
-      </svg>
+      <?php $prototype_image = get_field( 'prototype_image' ); ?>
+      <?php if ( $prototype_image ) : ?>
+        <img src="<?php echo esc_url( $prototype_image['url'] ); ?>" alt="<?php echo esc_attr( $prototype_image['alt'] ); ?>" style="width:100%; height:auto; display:block; border-radius: var(--radius-lg);">
+      <?php else : ?>
+        <?php
+        /* Default when no image is uploaded: same airship illustration
+           used on Home's research teaser (page-home.php) — reused here
+           rather than redrawn, since this section is literally about
+           that prototype. */
+        ?>
+        <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a 1930s airship">
+          <defs>
+            <clipPath id="airshipBodyPrototype">
+              <path d="M20,130 C20,78 110,52 210,58 C295,63 355,92 388,122 C396,127 396,133 388,138 C355,168 295,197 210,202 C110,208 20,182 20,130 Z" />
+            </clipPath>
+          </defs>
+          <g clip-path="url(#airshipBodyPrototype)">
+            <rect x="0" y="0" width="420" height="260" fill="#F4EFE4" />
+            <polygon points="0,190 420,70 420,130 0,250" fill="#EDC24E" />
+            <rect x="0" y="66" width="420" height="14" fill="#FFFFFF" opacity="0.55" />
+            <line x1="0" y1="150" x2="420" y2="150" stroke="#C9BFA8" stroke-width="2" opacity="0.6" />
+          </g>
+          <path d="M20,130 C20,78 110,52 210,58 C295,63 355,92 388,122 C396,127 396,133 388,138 C355,168 295,197 210,202 C110,208 20,182 20,130 Z"
+                fill="none" stroke="#2B1810" stroke-width="4" stroke-linejoin="round" />
+          <path d="M348,92 L402,34 L388,100 Z" fill="#E8A15C" stroke="#2B1810" stroke-width="4" stroke-linejoin="round" />
+          <rect x="168" y="196" width="72" height="30" rx="12" fill="#D9B25A" stroke="#2B1810" stroke-width="4" />
+          <circle cx="186" cy="211" r="4" fill="#2B1810" />
+          <circle cx="204" cy="211" r="4" fill="#2B1810" />
+          <circle cx="222" cy="211" r="4" fill="#2B1810" />
+        </svg>
+      <?php endif; ?>
     </div>
     <?php if ( have_rows( 'prototype_cards' ) ) : ?>
       <div class="zoe-card-grid zoe-section__full">

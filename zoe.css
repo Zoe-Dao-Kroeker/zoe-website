@@ -596,12 +596,15 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   gap: var(--sp-32);
 }
 .zoe-process--plain .zoe-process__step { background: none; padding: 0; }
-/* Fixed 2 columns instead of auto-fit — Research's framework_steps, so
-   Build/Scan land beside each other and Discuss/Fly below rather than
-   the 3-then-1 wrap auto-fit produced at this content width. */
-.zoe-process--cols2 { grid-template-columns: repeat(2, 1fr); row-gap: var(--sp-32); }
-@media (max-width: 600px) {
-  .zoe-process--cols2 { grid-template-columns: 1fr; }
+/* Fixed 4 columns instead of auto-fit — Research's framework_steps, one
+   row of Build/Scan/Discuss/Fly rather than whatever auto-fit wraps to
+   at a given width. Was 2 columns (.zoe-process--cols2) briefly. */
+.zoe-process--cols4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 900px) {
+  .zoe-process--cols4 { grid-template-columns: repeat(2, 1fr); row-gap: var(--sp-32); }
+}
+@media (max-width: 500px) {
+  .zoe-process--cols4 { grid-template-columns: 1fr; }
 }
 
 /* ── Closing CTA ──────────────────────────────────────────────────────────

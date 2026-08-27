@@ -304,6 +304,7 @@ acf_add_local_field_group( [
         [ 'key' => 'field_zr_prototype_eyebrow', 'label' => 'Eyebrow', 'name' => 'prototype_eyebrow', 'type' => 'text' ],
         [ 'key' => 'field_zr_prototype_heading', 'label' => 'Heading', 'name' => 'prototype_heading', 'type' => 'text' ],
         [ 'key' => 'field_zr_prototype_intro', 'label' => 'Intro', 'name' => 'prototype_intro', 'type' => 'textarea', 'rows' => 2 ],
+        [ 'key' => 'field_zr_prototype_image', 'label' => 'Image', 'name' => 'prototype_image', 'type' => 'image', 'return_format' => 'array', 'instructions' => 'Optional. Replaces the default airship illustration. Leave blank to keep the airship.' ],
         [
             'key'          => 'field_zr_prototype_cards',
             'label'        => 'Cards (how it\'s built)',
