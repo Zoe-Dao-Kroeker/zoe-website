@@ -306,19 +306,38 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 
 /* ── Stat bar ─────────────────────────────────────────────────────────── */
 
-.zoe-statbar { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); }
-.zoe-stat { padding: var(--sp-32) var(--sp-24); border-right: 1px solid var(--border); }
-.zoe-stat:last-child { border-right: 0; }
+/* Four circles, one Primary colour each (Coral/Magenta/Green/Blue, in
+   that fixed order — matches the Design Guidelines Primary row) — Lara's
+   call, was a plain 4-column bordered strip with no colour. Text is
+   --fg (dark) throughout: same reasoning as the page-hero blocks, none
+   of the four primaries is dark enough for comfortable light text. */
+.zoe-statbar { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-24); padding: var(--sp-32) 0; }
+.zoe-stat {
+  aspect-ratio: 1;
+  max-width: 220px;
+  margin: 0 auto;
+  border-radius: 50%;
+  padding: var(--sp-24);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.zoe-stat:nth-child(4n+1) { background: var(--zoe-coral); }
+.zoe-stat:nth-child(4n+2) { background: var(--zoe-magenta); }
+.zoe-stat:nth-child(4n+3) { background: var(--zoe-green); }
+.zoe-stat:nth-child(4n+4) { background: var(--zoe-blue); }
 .zoe-stat b { display: block; font-size: var(--type-h3); font-weight: var(--fw-black); color: var(--fg); }
 .zoe-stat span {
   font-family: var(--font-sans);
   font-size: var(--type-micro);
-  color: var(--fg-muted);
+  color: var(--fg);
   letter-spacing: var(--track-tight);
+  margin-top: var(--sp-4);
 }
 @media (max-width: 760px) {
   .zoe-statbar { grid-template-columns: repeat(2, 1fr); }
-  .zoe-stat:nth-child(2) { border-right: 0; }
 }
 
 /* ── Sections ─────────────────────────────────────────────────────────── */
@@ -334,6 +353,15 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 }
 .zoe-section__intro { color: var(--fg-muted); max-width: 65ch; font-size: var(--type-lead); line-height: var(--type-lead-lh); }
 .zoe-section--center .zoe-section__intro { margin: 0 auto; }
+
+/* Two columns — copy left, a decorative illustration right — for a plain
+   .zoe-section that wants an image without becoming a full bg-block
+   hero. Currently just Home's research teaser (the airship). */
+.zoe-section--split { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: var(--sp-56); align-items: center; }
+.zoe-section--split .zoe-section__media svg { width: 100%; height: auto; display: block; }
+@media (max-width: 760px) {
+  .zoe-section--split { grid-template-columns: 1fr; }
+}
 
 .zoe-note {
   margin-top: var(--sp-24);
@@ -443,11 +471,10 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .zoe-closing-cta__heading {
   font-family: var(--font-sans);
   font-weight: var(--fw-black);
-  /* Sized to match .zoe-card__title (--type-h4) — Lara's call, after
-     --type-display (48-99px) then --type-h1 (35-67px) both read as too
-     big here in turn. */
-  font-size: var(--type-h4);
-  line-height: var(--type-h4-lh);
+  /* --type-h2 — Lara's call, after --type-display, --type-h1, and
+     --type-h4 were each tried in turn. */
+  font-size: var(--type-h2);
+  line-height: var(--type-h2-lh);
   letter-spacing: var(--track-heading);
   color: var(--fg-on-dark);
 }
