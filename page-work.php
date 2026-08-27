@@ -15,7 +15,8 @@ if ( have_posts() ) :
 
 <main class="zoe-main" id="main">
 
-  <section class="zoe-hero zoe-bg-block zoe-bg-block--coral zoe-hero--full">
+  <?php $intro_image = get_field( 'intro_image' ); ?>
+  <section class="zoe-hero zoe-bg-block zoe-bg-block--coral<?php echo $intro_image ? '' : ' zoe-hero--full'; ?>">
     <div class="zoe-hero__copy">
       <?php if ( $eyebrow = get_field( 'intro_eyebrow' ) ) : ?>
         <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
@@ -27,6 +28,11 @@ if ( have_posts() ) :
         <p class="zoe-hero__intro"><?php echo esc_html( $text ); ?></p>
       <?php endif; ?>
     </div>
+    <?php if ( $intro_image ) : ?>
+      <div class="zoe-hero__media">
+        <img src="<?php echo esc_url( $intro_image['url'] ); ?>" alt="<?php echo esc_attr( $intro_image['alt'] ); ?>">
+      </div>
+    <?php endif; ?>
   </section>
 
   <section class="zoe-section">

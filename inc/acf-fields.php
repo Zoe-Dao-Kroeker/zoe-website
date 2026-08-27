@@ -298,6 +298,7 @@ acf_add_local_field_group( [
         [ 'key' => 'field_zw_intro_eyebrow', 'label' => 'Eyebrow', 'name' => 'intro_eyebrow', 'type' => 'text' ],
         [ 'key' => 'field_zw_intro_heading', 'label' => 'Heading', 'name' => 'intro_heading', 'type' => 'text' ],
         [ 'key' => 'field_zw_intro_text', 'label' => 'Text', 'name' => 'intro_text', 'type' => 'textarea', 'rows' => 2 ],
+        [ 'key' => 'field_zw_intro_image', 'label' => 'Hero image', 'name' => 'intro_image', 'type' => 'image', 'return_format' => 'array' ],
 
         [ 'key' => 'field_zw_featured_tab', 'label' => 'Featured (AI literacy)', 'type' => 'tab' ],
         [ 'key' => 'field_zw_featured_eyebrow', 'label' => 'Eyebrow', 'name' => 'featured_eyebrow', 'type' => 'text' ],
