@@ -147,7 +147,7 @@ get_header();
     <p class="zoe-section__intro">Every swatch below renders from its real CSS variable, and the hex printed under it is read live via <code>getComputedStyle()</code> — if the token file drifts, this page drifts with it.</p>
 
     <div class="dg-swatch-group">
-      <h3>Surface — what everything else sits on</h3>
+      <h3>Surface</h3>
       <div class="dg-swatch-row">
         <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-white" data-label="White" data-note="Cards and raised surfaces"></div></div>
         <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-neutral" data-label="Neutral" data-note="Default page canvas"></div></div>
@@ -156,17 +156,17 @@ get_header();
     </div>
 
     <div class="dg-swatch-group">
-      <h3>Primary — the brand. Accents, highlights, icon strokes</h3>
+      <h3>Primary</h3>
       <div class="dg-swatch-row">
         <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-coral" data-label="Coral" data-note="Work page hero block"></div></div>
         <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-magenta" data-label="Magenta" data-note="Eyebrows, links, hover states"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-green" data-label="Green" data-note="Illustration accent"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-blue" data-label="Blue" data-note="Icon strokes, borders"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-green" data-label="Green" data-note="About page hero block"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-blue" data-label="Blue" data-note="Research page hero block, icon strokes"></div></div>
       </div>
     </div>
 
     <div class="dg-swatch-group">
-      <h3>Greys — five even steps, warmed to match the dark surface</h3>
+      <h3>Greys</h3>
       <div class="dg-swatch-row dg-swatch-row--5">
         <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-grey-1" data-label="Grey 1" data-note="Any text"></div></div>
         <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-grey-2" data-label="Grey 2" data-note="Body text"></div></div>
@@ -177,7 +177,7 @@ get_header();
     </div>
 
     <div class="dg-swatch-group">
-      <h3>CTA — buttons, links, anything asking to be clicked</h3>
+      <h3>CTA</h3>
       <div class="dg-swatch-row">
         <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-cta" data-label="CTA" data-note="Buttons and links"></div></div>
         <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-cta-dark" data-label="CTA dark" data-note="Pressed state"></div></div>
@@ -186,16 +186,17 @@ get_header();
     </div>
 
     <div class="dg-swatch-group">
-      <h3>Additional — illustration and editorial work, used sparingly</h3>
+      <h3>Additional</h3>
+      <p class="zoe-section__intro" style="font-size: var(--type-small); margin-bottom: var(--sp-16);">Documentation-only — available for illustration and editorial work, never used on an actual site page. Primary carries every page's colour needs instead.</p>
       <div class="dg-swatch-row">
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-blush" data-label="Blush" data-note="Soft background wash, Research page hero block"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-deep-teal" data-label="Deep Teal" data-note="About page hero block"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-blush" data-label="Blush" data-note="Soft background wash"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-deep-teal" data-label="Deep Teal" data-note="Illustration accent, dark and cool"></div></div>
         <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-ochre" data-label="Ochre" data-note="Illustration accent — adjacent to CTA, not a substitute for it"></div></div>
       </div>
     </div>
 
     <div class="dg-swatch-group">
-      <h3>Semantic — form and message states. Conventional, not expressive</h3>
+      <h3>Semantic</h3>
       <div class="dg-swatch-row">
         <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-error" data-label="Error" data-note="Errors"></div></div>
         <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-info" data-label="Info" data-note="Information"></div></div>

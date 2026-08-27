@@ -249,31 +249,33 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
    .zoe-hero/.zoe-section border-bottom with a self-contained panel), three
    colour variants. Applied to .zoe-hero (Research, About) or
    .zoe-section--intro (Work) as an additional class.
-   Research = Blush, About = Deep Teal, Work = Coral (repainted August 27,
-   2026 along with the rest of the palette — was Lavender/Voltage Violet/
-   Sunburst; classes renamed so the name still matches the colour). */
+   Research = Blue, About = Green, Work = Coral — Primary colours only
+   (August 27, 2026: Lara asked that Additional stay documentation-only,
+   never used on an actual page — these were briefly Blush/Deep Teal/Coral).
+   All three primaries land in a similar mid-luminance band (none is dark
+   enough for comfortable light-text the way Deep Teal briefly was, none
+   light enough for the default sitewide colours to just work), so all
+   three get the same override below rather than three different
+   treatments. */
 .zoe-bg-block {
   padding: var(--sp-56);
   border-radius: var(--radius-lg);
   margin: var(--sp-40) 0;
   border-bottom: none;
 }
-.zoe-bg-block--blush { background: var(--zoe-blush); }
 .zoe-bg-block--coral { background: var(--zoe-coral); }
-/* Coral and Blush are both light/mid enough that the sitewide eyebrow
-   colour (--accent-deep, Magenta) loses almost all contrast against them —
-   force the default dark text colour instead. Work's intro paragraph gets
-   the same treatment (its default --fg-muted grey undershoots AA against
-   Coral specifically); Blush is pale enough that the default already
-   passes comfortably. */
-.zoe-bg-block--blush .eyebrow,
-.zoe-bg-block--coral .eyebrow { color: var(--fg); }
-.zoe-bg-block--coral .zoe-hero__intro { color: var(--fg); }
-
-.zoe-bg-block--teal { background: var(--zoe-deep-teal); }
-.zoe-bg-block--teal .eyebrow { color: var(--fg-on-dark); }
-.zoe-bg-block--teal .zoe-hero__heading { color: var(--fg-on-dark); }
-.zoe-bg-block--teal .zoe-hero__intro { color: var(--fg-on-dark-muted); }
+.zoe-bg-block--blue { background: var(--zoe-blue); }
+.zoe-bg-block--green { background: var(--zoe-green); }
+/* The sitewide eyebrow colour (--accent-deep, Magenta) and the default
+   intro-paragraph grey (--fg-muted) both lose most or all of their
+   contrast against Coral/Blue/Green — force the default dark text colour
+   on both instead. The heading needs no override; it already inherits
+   --fg. */
+.zoe-bg-block--coral .eyebrow, .zoe-bg-block--coral .zoe-hero__intro,
+.zoe-bg-block--blue .eyebrow, .zoe-bg-block--blue .zoe-hero__intro,
+.zoe-bg-block--green .eyebrow, .zoe-bg-block--green .zoe-hero__intro {
+  color: var(--fg);
+}
 .zoe-hero__intro {
   color: var(--fg-muted);
   max-width: 60ch;
@@ -512,7 +514,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .dg-swatch__note {
   margin-top: var(--sp-8); padding-top: var(--sp-8); border-top: 1px solid var(--border);
   font-size: var(--type-micro); font-weight: var(--fw-black); text-transform: uppercase;
-  letter-spacing: var(--track-tight); color: var(--accent-deep);
+  letter-spacing: var(--track-tight); color: var(--fg);
 }
 
 .dg-type-families { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--sp-32); padding-bottom: var(--sp-32); border-bottom: 1px solid var(--border); }

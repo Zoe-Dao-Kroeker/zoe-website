@@ -35,20 +35,30 @@
      regression, just not solved either.
    - Additional: three new colours designed to round out the primary
      palette rather than tint it — Blush (a warm, muted pastel wash, not a
-     diluted Coral), Deep Teal (dark and cool, the one new colour with
-     comfortable AA contrast for light text on top of it — carries About's
-     hero block), and Ochre (a muted, deliberately non-clickable warm gold,
-     distinct from CTA amber though in the same family).
-   - Greys: a genuine five-step ramp for the first time — earlier revisions
-     borrowed LKI's cool blue-grey ramp verbatim since Zoe had none of her
-     own; this one is derived from the new dark surface's own hue (~18°,
-     warm brown) at decreasing saturation, so borders/fills/muted text read
-     as part of the same warm family as the surface instead of a mismatched
-     cool grey sitting on top of it.
-   Page-hero-block colours: Research = Blush (was Lavender), About = Deep
-   Teal (was Voltage Violet), Work = Coral (was Sunburst) — see zoe.css's
-   .zoe-bg-block--* rules. Renamed along with the repaint so the class name
-   still describes what it looks like.
+     diluted Coral), Deep Teal (dark and cool), and Ochre (a muted,
+     deliberately non-clickable warm gold, distinct from CTA amber though
+     in the same family). August 27 (later same day): Lara asked that
+     Additional stay documentation-only — shown on the Design Guidelines
+     page, never used on an actual site page. Primary carries every page's
+     colour needs instead (see page-hero-block note below).
+   - Greys: replaced twice in one day. First with a derived warm ramp (hue
+     matched to the new dark surface); then swapped again for five exact
+     values Lara supplied directly (#958C88 → #EAE8E7) — those values sit
+     lighter than the derived ramp did, so --fg-muted/--fg-subtle (nav
+     links, muted body text) now read closer to ~3:1 against the page
+     background than the ~4.5–9.5:1 the derived ramp had. Flagged, not
+     fixed — Lara's exact hexes take precedence over the derivation.
+   Page-hero-block colours are Primary-only now (Additional is guidelines-
+   only, above): Research = Blue (was Blush), About = Green (was Deep
+   Teal), Work = Coral (unchanged) — see zoe.css's .zoe-bg-block--* rules.
+   All three read best with dark (--fg) text on top rather than light —
+   none of the four primaries is dark enough for comfortable light-text
+   contrast the way Deep Teal briefly was, so the block treatment is now
+   one consistent pattern (dark eyebrow + dark intro forced on all three)
+   instead of light-on-dark for one and dark-on-light for the other two.
+   Hero/page-title type (--type-h1, the h1 used by every hero and by the
+   Design Guidelines page's own title) sized down and given more leading
+   the same day — see the Type section below.
    The scale system below (type, spacing, radius, shadow, easing) is copied
    from LKI as structure, not a brand colour — Lara asked for this site's
    system to be set up exactly the same as LKI's. Type itself has diverged,
@@ -70,11 +80,11 @@
   --zoe-green: #049A5C;
   --zoe-blue: #2F7FFF;
 
-  --zoe-grey-1: #5C3829;
-  --zoe-grey-2: #885C49;
-  --zoe-grey-3: #A78576;
-  --zoe-grey-4: #C0B1AA;
-  --zoe-grey-5: #E1DDDB;
+  --zoe-grey-1: #958C88;
+  --zoe-grey-2: #AAA39F;
+  --zoe-grey-3: #BFBAB7;
+  --zoe-grey-4: #D5D1CF;
+  --zoe-grey-5: #EAE8E7;
 
   --zoe-cta: #FFB300;
   --zoe-cta-dark: #C28800;
@@ -144,7 +154,11 @@
   --fw-black: 800;
 
   --type-display: clamp(3rem, 1.4rem + 5.3333vw, 6.2rem);
-  --type-h1: clamp(2.6rem, 1.5rem + 3.6667vw, 4.8rem);
+  /* Sized down and given more leading August 27, 2026 (was 2.6→4.8rem at
+     1.06 line-height — Lara's call, "hero and page title text smaller,
+     more leading"). Drives every hero heading and the Design Guidelines
+     page's own h1 (.dg-h1 reads this token directly). */
+  --type-h1: clamp(2.2rem, 1.4rem + 3vw, 4.2rem);
   --type-h2: clamp(1.9rem, 1.4rem + 1.6667vw, 2.9rem);
   --type-h3: clamp(1.375rem, 1.1875rem + 0.625vw, 1.75rem);
   --type-h4: clamp(1.125rem, 1.0625rem + 0.2083vw, 1.25rem);
@@ -155,7 +169,7 @@
   --type-micro: 0.75rem;
 
   --type-display-lh: 1.02;
-  --type-h1-lh: 1.06;
+  --type-h1-lh: 1.25;
   --type-h2-lh: 1.08;
   --type-h3-lh: 1.25;
   --type-h4-lh: 1.35;
