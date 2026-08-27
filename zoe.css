@@ -25,6 +25,16 @@ h1, h2, h3, h4 {
   font-weight: var(--fw-black);
   letter-spacing: var(--track-heading);
 }
+/* Display font on the two largest real heading tiers only (hero headings,
+   section headings) — h3/h4 (card titles, sub-headings) stay on the sans.
+   Fontdiner Swanky ships one weight, so reset weight/tracking rather than
+   inherit the sans's black weight and tight negative tracking, which
+   would fight a hand-lettered face. */
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: normal;
+}
 p { margin: 0; }
 a { color: inherit; }
 img { max-width: 100%; display: block; }
@@ -389,9 +399,6 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .dg-pvm__item { border-left: 3px solid var(--accent); padding-left: var(--sp-16); }
 .dg-pvm__item h3 { font-size: var(--type-h4); margin-bottom: var(--sp-8); }
 .dg-pvm__item p { color: var(--fg-muted); font-size: var(--type-small); line-height: var(--type-small-lh); }
-
-.dg-values h4 { font-size: var(--type-h4); margin-bottom: var(--sp-8); }
-.dg-values p { color: var(--fg-muted); font-size: var(--type-small); line-height: var(--type-small-lh); }
 
 .dg-tags { display: flex; flex-wrap: wrap; gap: var(--sp-8); margin-top: var(--sp-16); }
 .dg-tag {

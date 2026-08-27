@@ -56,13 +56,25 @@ add_action( 'after_setup_theme', function () {
 // IMPORTANT: bump ZOE_STYLE_VER on every zoe.css change. The browser and CDN
 // cache by ?ver= query string, not by file content, so a correct upload can
 // still render stale.
-define( 'ZOE_STYLE_VER', '0.7.0' );
+define( 'ZOE_STYLE_VER', '0.8.0' );
 
 add_action( 'wp_enqueue_scripts', function () {
+    // Google Fonts — never actually loaded before this, despite colors_and_
+    // type.css naming Inter/Instrument Serif/JetBrains Mono in --font-*: the
+    // whole site has been rendering on system-font fallbacks. Fixed here,
+    // adding Fontdiner Swanky for the display/h1/h2 heading tiers at the
+    // same time.
+    wp_enqueue_style(
+        'zoe-google-fonts',
+        'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Fontdiner+Swanky&display=swap',
+        [],
+        null
+    );
+
     wp_enqueue_style(
         'zoe-tokens',
         get_stylesheet_directory_uri() . '/colors_and_type.css',
-        [],
+        [ 'zoe-google-fonts' ],
         ZOE_STYLE_VER
     );
 

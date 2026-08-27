@@ -99,6 +99,10 @@
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   --font-serif: "Instrument Serif", "Georgia", serif;
   --font-mono: "JetBrains Mono", "Menlo", ui-monospace, monospace;
+  /* Display — the three largest heading tiers only (hero/page-title/
+     section-heading), Lara's pick, August 24, 2026. Card titles and smaller
+     headings stay on --font-sans. */
+  --font-display: "Fontdiner Swanky", cursive;
 
   --fw-light: 300;
   --fw-regular: 300;
