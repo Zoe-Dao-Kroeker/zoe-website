@@ -443,12 +443,11 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .zoe-closing-cta__heading {
   font-family: var(--font-sans);
   font-weight: var(--fw-black);
-  /* Was --type-display (48-99px) — at that size a full sentence wrapped
-     to 8+ lines on a phone-width screen. --type-h1 (35-67px) is still
-     the biggest size in real use anywhere on the site, just not the
-     absolute largest token that exists. */
-  font-size: var(--type-h1);
-  line-height: var(--type-h1-lh);
+  /* Sized to match .zoe-card__title (--type-h4) — Lara's call, after
+     --type-display (48-99px) then --type-h1 (35-67px) both read as too
+     big here in turn. */
+  font-size: var(--type-h4);
+  line-height: var(--type-h4-lh);
   letter-spacing: var(--track-heading);
   color: var(--fg-on-dark);
 }
@@ -470,11 +469,12 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   align-items: center;
   gap: var(--sp-24);
 }
-/* Sized to match .zoe-card__title (--type-h4) — Lara's call; was
-   --type-small/--type-micro, the usual smaller footer-text convention. */
-.zoe-footer__link { font-size: var(--type-h4); font-weight: var(--fw-black); text-decoration: none; color: var(--fg-muted); }
+/* Sized to match .zoe-nav__links a (--type-small) — Lara's call; this is
+   the footer's own nav (Email/LinkedIn/Instagram/...), so it reads as
+   one size with the header nav rather than matching card titles. */
+.zoe-footer__link { font-size: var(--type-small); font-weight: var(--fw-black); text-decoration: none; color: var(--fg-muted); }
 .zoe-footer__link:hover { color: var(--accent-deep); }
-.zoe-footer__copy { margin-left: auto; font-family: var(--font-sans); font-size: var(--type-h4); color: var(--fg-muted); }
+.zoe-footer__copy { margin-left: auto; font-family: var(--font-sans); font-size: var(--type-small); color: var(--fg-muted); }
 
 @media (max-width: 760px) {
   .zoe-footer__inner { padding: 0 var(--sp-20); }
