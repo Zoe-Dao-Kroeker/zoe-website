@@ -143,7 +143,7 @@ get_header();
        ============================================================ -->
   <section class="dg-section" id="colour">
     <div class="eyebrow">05 — Colour</div>
-    <h2 class="zoe-section__heading">Six groups, always in this order.</h2>
+    <h2 class="zoe-section__heading">Four groups, always in this order.</h2>
     <p class="zoe-section__intro">Every swatch below renders from its real CSS variable, and the hex printed under it is read live via <code>getComputedStyle()</code> — if the token file drifts, this page drifts with it.</p>
 
     <div class="dg-swatch-group">
@@ -158,8 +158,8 @@ get_header();
     <div class="dg-swatch-group">
       <h3>Primary</h3>
       <div class="dg-swatch-row">
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-coral" data-label="Coral" data-note="Work page hero block"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-magenta" data-label="Magenta" data-note="Eyebrows, links, hover states"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-coral" data-label="Coral" data-note="Work page hero block, eyebrows, links, hover states"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-magenta" data-label="Magenta" data-note="Illustration accent"></div></div>
         <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-green" data-label="Green" data-note="About page hero block"></div></div>
         <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-blue" data-label="Blue" data-note="Research page hero block, icon strokes"></div></div>
       </div>
@@ -185,23 +185,6 @@ get_header();
       </div>
     </div>
 
-    <div class="dg-swatch-group">
-      <h3>Additional</h3>
-      <p class="zoe-section__intro" style="font-size: var(--type-small); margin-bottom: var(--sp-16);">Documentation-only — available for illustration and editorial work, never used on an actual site page. Primary carries every page's colour needs instead.</p>
-      <div class="dg-swatch-row">
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-blush" data-label="Blush" data-note="Soft background wash"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-deep-teal" data-label="Deep Teal" data-note="Illustration accent, dark and cool"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-ochre" data-label="Ochre" data-note="Illustration accent — adjacent to CTA, not a substitute for it"></div></div>
-      </div>
-    </div>
-
-    <div class="dg-swatch-group">
-      <h3>Semantic</h3>
-      <div class="dg-swatch-row">
-        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-error" data-label="Error" data-note="Errors"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-info" data-label="Info" data-note="Information"></div></div>
-      </div>
-    </div>
   </section>
 
   <!-- ============================================================

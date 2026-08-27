@@ -17,14 +17,15 @@
      Green #049A5C, Blue #2F7FFF, all exact values from Lara. Only two
      primaries ever get a role variable (--accent, --accent-deep read by
      component CSS); the other two are documented, available primitives
-     used directly where a page wants one (Work's hero block is Coral).
-     --accent-deep carries text/link duty, so it went to whichever primary
-     reads best as text on the light surface: Magenta, ~4.3:1 against
-     --zoe-neutral — just under the 4.5:1 AA text minimum, the closest any
-     of the four gets there (all four are vivid, none is naturally as dark
-     as the violet this replaced). Worth a look if Zoe ever wants a text-safe
-     fifth tone. --accent went to Blue — decorative only (a left-border
-     rule), so contrast wasn't the deciding factor there.
+     used directly where a page wants one (Work's hero block is Coral,
+     Research is Blue, About is Green — see the page-hero-block note
+     below). --accent-deep (eyebrows, link/nav-hover text) was Magenta at
+     first — the closest of the four to AA text contrast, ~4.3:1 — then
+     switched to Coral on Lara's explicit "all eyebrows can be coral."
+     Coral is a harder contrast trade than Magenta was: ~2.6:1 against
+     --zoe-neutral, well under the 4.5:1 AA text minimum. Flagged, not
+     fixed — implemented as asked. --accent went to Blue — decorative
+     only (a left-border rule), so contrast wasn't the deciding factor.
    - CTA: #FFB300 (amber/gold), with dark/light states derived by holding
      its hue and saturation constant and moving lightness only — the same
      method the previous CTA's states used. Amber only clears AA as a
@@ -40,14 +41,21 @@
      in the same family). August 27 (later same day): Lara asked that
      Additional stay documentation-only — shown on the Design Guidelines
      page, never used on an actual site page. Primary carries every page's
-     colour needs instead (see page-hero-block note below).
-   - Greys: replaced twice in one day. First with a derived warm ramp (hue
-     matched to the new dark surface); then swapped again for five exact
-     values Lara supplied directly (#958C88 → #EAE8E7) — those values sit
-     lighter than the derived ramp did, so --fg-muted/--fg-subtle (nav
-     links, muted body text) now read closer to ~3:1 against the page
-     background than the ~4.5–9.5:1 the derived ramp had. Flagged, not
-     fixed — Lara's exact hexes take precedence over the derivation.
+     colour needs instead (see page-hero-block note below). The Additional
+     and Semantic swatch groups were later removed from the Design
+     Guidelines page's Colour section entirely (Lara: "remove these
+     sections") — the primitives themselves (--zoe-blush/-deep-teal/-ochre/
+     -error/-info) are still defined here, just no longer documented or
+     used anywhere.
+   - Greys: replaced three times in one day. First a derived warm ramp (hue
+     matched to the new dark surface); then five exact values Lara supplied
+     directly (#958C88 → #EAE8E7) — lighter than the derived ramp, enough
+     that --fg-muted/--fg-subtle (nav links, muted body text) dropped to
+     ~3:1 against the page background; flagged, and Lara asked to darken
+     in response. Reused the original derived ramp's five values
+     (#5C3829 → #E1DDDB) rather than deriving a fourth set — already
+     verified (9.5:1 / 5.3:1 for grey-1/grey-2) and in the same warm hue
+     family her own picks were in, just at working contrast.
    Page-hero-block colours are Primary-only now (Additional is guidelines-
    only, above): Research = Blue (was Blush), About = Green (was Deep
    Teal), Work = Coral (unchanged) — see zoe.css's .zoe-bg-block--* rules.
@@ -80,11 +88,11 @@
   --zoe-green: #049A5C;
   --zoe-blue: #2F7FFF;
 
-  --zoe-grey-1: #958C88;
-  --zoe-grey-2: #AAA39F;
-  --zoe-grey-3: #BFBAB7;
-  --zoe-grey-4: #D5D1CF;
-  --zoe-grey-5: #EAE8E7;
+  --zoe-grey-1: #5C3829;
+  --zoe-grey-2: #885C49;
+  --zoe-grey-3: #A78576;
+  --zoe-grey-4: #C0B1AA;
+  --zoe-grey-5: #E1DDDB;
 
   --zoe-cta: #FFB300;
   --zoe-cta-dark: #C28800;
@@ -112,7 +120,7 @@
   --fg-on-dark-subtle: rgba(245, 247, 242, 0.45);
 
   --accent: var(--zoe-blue);
-  --accent-deep: var(--zoe-magenta);
+  --accent-deep: var(--zoe-coral);
   --cta: var(--zoe-cta);
   --cta-hover: var(--zoe-cta-dark);
 
