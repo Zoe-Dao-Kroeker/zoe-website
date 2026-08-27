@@ -67,7 +67,7 @@ if ( have_posts() ) :
     <?php endif; ?>
   </section>
 
-  <section class="zoe-section">
+  <section class="zoe-section zoe-section--dark">
     <?php if ( $eyebrow = get_field( 'framework_eyebrow' ) ) : ?>
       <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
@@ -78,7 +78,7 @@ if ( have_posts() ) :
       <p class="zoe-section__intro"><?php echo esc_html( $intro ); ?></p>
     <?php endif; ?>
     <?php if ( have_rows( 'framework_steps' ) ) : ?>
-      <div class="zoe-process">
+      <div class="zoe-process zoe-process--plain">
         <?php while ( have_rows( 'framework_steps' ) ) : the_row(); ?>
           <div class="zoe-process__step">
             <b><?php echo esc_html( get_sub_field( 'kicker' ) ); ?></b>
@@ -88,17 +88,10 @@ if ( have_posts() ) :
         <?php endwhile; ?>
       </div>
     <?php endif; ?>
-    <?php if ( have_rows( 'framework_cards' ) ) : ?>
-      <div class="zoe-card-grid">
-        <?php while ( have_rows( 'framework_cards' ) ) : the_row(); ?>
-          <div class="zoe-card">
-            <div class="zoe-card__tag"><?php echo esc_html( get_sub_field( 'tag' ) ); ?></div>
-            <h3 class="zoe-card__title"><?php echo esc_html( get_sub_field( 'title' ) ); ?></h3>
-            <p class="zoe-card__description"><?php echo esc_html( get_sub_field( 'description' ) ); ?></p>
-          </div>
-        <?php endwhile; ?>
-      </div>
-    <?php endif; ?>
+    <?php /* framework_cards (design principle + the 4P-to-question cards)
+             removed from display for now, Lara's call — the data is
+             still there in ACF (Research Page Content -> The framework),
+             just not rendered here. */ ?>
   </section>
 
   <section class="zoe-section">

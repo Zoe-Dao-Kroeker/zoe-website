@@ -365,6 +365,22 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .zoe-section { padding: var(--sp-96) 0; border-bottom: 1px solid var(--border); }
 .zoe-section--intro { padding-top: var(--sp-120); }
 .zoe-section--center { text-align: center; }
+/* A dark full-tone panel for one section on its own (not a page-hero
+   block) — currently just Research's "The framework". Text needs
+   explicit overrides here since --fg/--fg-muted (the sitewide default
+   for headings/body) are dark and would be invisible on this background;
+   the eyebrow and process-step kicker (--accent-deep, Coral) already
+   read fine on dark (~6:1) and need no override. */
+.zoe-section--dark {
+  background: var(--bg-inverse);
+  color: var(--fg-on-dark);
+  border-radius: var(--radius-lg);
+  border-bottom: none;
+  padding: var(--sp-56);
+  margin: var(--sp-40) 0;
+}
+.zoe-section--dark .zoe-section__heading { color: var(--fg-on-dark); }
+.zoe-section--dark .zoe-section__intro { color: var(--fg-on-dark-muted); }
 .zoe-section__heading {
   font-size: var(--type-h2);
   line-height: var(--type-h2-lh);
@@ -490,10 +506,13 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 }
 .zoe-process__step h4 { font-size: var(--type-h3); margin: var(--sp-8) 0; }
 .zoe-process__step p { color: var(--fg-muted); font-size: var(--type-small); line-height: var(--type-small-lh); }
+.zoe-section--dark .zoe-process__step h4 { color: var(--fg-on-dark); }
+.zoe-section--dark .zoe-process__step p { color: var(--fg-on-dark-muted); }
 
-/* Home's process section only (Research's framework_steps keeps the card
-   treatment above) — no white step backgrounds, no divider grid, no
-   border, sitting straight on the page like a plain 3-column list. */
+/* Plain (no white step backgrounds, no divider grid, no border) —
+   Home's process section, and now Research's framework_steps once its
+   section went dark: white cards on a dark section would read as a
+   separate block rather than one panel. */
 .zoe-process--plain {
   background: none;
   border: none;
