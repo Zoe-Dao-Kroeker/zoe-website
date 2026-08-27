@@ -41,8 +41,24 @@ a { color: inherit; }
 img { max-width: 100%; display: block; }
 ul, ol { list-style: none; margin: 0; padding: 0; }
 
+/* Real typography for raw post content (portfolio project write-ups,
+   single-post.php) — the global reset zeroes p/ul/ol margins site-wide
+   (see the top of this file), which left every paragraph, list item,
+   and embedded <img> in this content running straight into the next
+   with no breathing room. Not just list-style was missing. */
 .body-copy ul, .post-content ul, .page-content ul { list-style: disc; padding-left: 1.25em; }
 .body-copy ol, .post-content ol, .page-content ol { list-style: decimal; padding-left: 1.25em; }
+.body-copy p, .post-content p, .page-content p { margin: 0 0 var(--sp-20); }
+.body-copy p:last-child, .post-content p:last-child, .page-content p:last-child { margin-bottom: 0; }
+.body-copy h2, .post-content h2, .page-content h2 { font-size: var(--type-h3); font-weight: var(--fw-black); margin: var(--sp-32) 0 var(--sp-12); }
+.body-copy h3, .post-content h3, .page-content h3 { font-size: var(--type-h4); font-weight: var(--fw-black); margin: var(--sp-24) 0 var(--sp-8); }
+.body-copy ul, .post-content ul, .page-content ul,
+.body-copy ol, .post-content ol, .page-content ol { margin: 0 0 var(--sp-20); }
+.body-copy li, .post-content li, .page-content li { margin-bottom: var(--sp-8); }
+.body-copy li p, .post-content li p, .page-content li p { margin-bottom: 0; }
+.body-copy img, .post-content img, .page-content img { max-width: 100%; height: auto; display: block; border-radius: var(--radius-lg); margin: var(--sp-32) 0; }
+.body-copy strong, .post-content strong, .page-content strong { font-weight: var(--fw-black); }
+.body-copy a, .post-content a, .page-content a { color: var(--accent-deep); text-decoration: underline; }
 
 .skip-link {
   position: absolute;

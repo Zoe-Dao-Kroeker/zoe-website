@@ -96,34 +96,38 @@ if ( have_posts() ) :
       </div>
     </div>
     <div class="zoe-section__media">
-      <?php
-      /* Hand-drawn, not uploaded: a fixed decorative illustration for the
-         1930s-airship study this section describes, styled/coloured to
-         match the reference Lara supplied (cream body, gold diagonal
-         band, tan fin and gondola) rather than Zoe's own brand palette —
-         this one illustration isn't meant to be swapped per-project the
-         way the hero images are, so it's inline markup, not an ACF field. */
-      ?>
-      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a 1930s airship">
-        <defs>
-          <clipPath id="airshipBody">
-            <path d="M20,130 C20,78 110,52 210,58 C295,63 355,92 388,122 C396,127 396,133 388,138 C355,168 295,197 210,202 C110,208 20,182 20,130 Z" />
-          </clipPath>
-        </defs>
-        <g clip-path="url(#airshipBody)">
-          <rect x="0" y="0" width="420" height="260" fill="#F4EFE4" />
-          <polygon points="0,190 420,70 420,130 0,250" fill="#EDC24E" />
-          <rect x="0" y="66" width="420" height="14" fill="#FFFFFF" opacity="0.55" />
-          <line x1="0" y1="150" x2="420" y2="150" stroke="#C9BFA8" stroke-width="2" opacity="0.6" />
-        </g>
-        <path d="M20,130 C20,78 110,52 210,58 C295,63 355,92 388,122 C396,127 396,133 388,138 C355,168 295,197 210,202 C110,208 20,182 20,130 Z"
-              fill="none" stroke="#2B1810" stroke-width="4" stroke-linejoin="round" />
-        <path d="M348,92 L402,34 L388,100 Z" fill="#E8A15C" stroke="#2B1810" stroke-width="4" stroke-linejoin="round" />
-        <rect x="168" y="196" width="72" height="30" rx="12" fill="#D9B25A" stroke="#2B1810" stroke-width="4" />
-        <circle cx="186" cy="211" r="4" fill="#2B1810" />
-        <circle cx="204" cy="211" r="4" fill="#2B1810" />
-        <circle cx="222" cy="211" r="4" fill="#2B1810" />
-      </svg>
+      <?php $research_image = get_field( 'research_image' ); ?>
+      <?php if ( $research_image ) : ?>
+        <img src="<?php echo esc_url( $research_image['url'] ); ?>" alt="<?php echo esc_attr( $research_image['alt'] ); ?>" style="width:100%; height:auto; display:block; border-radius: var(--radius-lg);">
+      <?php else : ?>
+        <?php
+        /* Default when no image is uploaded: a hand-built illustration
+           for the 1930s-airship study this section describes, styled/
+           coloured to match the reference Lara supplied (cream body,
+           gold diagonal band, tan fin and gondola) rather than Zoe's own
+           brand palette. */
+        ?>
+        <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a 1930s airship">
+          <defs>
+            <clipPath id="airshipBody">
+              <path d="M20,130 C20,78 110,52 210,58 C295,63 355,92 388,122 C396,127 396,133 388,138 C355,168 295,197 210,202 C110,208 20,182 20,130 Z" />
+            </clipPath>
+          </defs>
+          <g clip-path="url(#airshipBody)">
+            <rect x="0" y="0" width="420" height="260" fill="#F4EFE4" />
+            <polygon points="0,190 420,70 420,130 0,250" fill="#EDC24E" />
+            <rect x="0" y="66" width="420" height="14" fill="#FFFFFF" opacity="0.55" />
+            <line x1="0" y1="150" x2="420" y2="150" stroke="#C9BFA8" stroke-width="2" opacity="0.6" />
+          </g>
+          <path d="M20,130 C20,78 110,52 210,58 C295,63 355,92 388,122 C396,127 396,133 388,138 C355,168 295,197 210,202 C110,208 20,182 20,130 Z"
+                fill="none" stroke="#2B1810" stroke-width="4" stroke-linejoin="round" />
+          <path d="M348,92 L402,34 L388,100 Z" fill="#E8A15C" stroke="#2B1810" stroke-width="4" stroke-linejoin="round" />
+          <rect x="168" y="196" width="72" height="30" rx="12" fill="#D9B25A" stroke="#2B1810" stroke-width="4" />
+          <circle cx="186" cy="211" r="4" fill="#2B1810" />
+          <circle cx="204" cy="211" r="4" fill="#2B1810" />
+          <circle cx="222" cy="211" r="4" fill="#2B1810" />
+        </svg>
+      <?php endif; ?>
     </div>
   </section>
 

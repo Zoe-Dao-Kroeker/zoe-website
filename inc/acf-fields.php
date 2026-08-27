@@ -155,6 +155,14 @@ acf_add_local_field_group( [
         [ 'key' => 'field_zh_research_eyebrow', 'label' => 'Eyebrow', 'name' => 'research_eyebrow', 'type' => 'text' ],
         [ 'key' => 'field_zh_research_heading', 'label' => 'Heading', 'name' => 'research_heading', 'type' => 'text' ],
         [ 'key' => 'field_zh_research_intro', 'label' => 'Intro', 'name' => 'research_intro', 'type' => 'textarea', 'rows' => 3 ],
+        [
+            'key'          => 'field_zh_research_image',
+            'label'        => 'Illustration / image',
+            'name'         => 'research_image',
+            'type'         => 'image',
+            'return_format'=> 'array',
+            'instructions' => 'Optional. Replaces the default airship illustration with an uploaded image — swap it any time. Leave blank to keep the airship.',
+        ],
         zoe_acf_cta_field( 'field_zh_research_cta_primary', 'research_cta_primary', 'Primary CTA' ),
         zoe_acf_cta_field( 'field_zh_research_cta_secondary', 'research_cta_secondary', 'Secondary CTA' ),
 

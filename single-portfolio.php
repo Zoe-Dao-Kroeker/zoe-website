@@ -14,7 +14,9 @@ get_header();
 while ( have_posts() ) : the_post();
     $cats     = get_the_category();
     $cat_name = $cats ? $cats[0]->name : '';
-    $cat_link = $cats ? get_category_link( $cats[0]->term_id ) : home_url( '/work/' );
+    // Always the Work page itself, not the category archive — Lara's
+    // call; every project's "back" should land in the same place.
+    $work_link = home_url( '/work/' );
 ?>
 
 <main class="zoe-main" id="main">
@@ -35,7 +37,7 @@ while ( have_posts() ) : the_post();
     </div>
 
     <div class="zoe-ctas" style="margin-top: var(--sp-48);">
-      <a class="btn-ghost btn-ghost--dark" href="<?php echo esc_url( $cat_link ); ?>">
+      <a class="btn-ghost btn-ghost--dark" href="<?php echo esc_url( $work_link ); ?>">
         <svg width="13" height="13" viewBox="0 0 14 14" fill="none" style="transform: rotate(180deg);"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
         Back to Work
       </a>
