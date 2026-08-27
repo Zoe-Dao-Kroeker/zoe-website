@@ -466,9 +466,11 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   align-items: center;
   gap: var(--sp-24);
 }
-.zoe-footer__link { font-size: var(--type-small); font-weight: var(--fw-black); text-decoration: none; color: var(--fg-muted); }
+/* Sized to match .zoe-card__title (--type-h4) — Lara's call; was
+   --type-small/--type-micro, the usual smaller footer-text convention. */
+.zoe-footer__link { font-size: var(--type-h4); font-weight: var(--fw-black); text-decoration: none; color: var(--fg-muted); }
 .zoe-footer__link:hover { color: var(--accent-deep); }
-.zoe-footer__copy { margin-left: auto; font-family: var(--font-sans); font-size: var(--type-micro); color: var(--fg-muted); }
+.zoe-footer__copy { margin-left: auto; font-family: var(--font-sans); font-size: var(--type-h4); color: var(--fg-muted); }
 
 @media (max-width: 760px) {
   .zoe-footer__inner { padding: 0 var(--sp-20); }
