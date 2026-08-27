@@ -178,8 +178,8 @@ get_header();
     <div class="dg-swatch-group">
       <h3>Primary — the brand. Accents, highlights, icon strokes</h3>
       <div class="dg-swatch-row">
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-green-primary" data-label="Green" data-note="Hero accent"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-green-deep" data-label="Green deep" data-note="Eyebrows, icon strokes"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-sunburst" data-label="Sunburst" data-note="Hero accent"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-voltage-violet" data-label="Voltage Violet" data-note="Eyebrows, icon strokes"></div></div>
       </div>
     </div>
 
@@ -197,7 +197,7 @@ get_header();
     <div class="dg-swatch-group">
       <h3>CTA — buttons, links, anything asking to be clicked</h3>
       <div class="dg-swatch-row">
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-cta" data-label="CTA" data-note="Buttons and links"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-cta" data-label="CTA" data-note="Buttons and links — also Ember, Additional"></div></div>
         <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-cta-dark" data-label="CTA dark" data-note="Pressed state"></div></div>
         <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-cta-light" data-label="CTA light" data-note="Tinted background"></div></div>
       </div>
@@ -205,12 +205,10 @@ get_header();
 
     <div class="dg-swatch-group">
       <h3>Additional — illustration and editorial work, used sparingly</h3>
-      <div class="dg-swatch-row dg-swatch-row--5">
+      <div class="dg-swatch-row">
         <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-mint-pop" data-label="Mint Pop" data-note="Illustration accent"></div></div>
         <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-lavender" data-label="Lavender" data-note="Soft background wash"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-ember" data-label="Ember" data-note="Warm illustration accent"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-sunburst" data-label="Sunburst" data-note="Illustration highlight"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-voltage-violet" data-label="Voltage Violet" data-note="Deep illustration accent"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-ember" data-label="Ember" data-note="Illustration accent — see CTA above"></div></div>
       </div>
     </div>
 

@@ -6,17 +6,25 @@
    the Design Guidelines page (page-design-guidelines.php) for how each colour
    is meant to be used.
 
-   Brand colours are Zoe/Lara's decision, August 24, 2026:
-   - Primary: two greens, #8CB120 and #05704E
+   Brand colours are Zoe/Lara's decision, August 24, 2026, revised same day:
+   - Primary: originally two greens (#8CB120, #05704E), replaced with
+     Sunburst #FFD731 (hero accent) and Voltage Violet #5C4ADE (eyebrows,
+     icon strokes) — Lara's call. Sunburst and Voltage Violet were briefly
+     also under Additional; pulled from there once promoted to Primary,
+     since "the brand's core identity" and "used sparingly, illustration
+     only" contradict each other as framings for the same swatch.
    - Surface dark: #042E33; white and one added light surface (no existing
      brand light surface, so this one's new)
-   - CTA: #F5CE12 (dark/pressed and light-tint states derived from it)
+   - CTA: #FB4903 (dark/pressed and light-tint states derived from it).
+     Identical to Additional's "Ember" — a deliberate overlap, not a typo,
+     cross-referenced on both swatches in the guidelines page (same pattern
+     as a single-accent site where Primary and CTA share a value).
    - Greys: reused verbatim from LKI — Zoe has no greyscale of her own, and
      Lara asked to borrow LKI's five steps rather than derive a new ramp.
      This is a deliberate exception to the usual "derive greys from Primary"
      rule, not an oversight.
    - Additional and Semantic groups are Lara's picks, kept distinct from
-     Primary/CTA hues per the naming convention.
+     Primary hues per the naming convention (CTA is the one exception, above).
    Fonts (Inter / Instrument Serif / JetBrains Mono) and the whole scale
    system below (type, spacing, radius, shadow, easing) are copied from LKI
    as structure, not a brand colour — Lara asked for this site's system to
@@ -28,9 +36,8 @@
   --zoe-white: #FFFFFF;
   --zoe-neutral: #F5F7F2;
 
-  --zoe-green-primary: #8CB120;
-  --zoe-green-deep: #05704E;
-  --zoe-green-wash: #EEF3DE;
+  --zoe-sunburst: #FFD731;
+  --zoe-voltage-violet: #5C4ADE;
 
   --zoe-grey-1: #203B53;
   --zoe-grey-2: #4D6275;
@@ -38,15 +45,13 @@
   --zoe-grey-4: #A6B1BA;
   --zoe-grey-5: #D2D8DD;
 
-  --zoe-cta: #F5CE12;
-  --zoe-cta-dark: #C4A408;
-  --zoe-cta-light: #FDF5CE;
+  --zoe-cta: #FB4903;
+  --zoe-cta-dark: #C03802;
+  --zoe-cta-light: #FFE2D7;
 
   --zoe-mint-pop: #55DB9C;
   --zoe-lavender: #E9CCFF;
   --zoe-ember: #FB4903;
-  --zoe-sunburst: #FFD731;
-  --zoe-voltage-violet: #5C4ADE;
 
   --zoe-error: #C4351E;
   --zoe-info: #2D6CDF;
@@ -56,7 +61,7 @@
   --bg: var(--zoe-neutral);
   --bg-raised: var(--zoe-white);
   --bg-inverse: var(--zoe-dark);
-  --bg-accent: var(--zoe-green-wash);
+  --bg-accent: var(--zoe-lavender);
 
   --fg: var(--zoe-dark);
   --fg-muted: var(--zoe-grey-1);
@@ -65,8 +70,8 @@
   --fg-on-dark-muted: rgba(245, 247, 242, 0.65);
   --fg-on-dark-subtle: rgba(245, 247, 242, 0.45);
 
-  --accent: var(--zoe-green-primary);
-  --accent-deep: var(--zoe-green-deep);
+  --accent: var(--zoe-sunburst);
+  --accent-deep: var(--zoe-voltage-violet);
   --cta: var(--zoe-cta);
   --cta-hover: var(--zoe-cta-dark);
 

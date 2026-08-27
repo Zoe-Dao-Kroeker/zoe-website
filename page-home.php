@@ -23,7 +23,7 @@ if ( have_posts() ) :
   <section class="zoe-hero">
     <div class="zoe-hero__copy">
       <?php if ( $eyebrow = get_field( 'hero_eyebrow' ) ) : ?>
-        <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+        <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
       <?php endif; ?>
       <?php if ( $heading = get_field( 'hero_heading' ) ) : ?>
         <h1 class="zoe-hero__heading"><?php echo esc_html( $heading ); ?></h1>
@@ -59,7 +59,7 @@ if ( have_posts() ) :
 
   <section class="zoe-section">
     <?php if ( $eyebrow = get_field( 'research_eyebrow' ) ) : ?>
-      <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+      <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
     <?php if ( $heading = get_field( 'research_heading' ) ) : ?>
       <h2 class="zoe-section__heading"><?php echo esc_html( $heading ); ?></h2>
@@ -77,7 +77,7 @@ if ( have_posts() ) :
 
   <section class="zoe-section">
     <?php if ( $eyebrow = get_field( 'work_eyebrow' ) ) : ?>
-      <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+      <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
     <?php if ( $heading = get_field( 'work_heading' ) ) : ?>
       <h2 class="zoe-section__heading"><?php echo esc_html( $heading ); ?></h2>
@@ -100,7 +100,7 @@ if ( have_posts() ) :
 
   <section class="zoe-section">
     <?php if ( $eyebrow = get_field( 'process_eyebrow' ) ) : ?>
-      <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+      <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
     <?php if ( $heading = get_field( 'process_heading' ) ) : ?>
       <h2 class="zoe-section__heading"><?php echo esc_html( $heading ); ?></h2>

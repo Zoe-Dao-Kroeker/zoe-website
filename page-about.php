@@ -18,7 +18,7 @@ if ( have_posts() ) :
   <section class="zoe-hero">
     <div class="zoe-hero__copy">
       <?php if ( $eyebrow = get_field( 'hero_eyebrow' ) ) : ?>
-        <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+        <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
       <?php endif; ?>
       <?php if ( $heading = get_field( 'hero_heading' ) ) : ?>
         <h1 class="zoe-hero__heading"><?php echo esc_html( $heading ); ?></h1>
@@ -37,7 +37,7 @@ if ( have_posts() ) :
 
   <section class="zoe-section">
     <?php if ( $eyebrow = get_field( 'background_eyebrow' ) ) : ?>
-      <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+      <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
     <?php if ( have_rows( 'background_blocks' ) ) : ?>
       <div class="zoe-process">
@@ -54,7 +54,7 @@ if ( have_posts() ) :
 
   <section class="zoe-section">
     <?php if ( $eyebrow = get_field( 'publications_eyebrow' ) ) : ?>
-      <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+      <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
     <?php if ( have_rows( 'publications_cards' ) ) : ?>
       <div class="zoe-card-grid">
@@ -71,7 +71,7 @@ if ( have_posts() ) :
 
   <section class="zoe-section">
     <?php if ( $eyebrow = get_field( 'facilitation_eyebrow' ) ) : ?>
-      <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+      <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
     <?php if ( have_rows( 'facilitation_cards' ) ) : ?>
       <div class="zoe-card-grid">

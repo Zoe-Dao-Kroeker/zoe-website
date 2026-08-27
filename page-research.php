@@ -18,7 +18,7 @@ if ( have_posts() ) :
   <section class="zoe-hero">
     <div class="zoe-hero__copy">
       <?php if ( $eyebrow = get_field( 'hero_eyebrow' ) ) : ?>
-        <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+        <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
       <?php endif; ?>
       <?php if ( $heading = get_field( 'hero_heading' ) ) : ?>
         <h1 class="zoe-hero__heading"><?php echo esc_html( $heading ); ?></h1>
@@ -54,7 +54,7 @@ if ( have_posts() ) :
 
   <section class="zoe-section">
     <?php if ( $eyebrow = get_field( 'problem_eyebrow' ) ) : ?>
-      <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+      <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
     <?php if ( $heading = get_field( 'problem_heading' ) ) : ?>
       <h2 class="zoe-section__heading"><?php echo esc_html( $heading ); ?></h2>
@@ -69,7 +69,7 @@ if ( have_posts() ) :
 
   <section class="zoe-section">
     <?php if ( $eyebrow = get_field( 'framework_eyebrow' ) ) : ?>
-      <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+      <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
     <?php if ( $heading = get_field( 'framework_heading' ) ) : ?>
       <h2 class="zoe-section__heading"><?php echo esc_html( $heading ); ?></h2>
@@ -103,7 +103,7 @@ if ( have_posts() ) :
 
   <section class="zoe-section">
     <?php if ( $eyebrow = get_field( 'findings_eyebrow' ) ) : ?>
-      <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+      <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
     <?php if ( $heading = get_field( 'findings_heading' ) ) : ?>
       <h2 class="zoe-section__heading"><?php echo esc_html( $heading ); ?></h2>
@@ -123,7 +123,7 @@ if ( have_posts() ) :
 
   <section class="zoe-section">
     <?php if ( $eyebrow = get_field( 'matters_eyebrow' ) ) : ?>
-      <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+      <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
     <?php if ( have_rows( 'matters_cards' ) ) : ?>
       <div class="zoe-card-grid">

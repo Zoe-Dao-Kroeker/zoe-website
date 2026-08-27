@@ -56,7 +56,7 @@ add_action( 'after_setup_theme', function () {
 // IMPORTANT: bump ZOE_STYLE_VER on every zoe.css change. The browser and CDN
 // cache by ?ver= query string, not by file content, so a correct upload can
 // still render stale.
-define( 'ZOE_STYLE_VER', '0.5.0' );
+define( 'ZOE_STYLE_VER', '0.7.0' );
 
 add_action( 'wp_enqueue_scripts', function () {
     wp_enqueue_style(

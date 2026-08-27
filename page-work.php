@@ -17,7 +17,7 @@ if ( have_posts() ) :
 
   <section class="zoe-section zoe-section--intro">
     <?php if ( $eyebrow = get_field( 'intro_eyebrow' ) ) : ?>
-      <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+      <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
     <?php if ( $heading = get_field( 'intro_heading' ) ) : ?>
       <h1 class="zoe-section__heading"><?php echo esc_html( $heading ); ?></h1>
@@ -29,7 +29,7 @@ if ( have_posts() ) :
 
   <section class="zoe-section">
     <?php if ( $eyebrow = get_field( 'featured_eyebrow' ) ) : ?>
-      <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+      <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
     <?php if ( $title = get_field( 'featured_title' ) ) : ?>
       <h2 class="zoe-section__heading"><?php echo esc_html( $title ); ?></h2>
@@ -47,7 +47,7 @@ if ( have_posts() ) :
 
   <section class="zoe-section">
     <?php if ( $eyebrow = get_field( 'stem_eyebrow' ) ) : ?>
-      <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+      <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
     <?php if ( have_rows( 'stem_cards' ) ) : ?>
       <div class="zoe-card-grid">
@@ -63,7 +63,7 @@ if ( have_posts() ) :
 
   <section class="zoe-section">
     <?php if ( $eyebrow = get_field( 'learning_eyebrow' ) ) : ?>
-      <div class="zoe-eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
+      <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>
     <?php endif; ?>
     <?php if ( have_rows( 'learning_cards' ) ) : ?>
       <div class="zoe-card-grid">
