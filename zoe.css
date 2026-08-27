@@ -374,6 +374,29 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .zoe-section__intro { color: var(--fg-muted); max-width: 65ch; font-size: var(--type-lead); line-height: var(--type-lead-lh); }
 .zoe-section--center .zoe-section__intro { margin: 0 auto; }
 
+/* single-portfolio.php — the project itself on the left, a "browse other
+   projects" sidebar on the right, grouped by category, image + title
+   only (no excerpt — this is navigation, not another zoe-card grid). */
+.zoe-portfolio-layout { display: grid; grid-template-columns: 2fr 1fr; gap: var(--sp-56); align-items: start; }
+.zoe-portfolio-sidebar h3 {
+  font-family: var(--font-sans);
+  font-size: var(--type-micro);
+  font-weight: var(--fw-black);
+  text-transform: uppercase;
+  letter-spacing: var(--track-micro);
+  color: var(--fg-muted);
+  margin: var(--sp-32) 0 var(--sp-16);
+}
+.zoe-portfolio-sidebar h3:first-child { margin-top: 0; }
+.zoe-portfolio-sidebar ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-16); }
+.zoe-portfolio-sidebar li a { display: flex; align-items: center; gap: var(--sp-12); text-decoration: none; color: var(--fg); }
+.zoe-portfolio-sidebar li img { width: 64px; height: 64px; object-fit: cover; border-radius: var(--radius-sm); flex-shrink: 0; }
+.zoe-portfolio-sidebar li span { font-size: var(--type-small); font-weight: var(--fw-black); line-height: var(--type-small-lh); }
+.zoe-portfolio-sidebar li a:hover span { color: var(--accent-deep); }
+@media (max-width: 760px) {
+  .zoe-portfolio-layout { grid-template-columns: 1fr; }
+}
+
 /* Two columns — copy left, a decorative illustration right — for a plain
    .zoe-section that wants an image without becoming a full bg-block
    hero. Currently just Home's research teaser (the airship). */
