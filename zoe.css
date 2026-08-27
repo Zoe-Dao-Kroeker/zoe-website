@@ -418,20 +418,38 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .dg-swatch-group { margin-top: var(--sp-48); }
 .dg-swatch-group h3 { font-size: var(--type-h4); margin-bottom: var(--sp-16); }
 .dg-swatch-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--sp-16); }
-.dg-swatch-row--5 { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
-.dg-swatch {
-  height: 100px; border-radius: var(--radius-md) var(--radius-md) 0 0; border: 1px solid var(--border);
-  border-bottom: none;
-}
-.dg-swatch__meta {
-  border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius-md) var(--radius-md);
-  padding: var(--sp-12) var(--sp-16); margin-top: -1px; display: flex; flex-direction: column; gap: var(--sp-4);
+.dg-swatch-row--5 { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+
+/* One swatch = one card: colour box on top, info block below, as a single
+   grid cell. (The color box and its meta used to be separate siblings
+   inside .dg-swatch-row, which split one swatch into two grid items —
+   fixed by wrapping both in .dg-swatch-item.) */
+.dg-swatch-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
   background: var(--bg-raised);
+  display: flex;
+  flex-direction: column;
 }
-.dg-swatch__meta b { font-size: var(--type-small); }
-.dg-swatch__meta code { font-family: var(--font-mono); font-size: var(--type-micro); color: var(--fg-muted); }
-.dg-swatch__ratio { font-family: var(--font-mono); font-size: var(--type-micro); color: var(--accent-deep); }
-.dg-swatch__note { font-size: var(--type-micro); color: var(--fg-subtle); }
+.dg-swatch { height: 110px; }
+.dg-swatch__meta {
+  padding: var(--sp-16);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.dg-swatch__meta b { font-size: var(--type-body); font-weight: var(--fw-black); }
+.dg-swatch__meta code { font-family: var(--font-mono); font-size: var(--type-small); color: var(--fg-muted); }
+.dg-swatch__token {
+  font-family: var(--font-mono); font-size: var(--type-micro); color: var(--fg-subtle);
+  margin-bottom: var(--sp-8);
+}
+.dg-swatch__note {
+  margin-top: var(--sp-8); padding-top: var(--sp-8); border-top: 1px solid var(--border);
+  font-size: var(--type-micro); font-weight: var(--fw-black); text-transform: uppercase;
+  letter-spacing: var(--track-tight); color: var(--accent-deep);
+}
 
 .dg-type-families { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--sp-32); padding-bottom: var(--sp-32); border-bottom: 1px solid var(--border); }
 .dg-type-label { font-family: var(--font-mono); font-size: var(--type-micro); text-transform: uppercase; letter-spacing: var(--track-tight); color: var(--fg-muted); }

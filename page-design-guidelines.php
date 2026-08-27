@@ -11,9 +11,9 @@
  * colours/logo/photography/copy.
  *
  * The page must be incapable of lying: every swatch below renders from
- * `background: var(--token)`, and the hex + contrast ratio next to it are
- * read live from the rendered element via getComputedStyle(), not typed in.
- * If colors_and_type.css drifts, this page drifts with it.
+ * `background: var(--token)`, and the hex printed under it is read live
+ * from the rendered element via getComputedStyle(), not typed in. If
+ * colors_and_type.css drifts, this page drifts with it.
  */
 
 get_header();
@@ -164,59 +164,61 @@ get_header();
   <section class="dg-section" id="colour">
     <div class="eyebrow">05 — Colour</div>
     <h2 class="zoe-section__heading">Six groups, always in this order.</h2>
-    <p class="zoe-section__intro">Every hex and contrast ratio below is read live from the rendered swatch, not typed in — if the token file drifts, this page drifts with it.</p>
+    <p class="zoe-section__intro">Every swatch below renders from its real CSS variable, and the hex printed under it is read live via <code>getComputedStyle()</code> — if the token file drifts, this page drifts with it.</p>
 
     <div class="dg-swatch-group">
       <h3>Surface — what everything else sits on</h3>
       <div class="dg-swatch-row">
-        <div class="dg-swatch" data-token="--bg-raised" data-label="White" data-note="Cards and raised surfaces"></div>
-        <div class="dg-swatch" data-token="--bg" data-label="Neutral" data-note="Default page canvas"></div>
-        <div class="dg-swatch dg-swatch--dark" data-token="--bg-inverse" data-label="Dark" data-note="Nav pill, footer accents"></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-white" data-label="White" data-note="Cards and raised surfaces"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-neutral" data-label="Neutral" data-note="Default page canvas"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-dark" data-label="Dark" data-note="Nav pill, footer accents"></div></div>
       </div>
     </div>
 
     <div class="dg-swatch-group">
       <h3>Primary — the brand. Accents, highlights, icon strokes</h3>
       <div class="dg-swatch-row">
-        <div class="dg-swatch" data-token="--accent" data-label="Green" data-note="Hero accent"></div>
-        <div class="dg-swatch dg-swatch--dark" data-token="--accent-deep" data-label="Green deep" data-note="Eyebrows, icon strokes"></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-green-primary" data-label="Green" data-note="Hero accent"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-green-deep" data-label="Green deep" data-note="Eyebrows, icon strokes"></div></div>
       </div>
     </div>
 
     <div class="dg-swatch-group">
       <h3>Greys — five even steps. Borrowed from LKI's ramp; Zoe has no greyscale of her own yet</h3>
       <div class="dg-swatch-row dg-swatch-row--5">
-        <div class="dg-swatch dg-swatch--dark" data-token="--fill-strong" data-label="Grey 1" data-note="Any text"></div>
-        <div class="dg-swatch dg-swatch--dark" data-token="--fg-muted" data-label="Grey 2" data-note="Body text"></div>
-        <div class="dg-swatch" data-token="--fg-subtle" data-label="Grey 3" data-note="Large text only"></div>
-        <div class="dg-swatch" data-token="--fill" data-label="Grey 4" data-note="Fills and dividers"></div>
-        <div class="dg-swatch" data-token="--border" data-label="Grey 5" data-note="Hairline borders"></div>
+        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-grey-1" data-label="Grey 1" data-note="Any text"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-grey-2" data-label="Grey 2" data-note="Body text"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-grey-3" data-label="Grey 3" data-note="Large text only"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-grey-4" data-label="Grey 4" data-note="Fills and dividers"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-grey-5" data-label="Grey 5" data-note="Hairline borders"></div></div>
       </div>
     </div>
 
     <div class="dg-swatch-group">
       <h3>CTA — buttons, links, anything asking to be clicked</h3>
       <div class="dg-swatch-row">
-        <div class="dg-swatch" data-token="--cta" data-label="CTA" data-note="Buttons and links"></div>
-        <div class="dg-swatch" data-token="--cta-hover" data-label="CTA dark" data-note="Pressed state"></div>
-        <div class="dg-swatch" data-token="--bg-accent" data-label="CTA light" data-note="Tinted background"></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-cta" data-label="CTA" data-note="Buttons and links"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-cta-dark" data-label="CTA dark" data-note="Pressed state"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-cta-light" data-label="CTA light" data-note="Tinted background"></div></div>
       </div>
     </div>
 
     <div class="dg-swatch-group">
       <h3>Additional — illustration and editorial work, used sparingly</h3>
-      <div class="dg-swatch-row">
-        <div class="dg-swatch" data-hex="#E8734A" data-label="Coral" data-note="Illustration"></div>
-        <div class="dg-swatch" data-hex="#4FA8D8" data-label="Sky" data-note="Illustration"></div>
-        <div class="dg-swatch" data-hex="#8B5FBF" data-label="Plum" data-note="Illustration"></div>
+      <div class="dg-swatch-row dg-swatch-row--5">
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-mint-pop" data-label="Mint Pop" data-note="Illustration accent"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-lavender" data-label="Lavender" data-note="Soft background wash"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-ember" data-label="Ember" data-note="Warm illustration accent"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-sunburst" data-label="Sunburst" data-note="Illustration highlight"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-voltage-violet" data-label="Voltage Violet" data-note="Deep illustration accent"></div></div>
       </div>
     </div>
 
     <div class="dg-swatch-group">
       <h3>Semantic — form and message states. Conventional, not expressive</h3>
       <div class="dg-swatch-row">
-        <div class="dg-swatch dg-swatch--dark" data-hex="#C4351E" data-label="Error" data-note="Errors"></div>
-        <div class="dg-swatch dg-swatch--dark" data-hex="#2D6CDF" data-label="Info" data-note="Information"></div>
+        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-error" data-label="Error" data-note="Errors"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-info" data-label="Info" data-note="Information"></div></div>
       </div>
     </div>
   </section>
@@ -314,12 +316,16 @@ get_header();
 
 <script>
 (function () {
-  // Self-checking colour swatches: read the ACTUAL rendered colour via
-  // getComputedStyle(), never the token file's text — two independent
-  // readings (hex + measured contrast) is what makes this page catch its
-  // own drift instead of just repeating a claim. Runs immediately, not on
-  // DOMContentLoaded, since this script sits after the swatches in the
-  // page rather than being deferred to the footer.
+  // Self-checking colour swatches: the hex printed under each swatch is read
+  // from the ACTUAL rendered colour via getComputedStyle(), never typed in —
+  // if colors_and_type.css drifts, the printed hex drifts with it. Runs
+  // immediately, not on DOMContentLoaded, since this script sits after the
+  // swatches in the page rather than being deferred to the footer.
+  //
+  // Each swatch box lives inside a .dg-swatch-item wrapper; the meta block
+  // is appended INTO that wrapper (not as a sibling of .dg-swatch within the
+  // grid row), so swatch + meta stay one grid cell instead of splitting into
+  // two — that split was the original bug here.
   function toHex(rgbStr) {
     var m = rgbStr.match(/\d+(\.\d+)?/g);
     if (!m) return '#000000';
@@ -327,22 +333,6 @@ get_header();
       return ('0' + parseInt(n, 10).toString(16)).slice(-2);
     }).join('').toUpperCase();
   }
-  function luminance(r, g, b) {
-    var a = [r, g, b].map(function (v) {
-      v /= 255;
-      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
-    });
-    return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
-  }
-  function contrast(hex1, hex2) {
-    var c1 = hex1.match(/[0-9A-F]{2}/g).map(function (h) { return parseInt(h, 16); });
-    var c2 = hex2.match(/[0-9A-F]{2}/g).map(function (h) { return parseInt(h, 16); });
-    var l1 = luminance(c1[0], c1[1], c1[2]) + 0.05;
-    var l2 = luminance(c2[0], c2[1], c2[2]) + 0.05;
-    return (l1 > l2 ? l1 / l2 : l2 / l1).toFixed(2) + ':1';
-  }
-
-  var pageBg = toHex(getComputedStyle(document.body).backgroundColor);
 
   document.querySelectorAll('.dg-swatch').forEach(function (el) {
     var token = el.getAttribute('data-token');
@@ -353,14 +343,13 @@ get_header();
       el.style.background = fixedHex;
     }
     var hex = toHex(getComputedStyle(el).backgroundColor);
-    var ratio = contrast(hex, pageBg);
-    var card = document.createElement('div');
-    card.className = 'dg-swatch__meta';
-    card.innerHTML = '<b>' + (el.getAttribute('data-label') || '') + '</b>' +
+    var meta = document.createElement('div');
+    meta.className = 'dg-swatch__meta';
+    meta.innerHTML = '<b>' + (el.getAttribute('data-label') || '') + '</b>' +
       '<code>' + hex + '</code>' +
-      '<span class="dg-swatch__ratio">' + ratio + ' vs page bg</span>' +
+      '<span class="dg-swatch__token">' + (token || '') + '</span>' +
       '<span class="dg-swatch__note">' + (el.getAttribute('data-note') || '') + '</span>';
-    el.after(card);
+    el.parentElement.appendChild(meta);
   });
 }());
 </script>
