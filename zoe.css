@@ -262,19 +262,32 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   border-radius: var(--radius-lg);
   margin: var(--sp-40) 0;
   border-bottom: none;
+  /* All three variants read the same height regardless of how much their
+     own copy wraps to (Lara: "make them all the same height") — generous
+     enough for the longest current content (a 2-line heading + 3-4 line
+     intro) with room to spare; .zoe-hero's own align-items:center keeps
+     shorter content vertically centred rather than pinned to the top. */
+  min-height: 26rem;
 }
 .zoe-bg-block--coral { background: var(--zoe-coral); }
 .zoe-bg-block--blue { background: var(--zoe-blue); }
 .zoe-bg-block--green { background: var(--zoe-green); }
-/* The sitewide eyebrow colour (--accent-deep, Magenta) and the default
-   intro-paragraph grey (--fg-muted) both lose most or all of their
-   contrast against Coral/Blue/Green — force the default dark text colour
-   on both instead. The heading needs no override; it already inherits
-   --fg. */
-.zoe-bg-block--coral .eyebrow, .zoe-bg-block--coral .zoe-hero__intro,
-.zoe-bg-block--blue .eyebrow, .zoe-bg-block--blue .zoe-hero__intro,
-.zoe-bg-block--green .eyebrow, .zoe-bg-block--green .zoe-hero__intro {
-  color: var(--fg);
+/* Neutral (off-white) text on all three — Lara's call, August 27, 2026 —
+   in place of the dark text these previously forced. This is a harder
+   contrast trade than dark text was: dark cleared 4.5:1+ against all
+   three, neutral only reaches ~3.4-3.5:1 (large-text AA, not small-text
+   AA) against Blue/Green and ~2.6:1 against Coral. Implemented as asked;
+   flagged, not fixed. The heading needed an explicit override here (it
+   previously inherited --fg by default, which no longer applies). */
+.zoe-bg-block--coral .eyebrow, .zoe-bg-block--coral .zoe-hero__heading,
+.zoe-bg-block--blue .eyebrow, .zoe-bg-block--blue .zoe-hero__heading,
+.zoe-bg-block--green .eyebrow, .zoe-bg-block--green .zoe-hero__heading {
+  color: var(--fg-on-dark);
+}
+.zoe-bg-block--coral .zoe-hero__intro,
+.zoe-bg-block--blue .zoe-hero__intro,
+.zoe-bg-block--green .zoe-hero__intro {
+  color: var(--fg-on-dark-muted);
 }
 .zoe-hero__intro {
   color: var(--fg-muted);

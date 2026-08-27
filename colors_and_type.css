@@ -59,11 +59,14 @@
    Page-hero-block colours are Primary-only now (Additional is guidelines-
    only, above): Research = Blue (was Blush), About = Green (was Deep
    Teal), Work = Coral (unchanged) — see zoe.css's .zoe-bg-block--* rules.
-   All three read best with dark (--fg) text on top rather than light —
-   none of the four primaries is dark enough for comfortable light-text
-   contrast the way Deep Teal briefly was, so the block treatment is now
-   one consistent pattern (dark eyebrow + dark intro forced on all three)
-   instead of light-on-dark for one and dark-on-light for the other two.
+   Text on all three was dark (--fg) at first — the best-contrast option
+   of the two available, since none of the four primaries is dark enough
+   for comfortable light-text the way Deep Teal briefly was — then
+   switched to neutral (--fg-on-dark) on Lara's explicit call, a harder
+   contrast trade (~2.6–3.5:1 depending on the block vs. dark text's
+   4.5–6:1). Flagged, not fixed. All three blocks also got a shared
+   min-height the same day so they read as the same size regardless of
+   how much their own copy wraps to.
    Hero/page-title type (--type-h1, the h1 used by every hero and by the
    Design Guidelines page's own title) sized down and given more leading
    the same day — see the Type section below.
