@@ -158,13 +158,15 @@ get_header();
     <div class="dg-swatch-group">
       <h3>Primary — the brand. Accents, highlights, icon strokes</h3>
       <div class="dg-swatch-row">
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-sunburst" data-label="Sunburst" data-note="Hero accent"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-voltage-violet" data-label="Voltage Violet" data-note="Eyebrows, icon strokes"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-coral" data-label="Coral" data-note="Work page hero block"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-magenta" data-label="Magenta" data-note="Eyebrows, links, hover states"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-green" data-label="Green" data-note="Illustration accent"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-blue" data-label="Blue" data-note="Icon strokes, borders"></div></div>
       </div>
     </div>
 
     <div class="dg-swatch-group">
-      <h3>Greys — five even steps. Borrowed from LKI's ramp; Zoe has no greyscale of her own yet</h3>
+      <h3>Greys — five even steps, warmed to match the dark surface</h3>
       <div class="dg-swatch-row dg-swatch-row--5">
         <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-grey-1" data-label="Grey 1" data-note="Any text"></div></div>
         <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-grey-2" data-label="Grey 2" data-note="Body text"></div></div>
@@ -177,7 +179,7 @@ get_header();
     <div class="dg-swatch-group">
       <h3>CTA — buttons, links, anything asking to be clicked</h3>
       <div class="dg-swatch-row">
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-cta" data-label="CTA" data-note="Buttons and links — also Ember, Additional"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-cta" data-label="CTA" data-note="Buttons and links"></div></div>
         <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-cta-dark" data-label="CTA dark" data-note="Pressed state"></div></div>
         <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-cta-light" data-label="CTA light" data-note="Tinted background"></div></div>
       </div>
@@ -186,9 +188,9 @@ get_header();
     <div class="dg-swatch-group">
       <h3>Additional — illustration and editorial work, used sparingly</h3>
       <div class="dg-swatch-row">
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-mint-pop" data-label="Mint Pop" data-note="Illustration accent"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-lavender" data-label="Lavender" data-note="Soft background wash"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-ember" data-label="Ember" data-note="Illustration accent — see CTA above"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-blush" data-label="Blush" data-note="Soft background wash, Research page hero block"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-deep-teal" data-label="Deep Teal" data-note="About page hero block"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-ochre" data-label="Ochre" data-note="Illustration accent — adjacent to CTA, not a substitute for it"></div></div>
       </div>
     </div>
 

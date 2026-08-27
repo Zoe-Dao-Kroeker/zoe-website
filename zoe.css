@@ -148,7 +148,11 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .btn-ghost--dark:hover {
   color: var(--fg);
   text-decoration: underline;
-  text-decoration-color: var(--cta);
+  /* --cta-hover, not --cta: the base amber only clears WCAG's 3:1
+     non-text-contrast minimum with dark text sitting ON it (buttons, the
+     arrow circle) — as a thin line on a light background it undershoots
+     3:1. The darker pressed-state tone reads clearly here instead. */
+  text-decoration-color: var(--cta-hover);
   text-underline-offset: 5px;
   text-decoration-thickness: 2px;
 }
@@ -244,20 +248,32 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
    One shared box treatment (padding, radius, margin — replaces the plain
    .zoe-hero/.zoe-section border-bottom with a self-contained panel), three
    colour variants. Applied to .zoe-hero (Research, About) or
-   .zoe-section--intro (Work) as an additional class. */
+   .zoe-section--intro (Work) as an additional class.
+   Research = Blush, About = Deep Teal, Work = Coral (repainted August 27,
+   2026 along with the rest of the palette — was Lavender/Voltage Violet/
+   Sunburst; classes renamed so the name still matches the colour). */
 .zoe-bg-block {
   padding: var(--sp-56);
   border-radius: var(--radius-lg);
   margin: var(--sp-40) 0;
   border-bottom: none;
 }
-.zoe-bg-block--lavender { background: var(--zoe-lavender); }
-.zoe-bg-block--sunburst { background: var(--zoe-sunburst); }
+.zoe-bg-block--blush { background: var(--zoe-blush); }
+.zoe-bg-block--coral { background: var(--zoe-coral); }
+/* Coral and Blush are both light/mid enough that the sitewide eyebrow
+   colour (--accent-deep, Magenta) loses almost all contrast against them —
+   force the default dark text colour instead. Work's intro paragraph gets
+   the same treatment (its default --fg-muted grey undershoots AA against
+   Coral specifically); Blush is pale enough that the default already
+   passes comfortably. */
+.zoe-bg-block--blush .eyebrow,
+.zoe-bg-block--coral .eyebrow { color: var(--fg); }
+.zoe-bg-block--coral .zoe-hero__intro { color: var(--fg); }
 
-.zoe-bg-block--violet { background: var(--zoe-voltage-violet); }
-.zoe-bg-block--violet .eyebrow { color: var(--fg-on-dark); }
-.zoe-bg-block--violet .zoe-hero__heading { color: var(--fg-on-dark); }
-.zoe-bg-block--violet .zoe-hero__intro { color: var(--fg-on-dark-muted); }
+.zoe-bg-block--teal { background: var(--zoe-deep-teal); }
+.zoe-bg-block--teal .eyebrow { color: var(--fg-on-dark); }
+.zoe-bg-block--teal .zoe-hero__heading { color: var(--fg-on-dark); }
+.zoe-bg-block--teal .zoe-hero__intro { color: var(--fg-on-dark-muted); }
 .zoe-hero__intro {
   color: var(--fg-muted);
   max-width: 60ch;

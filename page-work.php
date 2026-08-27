@@ -15,7 +15,7 @@ if ( have_posts() ) :
 
 <main class="zoe-main" id="main">
 
-  <section class="zoe-hero zoe-bg-block zoe-bg-block--sunburst zoe-hero--full">
+  <section class="zoe-hero zoe-bg-block zoe-bg-block--coral zoe-hero--full">
     <div class="zoe-hero__copy">
       <?php if ( $eyebrow = get_field( 'intro_eyebrow' ) ) : ?>
         <div class="eyebrow"><?php echo esc_html( $eyebrow ); ?></div>

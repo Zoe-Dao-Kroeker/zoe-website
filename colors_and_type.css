@@ -6,25 +6,49 @@
    the Design Guidelines page (page-design-guidelines.php) for how each colour
    is meant to be used.
 
-   Brand colours are Zoe/Lara's decision, August 24, 2026, revised same day:
-   - Primary: originally two greens (#8CB120, #05704E), replaced with
-     Sunburst #FFD731 (hero accent) and Voltage Violet #5C4ADE (eyebrows,
-     icon strokes) — Lara's call. Sunburst and Voltage Violet were briefly
-     also under Additional; pulled from there once promoted to Primary,
-     since "the brand's core identity" and "used sparingly, illustration
-     only" contradict each other as framings for the same swatch.
-   - Surface dark: #042E33; white and one added light surface (no existing
-     brand light surface, so this one's new)
-   - CTA: #FB4903 (dark/pressed and light-tint states derived from it).
-     Identical to Additional's "Ember" — a deliberate overlap, not a typo,
-     cross-referenced on both swatches in the guidelines page (same pattern
-     as a single-accent site where Primary and CTA share a value).
-   - Greys: reused verbatim from LKI — Zoe has no greyscale of her own, and
-     Lara asked to borrow LKI's five steps rather than derive a new ramp.
-     This is a deliberate exception to the usual "derive greys from Primary"
-     rule, not an oversight.
-   - Additional and Semantic groups are Lara's picks, kept distinct from
-     Primary hues per the naming convention (CTA is the one exception, above).
+   Brand colours are Zoe/Lara's decision, August 24, 2026, revised same day,
+   then fully repainted August 27, 2026 (this revision):
+   - Surface dark: #2B1810 (warm espresso brown, replaces the old teal
+     #042E33). Every rgba() tint keyed to the dark surface (scrims, hover
+     tint, shadows) was hand-recalculated against this new RGB — they don't
+     derive from the var automatically, so a future dark-surface change
+     needs the same recompute.
+   - Primary: four colours, not two — Coral #FF6B4D, Magenta #E8177B,
+     Green #049A5C, Blue #2F7FFF, all exact values from Lara. Only two
+     primaries ever get a role variable (--accent, --accent-deep read by
+     component CSS); the other two are documented, available primitives
+     used directly where a page wants one (Work's hero block is Coral).
+     --accent-deep carries text/link duty, so it went to whichever primary
+     reads best as text on the light surface: Magenta, ~4.3:1 against
+     --zoe-neutral — just under the 4.5:1 AA text minimum, the closest any
+     of the four gets there (all four are vivid, none is naturally as dark
+     as the violet this replaced). Worth a look if Zoe ever wants a text-safe
+     fifth tone. --accent went to Blue — decorative only (a left-border
+     rule), so contrast wasn't the deciding factor there.
+   - CTA: #FFB300 (amber/gold), with dark/light states derived by holding
+     its hue and saturation constant and moving lightness only — the same
+     method the previous CTA's states used. Amber only clears AA as a
+     background with dark text on top (~9.4:1 with --fg) — that's how every
+     component already uses it (button fills, the pill's arrow circle), so
+     no component changed. It reads poorly as text on a light background,
+     which was already true of the orange it replaced (~3.5:1) — not a
+     regression, just not solved either.
+   - Additional: three new colours designed to round out the primary
+     palette rather than tint it — Blush (a warm, muted pastel wash, not a
+     diluted Coral), Deep Teal (dark and cool, the one new colour with
+     comfortable AA contrast for light text on top of it — carries About's
+     hero block), and Ochre (a muted, deliberately non-clickable warm gold,
+     distinct from CTA amber though in the same family).
+   - Greys: a genuine five-step ramp for the first time — earlier revisions
+     borrowed LKI's cool blue-grey ramp verbatim since Zoe had none of her
+     own; this one is derived from the new dark surface's own hue (~18°,
+     warm brown) at decreasing saturation, so borders/fills/muted text read
+     as part of the same warm family as the surface instead of a mismatched
+     cool grey sitting on top of it.
+   Page-hero-block colours: Research = Blush (was Lavender), About = Deep
+   Teal (was Voltage Violet), Work = Coral (was Sunburst) — see zoe.css's
+   .zoe-bg-block--* rules. Renamed along with the repaint so the class name
+   still describes what it looks like.
    The scale system below (type, spacing, radius, shadow, easing) is copied
    from LKI as structure, not a brand colour — Lara asked for this site's
    system to be set up exactly the same as LKI's. Type itself has diverged,
@@ -37,26 +61,28 @@
 
 :root {
   /* ── Primitives ─────────────────────────────────────────────────────── */
-  --zoe-dark: #042E33;
+  --zoe-dark: #2B1810;
   --zoe-white: #FFFFFF;
   --zoe-neutral: #F5F7F2;
 
-  --zoe-sunburst: #FFD731;
-  --zoe-voltage-violet: #5C4ADE;
+  --zoe-coral: #FF6B4D;
+  --zoe-magenta: #E8177B;
+  --zoe-green: #049A5C;
+  --zoe-blue: #2F7FFF;
 
-  --zoe-grey-1: #203B53;
-  --zoe-grey-2: #4D6275;
-  --zoe-grey-3: #798998;
-  --zoe-grey-4: #A6B1BA;
-  --zoe-grey-5: #D2D8DD;
+  --zoe-grey-1: #5C3829;
+  --zoe-grey-2: #885C49;
+  --zoe-grey-3: #A78576;
+  --zoe-grey-4: #C0B1AA;
+  --zoe-grey-5: #E1DDDB;
 
-  --zoe-cta: #FB4903;
-  --zoe-cta-dark: #C03802;
-  --zoe-cta-light: #FFE2D7;
+  --zoe-cta: #FFB300;
+  --zoe-cta-dark: #C28800;
+  --zoe-cta-light: #FFF3D6;
 
-  --zoe-mint-pop: #55DB9C;
-  --zoe-lavender: #E9CCFF;
-  --zoe-ember: #FB4903;
+  --zoe-blush: #F5DBD6;
+  --zoe-deep-teal: #0F5754;
+  --zoe-ochre: #CB9D4D;
 
   --zoe-error: #C4351E;
   --zoe-info: #2D6CDF;
@@ -66,7 +92,7 @@
   --bg: var(--zoe-neutral);
   --bg-raised: var(--zoe-white);
   --bg-inverse: var(--zoe-dark);
-  --bg-accent: var(--zoe-lavender);
+  --bg-accent: var(--zoe-blush);
 
   --fg: var(--zoe-dark);
   --fg-muted: var(--zoe-grey-1);
@@ -75,8 +101,8 @@
   --fg-on-dark-muted: rgba(245, 247, 242, 0.65);
   --fg-on-dark-subtle: rgba(245, 247, 242, 0.45);
 
-  --accent: var(--zoe-sunburst);
-  --accent-deep: var(--zoe-voltage-violet);
+  --accent: var(--zoe-blue);
+  --accent-deep: var(--zoe-magenta);
   --cta: var(--zoe-cta);
   --cta-hover: var(--zoe-cta-dark);
 
@@ -93,12 +119,12 @@
 
   --bg-scrim: rgba(245, 247, 242, 0.93);
   --bg-scrim-solid: rgba(245, 247, 242, 0.97);
-  --bg-hover-tint: rgba(4, 46, 51, 0.04);
+  --bg-hover-tint: rgba(43, 24, 16, 0.04);
 
-  --scrim-hero-strong: rgba(4, 46, 51, 0.97);
-  --scrim-hero-mid: rgba(4, 46, 51, 0.55);
-  --scrim-hero-soft: rgba(4, 46, 51, 0.20);
-  --scrim-hero-dense: rgba(4, 46, 51, 0.78);
+  --scrim-hero-strong: rgba(43, 24, 16, 0.97);
+  --scrim-hero-mid: rgba(43, 24, 16, 0.55);
+  --scrim-hero-soft: rgba(43, 24, 16, 0.20);
+  --scrim-hero-dense: rgba(43, 24, 16, 0.78);
 
   /* ── Type ───────────────────────────────────────────────────────────── */
   --font-sans: "Open Sans", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -168,8 +194,8 @@
   --radius-xl: 32px;
   --radius-pill: 999px;
 
-  --shadow-xs: 0 1px 2px rgba(4, 46, 51, 0.06);
-  --shadow-inset-hairline: inset 0 -1px 0 rgba(4, 46, 51, 0.08);
+  --shadow-xs: 0 1px 2px rgba(43, 24, 16, 0.06);
+  --shadow-inset-hairline: inset 0 -1px 0 rgba(43, 24, 16, 0.08);
 
   --ease-standard: cubic-bezier(0.32, 0.72, 0.24, 1);
   --ease-out: cubic-bezier(0.22, 0.8, 0.36, 1);
