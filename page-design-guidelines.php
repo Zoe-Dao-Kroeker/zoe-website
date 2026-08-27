@@ -39,7 +39,6 @@ $zoe_ai_tokens = zoe_design_tokens_for_ai();
     <div class="eyebrow">Zoe Dao-Kroeker</div>
     <h1 class="dg-h1">Design Guidelines</h1>
     <p class="dg-lede">This page documents the site's real colours and type, pulled directly from its stylesheet, not typed in by hand.</p>
-    <p class="dg-tagline">&ldquo;I design how kids learn — and study what happens when AI joins the room.&rdquo;</p>
     <div class="dg-meta">
       <span>Draft</span><span>v1.0</span><span>Built by Lara Kroeker Interactive</span>
       <span>Sources: <a href="<?php echo esc_url( home_url( '/wp-content/themes/zoe-theme/colors_and_type.css' ) ); ?>">colors_and_type.css</a></span>
