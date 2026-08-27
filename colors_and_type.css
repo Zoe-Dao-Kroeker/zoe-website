@@ -25,10 +25,12 @@
      rule, not an oversight.
    - Additional and Semantic groups are Lara's picks, kept distinct from
      Primary hues per the naming convention (CTA is the one exception, above).
-   Fonts (Inter / Instrument Serif / JetBrains Mono) and the whole scale
-   system below (type, spacing, radius, shadow, easing) are copied from LKI
-   as structure, not a brand colour — Lara asked for this site's system to
-   be set up exactly the same as LKI's. */
+   Fonts and the whole scale system below (type, spacing, radius, shadow,
+   easing) are copied from LKI as structure, not a brand colour — Lara asked
+   for this site's system to be set up exactly the same as LKI's, with two
+   font changes of her own, both August 24, 2026: the sans is Open Sans, not
+   Inter, and Fontdiner Swanky is a new h1-only display face (Instrument
+   Serif and JetBrains Mono are unchanged from LKI). */
 
 :root {
   /* ── Primitives ─────────────────────────────────────────────────────── */
@@ -96,20 +98,23 @@
   --scrim-hero-dense: rgba(4, 46, 51, 0.78);
 
   /* ── Type ───────────────────────────────────────────────────────────── */
-  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-sans: "Open Sans", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   --font-serif: "Instrument Serif", "Georgia", serif;
   --font-mono: "JetBrains Mono", "Menlo", ui-monospace, monospace;
-  /* Display — the three largest heading tiers only (hero/page-title/
-     section-heading), Lara's pick, August 24, 2026. Card titles and smaller
-     headings stay on --font-sans. */
+  /* Display — h1 only (hero headings, page titles), Lara's pick, August 24,
+     2026. h2 (section headings) reverted to --font-sans the same day —
+     Fontdiner Swanky is a one-tier accent, not the whole heading system. */
   --font-display: "Fontdiner Swanky", cursive;
 
+  /* Open Sans's real weight range tops out at 800 (no 900) — fw-bold/
+     fw-black point there instead of 900 to avoid the browser synthesizing
+     a fake bold on every heading. */
   --fw-light: 300;
   --fw-regular: 300;
   --fw-medium: 500;
   --fw-semibold: 500;
-  --fw-bold: 900;
-  --fw-black: 900;
+  --fw-bold: 800;
+  --fw-black: 800;
 
   --type-display: clamp(3rem, 1.4rem + 5.3333vw, 6.2rem);
   --type-h1: clamp(2.6rem, 1.5rem + 3.6667vw, 4.8rem);

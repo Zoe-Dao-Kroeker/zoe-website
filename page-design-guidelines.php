@@ -206,11 +206,11 @@ get_header();
        ============================================================ -->
   <section class="dg-section" id="type">
     <div class="eyebrow">06 — Type</div>
-    <h2 class="zoe-section__heading">Inter, Instrument Serif, JetBrains Mono, Fontdiner Swanky.</h2>
+    <h2 class="zoe-section__heading">Open Sans, Instrument Serif, JetBrains Mono, Fontdiner Swanky.</h2>
 
     <div class="dg-type-families">
-      <div><span class="dg-type-label">Display / headings</span><div class="dg-type-glyph" style="font-family: var(--font-display); font-weight: 400;">Aa</div><span class="dg-type-sub">Fontdiner Swanky · 400</span></div>
-      <div><span class="dg-type-label">UI / body</span><div class="dg-type-glyph" style="font-family: var(--font-sans); font-weight: 900;">Aa</div><span class="dg-type-sub">Inter · Light 300 / Black 900</span></div>
+      <div><span class="dg-type-label">Display / H1 only</span><div class="dg-type-glyph" style="font-family: var(--font-display); font-weight: 400;">Aa</div><span class="dg-type-sub">Fontdiner Swanky · 400</span></div>
+      <div><span class="dg-type-label">UI / body / H2+</span><div class="dg-type-glyph" style="font-family: var(--font-sans); font-weight: var(--fw-black);">Aa</div><span class="dg-type-sub">Open Sans · Light 300 / Black 800</span></div>
       <div><span class="dg-type-label">Editorial accent</span><div class="dg-type-glyph" style="font-family: var(--font-serif); font-style: italic;">Aa</div><span class="dg-type-sub">Instrument Serif · 400 italic</span></div>
       <div><span class="dg-type-label">Mono</span><div class="dg-type-glyph" style="font-family: var(--font-mono);">Aa</div><span class="dg-type-sub">JetBrains Mono · 400/500</span></div>
     </div>
@@ -219,7 +219,7 @@ get_header();
       <div class="dg-type-row"><span class="eyebrow" style="margin:0">Eyebrow</span><span class="dg-type-meta">--type-micro · 12px fixed, tracked</span></div>
       <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-display); line-height:var(--type-display-lh); font-weight:400;">Hero headline</span><span class="dg-type-meta">--type-display · 48&rarr;99px fluid · Fontdiner Swanky</span></div>
       <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-h1); line-height:var(--type-h1-lh); font-weight:400;">Page title</span><span class="dg-type-meta">--type-h1 · 42&rarr;77px fluid · Fontdiner Swanky</span></div>
-      <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-h2); line-height:var(--type-h2-lh); font-weight:400;">Section heading</span><span class="dg-type-meta">--type-h2 · 30&rarr;46px fluid · Fontdiner Swanky</span></div>
+      <div class="dg-type-row"><span style="font-size:var(--type-h2); line-height:var(--type-h2-lh); font-weight:var(--fw-black);">Section heading</span><span class="dg-type-meta">--type-h2 · 30&rarr;46px fluid</span></div>
       <div class="dg-type-row"><span style="font-size:var(--type-h3); line-height:var(--type-h3-lh); font-weight:900;">Card title</span><span class="dg-type-meta">--type-h3 · 22&rarr;28px fluid</span></div>
       <div class="dg-type-row"><span style="font-size:var(--type-lead); line-height:var(--type-lead-lh);">Lead paragraph, for openings and introductions.</span><span class="dg-type-meta">--type-lead · 20&rarr;22px fluid</span></div>
       <div class="dg-type-row"><span style="font-size:var(--type-body-lg); line-height:var(--type-body-lg-lh);">Intro paragraph, a step above body copy.</span><span class="dg-type-meta">--type-body-lg · 18px fixed</span></div>

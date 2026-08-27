@@ -25,12 +25,13 @@ h1, h2, h3, h4 {
   font-weight: var(--fw-black);
   letter-spacing: var(--track-heading);
 }
-/* Display font on the two largest real heading tiers only (hero headings,
-   section headings) — h3/h4 (card titles, sub-headings) stay on the sans.
-   Fontdiner Swanky ships one weight, so reset weight/tracking rather than
-   inherit the sans's black weight and tight negative tracking, which
+/* Display font on h1 only (hero headings, page titles). h2 reverted to the
+   sans the same day it was added — Fontdiner Swanky is a one-tier accent,
+   not the whole heading system — so h2/h3/h4 all stay on the base rule
+   above. Fontdiner Swanky ships one weight, so reset weight/tracking rather
+   than inherit the sans's black weight and tight negative tracking, which
    would fight a hand-lettered face. */
-h1, h2 {
+h1 {
   font-family: var(--font-display);
   font-weight: 400;
   letter-spacing: normal;
