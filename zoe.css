@@ -233,6 +233,31 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   letter-spacing: var(--track-display);
   max-width: 20ch;
 }
+
+/* No hero image on this page — full-width text instead of a blank second
+   column. Research/About/Work all currently render this way. */
+.zoe-hero--full { grid-template-columns: 1fr; }
+.zoe-hero--full .zoe-hero__heading,
+.zoe-hero--full .zoe-hero__intro { max-width: none; }
+
+/* ── Page-specific hero/intro background blocks ──────────────────────────
+   One shared box treatment (padding, radius, margin — replaces the plain
+   .zoe-hero/.zoe-section border-bottom with a self-contained panel), three
+   colour variants. Applied to .zoe-hero (Research, About) or
+   .zoe-section--intro (Work) as an additional class. */
+.zoe-bg-block {
+  padding: var(--sp-56);
+  border-radius: var(--radius-lg);
+  margin: var(--sp-40) 0;
+  border-bottom: none;
+}
+.zoe-bg-block--lavender { background: var(--zoe-lavender); }
+.zoe-bg-block--sunburst { background: var(--zoe-sunburst); }
+
+.zoe-bg-block--violet { background: var(--zoe-voltage-violet); }
+.zoe-bg-block--violet .eyebrow { color: var(--fg-on-dark); }
+.zoe-bg-block--violet .zoe-hero__heading { color: var(--fg-on-dark); }
+.zoe-bg-block--violet .zoe-hero__intro { color: var(--fg-on-dark-muted); }
 .zoe-hero__intro {
   color: var(--fg-muted);
   max-width: 60ch;
