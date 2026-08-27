@@ -154,14 +154,25 @@
      Fontdiner Swanky is a one-tier accent, not the whole heading system. */
   --font-display: "Fontdiner Swanky", cursive;
 
-  /* Open Sans's real weight range tops out at 800 (no 900) — fw-bold/
-     fw-black point there instead of 900 to avoid the browser synthesizing
-     a fake bold on every heading. */
+  /* Open Sans's real weight range tops out at 800 (no 900) — fw-black
+     points there instead of 900 to avoid the browser synthesizing a fake
+     bold on every heading.
+     --fw-body (400) added August 27, 2026 — Lara: "small text and body
+     copy feel too light... make it Open Sans 400 to 700... I like the
+     light however for the lead and intro". Base <body> text now reads
+     --fw-body, not --fw-regular — --fw-regular (300) stays exactly where
+     it already was, still read explicitly by .zoe-hero__intro/.dg-lede/
+     .zoe-section__intro (lead-sized copy, kept light on purpose). --fw-bold
+     moved from 800 to 700 (Open Sans's real "Bold", not "ExtraBold") so
+     inline <strong> emphasis inside body copy pairs with the new 400
+     baseline instead of jumping straight to --fw-black's 800, which stays
+     the heavier tier for headings/labels. */
   --fw-light: 300;
   --fw-regular: 300;
+  --fw-body: 400;
   --fw-medium: 500;
   --fw-semibold: 500;
-  --fw-bold: 800;
+  --fw-bold: 700;
   --fw-black: 800;
 
   --type-display: clamp(3rem, 1.4rem + 5.3333vw, 6.2rem);

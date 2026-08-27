@@ -22,7 +22,7 @@ if ( have_posts() ) :
     the_post();
 ?>
 
-<main class="zoe-main" id="main">
+<main class="zoe-main zoe-main--about" id="main">
 
   <?php $hero_image = get_field( 'hero_image' ); ?>
   <section class="zoe-hero zoe-bg-block zoe-bg-block--green<?php echo $hero_image ? '' : ' zoe-hero--full'; ?>">
