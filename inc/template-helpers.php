@@ -45,7 +45,15 @@ function zoe_cta( $cta, $variant = 'pill' ) {
 
     $href = esc_url( $cta['url'] );
     $atts = zoe_external_link_atts( $cta['url'] );
-    $label = esc_html( $cta['label'] );
+
+    // The original wireframe copy baked an arrow glyph into the label text
+    // itself (e.g. "See the work →", "Try the tool ↗"). Pill and ghost
+    // variants below already render their own SVG arrow, so a baked-in
+    // glyph doubles up. Strip a trailing arrow (with any spacing around it)
+    // at render time rather than hand-editing every ACF field — catches
+    // today's content and anything pasted in later the same way.
+    $label = trim( preg_replace( '/\s*[\x{2192}\x{2197}\x{00BB}]+\s*$/u', '', $cta['label'] ) );
+    $label = esc_html( $label );
 
     if ( 'outline' === $variant ) {
         printf( '<a class="btn-outline" href="%s"%s>%s</a>', $href, $atts, $label );

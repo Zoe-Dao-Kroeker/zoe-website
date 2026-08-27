@@ -160,6 +160,7 @@ acf_add_local_field_group( [
             'button_label' => 'Add card',
             'sub_fields'   => zoe_acf_card_subfields( 'field_zh_work_card' ),
         ],
+        zoe_acf_cta_field( 'field_zh_work_cta', 'work_cta', 'Link to Work page' ),
 
         [ 'key' => 'field_zh_process_tab', 'label' => 'How I work', 'type' => 'tab' ],
         [ 'key' => 'field_zh_process_eyebrow', 'label' => 'Eyebrow', 'name' => 'process_eyebrow', 'type' => 'text' ],

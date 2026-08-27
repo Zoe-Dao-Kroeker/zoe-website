@@ -96,6 +96,9 @@ if ( have_posts() ) :
         <?php endwhile; ?>
       </div>
     <?php endif; ?>
+    <div class="zoe-ctas">
+      <?php zoe_cta( get_field( 'work_cta' ) ); ?>
+    </div>
   </section>
 
   <section class="zoe-section">
