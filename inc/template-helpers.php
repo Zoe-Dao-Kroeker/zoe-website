@@ -75,6 +75,163 @@ function zoe_cta( $cta, $variant = 'pill' ) {
 }
 
 /**
+ * Reads every `--token: value;` declaration straight out of
+ * colors_and_type.css and returns them as ['--name' => 'raw css value'].
+ * The Design Guidelines page's Type table and its AI-readable JSON export
+ * both build off this instead of hand-typed numbers, so neither can drift
+ * out of sync with the actual token file again (August 27, 2026 — the
+ * page's h1 range label had gone stale after the token was resized, since
+ * it was hand-typed prose, not derived).
+ *
+ * @return array<string,string>
+ */
+function zoe_read_design_tokens() {
+    static $tokens = null;
+    if ( null !== $tokens ) {
+        return $tokens;
+    }
+    $tokens = [];
+    $path = get_theme_file_path( 'colors_and_type.css' );
+    if ( ! file_exists( $path ) ) {
+        return $tokens;
+    }
+    $css = file_get_contents( $path );
+    // Strip comments first so a --token mentioned in the header prose above
+    // :root (there's a lot of it) never gets picked up as a declaration.
+    $css = preg_replace( '#/\*.*?\*/#s', '', $css );
+    if ( preg_match_all( '/(--[a-z0-9-]+)\s*:\s*([^;]+);/i', $css, $rows, PREG_SET_ORDER ) ) {
+        foreach ( $rows as $row ) {
+            $tokens[ $row[1] ] = trim( $row[2] );
+        }
+    }
+    return $tokens;
+}
+
+/**
+ * Converts a single rem or px value to a whole px number. Every token in
+ * colors_and_type.css assumes a 16px root (nothing on this site overrides
+ * html { font-size }), so the multiply is safe.
+ *
+ * @param string $value e.g. "2.2rem" or "14px"
+ * @return int|null
+ */
+function zoe_rem_to_px( $value ) {
+    if ( preg_match( '/([\d.]+)\s*rem/', $value, $m ) ) {
+        return (int) round( (float) $m[1] * 16 );
+    }
+    if ( preg_match( '/([\d.]+)\s*px/', $value, $m ) ) {
+        return (int) round( (float) $m[1] );
+    }
+    return null;
+}
+
+/**
+ * Given a --type-* value — either a plain rem/px, or a clamp(min, preferred,
+ * max) — returns ['min' => px, 'max' => px, 'fluid' => bool]. Powers both
+ * the Type table's printed ranges and the AI-readable export.
+ *
+ * @param string $value
+ * @return array{min:?int,max:?int,fluid:bool}
+ */
+function zoe_type_range( $value ) {
+    if ( preg_match( '/^clamp\(\s*([^,]+),\s*([^,]+),\s*([^)]+)\)$/i', trim( $value ), $m ) ) {
+        return [
+            'min'   => zoe_rem_to_px( trim( $m[1] ) ),
+            'max'   => zoe_rem_to_px( trim( $m[3] ) ),
+            'fluid' => true,
+        ];
+    }
+    $px = zoe_rem_to_px( $value );
+    return [ 'min' => $px, 'max' => $px, 'fluid' => false ];
+}
+
+/**
+ * Builds the AI-readable design-token export: real hex/px values only, no
+ * prescriptive "use this colour for X" rules. Lara's explicit call (August
+ * 27, 2026) after two of the hand-written swatch notes turned out wrong
+ * ("illustration accent" / "icon strokes" — neither was true) — usage notes
+ * are opinions that go stale; raw token values read straight off the CSS
+ * file can't. An AI tool reading this page should get facts to reason from,
+ * not rules that might be mis-stated and box it in.
+ *
+ * @return array
+ */
+function zoe_design_tokens_for_ai() {
+    $t = zoe_read_design_tokens();
+
+    $colors = [];
+    foreach ( $t as $name => $value ) {
+        if ( 0 === strpos( $name, '--zoe-' ) && preg_match( '/^#[0-9a-f]{3,6}$/i', $value ) ) {
+            $colors[ str_replace( '--zoe-', '', $name ) ] = strtoupper( $value );
+        }
+    }
+
+    $type_names = [ 'display', 'h1', 'h2', 'h3', 'h4', 'lead', 'body-lg', 'body', 'small', 'micro' ];
+    $scale = [];
+    foreach ( $type_names as $name ) {
+        if ( isset( $t[ '--type-' . $name ] ) ) {
+            $r = zoe_type_range( $t[ '--type-' . $name ] );
+            $scale[ str_replace( '-', '_', $name ) ] = [
+                'min_px' => $r['min'],
+                'max_px' => $r['max'],
+                'fluid'  => $r['fluid'],
+                'line_height' => $t[ '--type-' . $name . '-lh' ] ?? null,
+            ];
+        }
+    }
+
+    $spacing = [];
+    foreach ( $t as $name => $value ) {
+        if ( preg_match( '/^--sp-(\d+)$/', $name, $m ) ) {
+            $spacing[] = zoe_rem_to_px( $value );
+        }
+    }
+    sort( $spacing, SORT_NUMERIC );
+
+    $radius = [];
+    foreach ( [ 'none', 'sm', 'md', 'lg', 'xl', 'pill' ] as $name ) {
+        if ( isset( $t[ '--radius-' . $name ] ) ) {
+            $radius[ $name ] = trim( $t[ '--radius-' . $name ] );
+        }
+    }
+
+    return [
+        'site'   => get_bloginfo( 'name' ),
+        'source' => home_url( '/design-guidelines/' ),
+        'note'   => 'Generated directly from this theme\'s colors_and_type.css at page load — always current, not hand-maintained.',
+        'colors' => [
+            'primitives' => $colors,
+            'roles'      => [
+                'background'      => $t['--bg'] ?? null,
+                'background_raised' => $t['--bg-raised'] ?? null,
+                'background_inverse' => $t['--bg-inverse'] ?? null,
+                'text'            => $t['--fg'] ?? null,
+                'text_muted'      => $t['--fg-muted'] ?? null,
+                'text_on_dark'    => $t['--fg-on-dark'] ?? null,
+                'accent'          => $t['--accent'] ?? null,
+                'accent_deep'     => $t['--accent-deep'] ?? null,
+                'cta'             => $t['--cta'] ?? null,
+                'border'          => $t['--border'] ?? null,
+            ],
+        ],
+        'type'   => [
+            'fonts' => [
+                'sans'    => 'Open Sans — body copy, UI, and every heading level except the H1/hero display face',
+                'display' => 'Fontdiner Swanky — H1 and hero headlines only, not the whole heading system',
+            ],
+            'weights' => [
+                'regular' => $t['--fw-regular'] ?? null,
+                'medium'  => $t['--fw-medium'] ?? null,
+                'bold'    => $t['--fw-bold'] ?? null,
+            ],
+            'scale_px' => $scale,
+        ],
+        'spacing_px' => $spacing,
+        'radius'     => $radius,
+    ];
+}
+
+/**
  * Renders a .zoe-card-grid of real `portfolio` posts in one category —
  * featured image, category name as the tag, title, trimmed excerpt — each
  * card a clickable link to its own single-portfolio.php page. Used by the

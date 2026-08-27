@@ -14,9 +14,20 @@
  * `background: var(--token)`, and the hex printed under it is read live
  * from the rendered element via getComputedStyle(), not typed in. If
  * colors_and_type.css drifts, this page drifts with it.
+ *
+ * AI-readable export (added August 27, 2026, same audit that found the
+ * .zoe-note colour bug and the stale h1 label below): the swatch hex values
+ * only exist once JS runs getComputedStyle() in a real browser — a tool that
+ * just fetches this URL's HTML sees none of them. zoe_design_tokens_for_ai()
+ * (inc/template-helpers.php) reads colors_and_type.css directly and prints
+ * a plain JSON block server-side, so any AI tool given this page's URL gets
+ * real values with no JS execution required. See the <script type=
+ * "application/json"> block right after this header, and the plain-English
+ * paragraph above it for tools that only read visible text.
  */
 
 get_header();
+$zoe_ai_tokens = zoe_design_tokens_for_ai();
 ?>
 
 <main class="zoe-main dg" id="main">
@@ -34,6 +45,24 @@ get_header();
       <span>Sources: <a href="<?php echo esc_url( home_url( '/wp-content/themes/zoe-theme/colors_and_type.css' ) ); ?>">colors_and_type.css</a></span>
     </div>
   </header>
+
+  <!-- ============================================================
+       For AI tools reading this page: plain-text summary first (for a
+       tool that only reads visible text), then a full machine-readable
+       JSON block right after (for anything that parses page source).
+       Both are generated from colors_and_type.css, not hand-typed.
+       ============================================================ -->
+  <p class="dg-ai-summary">
+    For AI tools: this site's core palette is Dark <?php echo esc_html( $zoe_ai_tokens['colors']['primitives']['dark'] ?? '' ); ?>,
+    Coral <?php echo esc_html( $zoe_ai_tokens['colors']['primitives']['coral'] ?? '' ); ?>,
+    Magenta <?php echo esc_html( $zoe_ai_tokens['colors']['primitives']['magenta'] ?? '' ); ?>,
+    Green <?php echo esc_html( $zoe_ai_tokens['colors']['primitives']['green'] ?? '' ); ?>,
+    Blue <?php echo esc_html( $zoe_ai_tokens['colors']['primitives']['blue'] ?? '' ); ?>,
+    and CTA amber <?php echo esc_html( $zoe_ai_tokens['colors']['primitives']['cta'] ?? '' ); ?>. Body/UI type is Open Sans;
+    Fontdiner Swanky is used for H1s and hero headlines only. Full colour, type,
+    spacing and radius values are in the JSON block below this paragraph.
+  </p>
+  <script type="application/json" id="zoe-design-tokens"><?php echo wp_json_encode( $zoe_ai_tokens, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ); ?></script>
 
   <!-- ============================================================
        01 — Foundation
@@ -157,11 +186,18 @@ get_header();
 
     <div class="dg-swatch-group">
       <h3>Primary</h3>
+      <!-- No per-swatch usage notes here on purpose (Lara, August 27, 2026):
+           two of the four had gone wrong ("illustration accent" / "icon
+           strokes" — neither was actually true) and stayed wrong until this
+           audit caught them. Hex + label is what this page can guarantee is
+           correct; a written rule about exactly where/how to use a colour is
+           the kind of thing that's easy to get subtly wrong and then have an
+           AI tool (or a person) follow too literally. Less to get wrong. -->
       <div class="dg-swatch-row">
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-coral" data-label="Coral" data-note="Work page hero block, eyebrows, links, hover states"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-magenta" data-label="Magenta" data-note="Illustration accent"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-green" data-label="Green" data-note="About page hero block"></div></div>
-        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-blue" data-label="Blue" data-note="Research page hero block, icon strokes"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-coral" data-label="Coral"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch dg-swatch--dark" data-token="--zoe-magenta" data-label="Magenta"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-green" data-label="Green"></div></div>
+        <div class="dg-swatch-item"><div class="dg-swatch" data-token="--zoe-blue" data-label="Blue"></div></div>
       </div>
     </div>
 
@@ -200,16 +236,35 @@ get_header();
       <div><span class="dg-type-label">UI / body / H2+</span><div class="dg-type-glyph" style="font-family: var(--font-sans); font-weight: var(--fw-black);">Aa</div><span class="dg-type-sub">Open Sans · Light 300 / Black 800</span></div>
     </div>
 
+    <?php
+    // Printed ranges below are computed from colors_and_type.css via
+    // zoe_type_range(), not typed in — the h1 row used to read "42→77px"
+    // after the token had already been resized to 35→67px (caught in the
+    // August 27, 2026 audit). Can't go stale again since it's not text
+    // anyone maintains by hand.
+    $zoe_tokens = zoe_read_design_tokens();
+    $dg_type_meta = function ( $name, $font = '' ) use ( $zoe_tokens ) {
+        $r = zoe_type_range( $zoe_tokens[ '--type-' . $name ] ?? '' );
+        printf(
+            '--type-%s &middot; %s&rarr;%spx %s%s',
+            esc_html( $name ),
+            esc_html( $r['min'] ),
+            esc_html( $r['max'] ),
+            $r['fluid'] ? 'fluid' : 'fixed',
+            $font ? ' &middot; ' . esc_html( $font ) : ''
+        );
+    };
+    ?>
     <div class="dg-type-scale">
       <div class="dg-type-row"><span class="eyebrow" style="margin:0">Eyebrow</span><span class="dg-type-meta">--type-micro · 12px fixed, tracked</span></div>
-      <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-display); line-height:var(--type-display-lh); font-weight:400;">Hero headline</span><span class="dg-type-meta">--type-display · 48&rarr;99px fluid · Fontdiner Swanky</span></div>
-      <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-h1); line-height:var(--type-h1-lh); font-weight:400;">Page title</span><span class="dg-type-meta">--type-h1 · 42&rarr;77px fluid · Fontdiner Swanky</span></div>
-      <div class="dg-type-row"><span style="font-size:var(--type-h2); line-height:var(--type-h2-lh); font-weight:var(--fw-black);">Section heading</span><span class="dg-type-meta">--type-h2 · 30&rarr;46px fluid</span></div>
-      <div class="dg-type-row"><span style="font-size:var(--type-h4); line-height:var(--type-h4-lh); font-weight:var(--fw-black);">Card title</span><span class="dg-type-meta">--type-h4 · 18&rarr;20px fluid</span></div>
-      <div class="dg-type-row"><span style="font-size:var(--type-lead); line-height:var(--type-lead-lh);">Lead paragraph, for openings and introductions.</span><span class="dg-type-meta">--type-lead · 20&rarr;22px fluid</span></div>
-      <div class="dg-type-row"><span style="font-size:var(--type-body-lg); line-height:var(--type-body-lg-lh);">Intro paragraph, a step above body copy.</span><span class="dg-type-meta">--type-body-lg · 18px fixed</span></div>
-      <div class="dg-type-row"><span style="font-size:var(--type-body); line-height:var(--type-body-lh);">Body copy, the standard reading size used everywhere else.</span><span class="dg-type-meta">--type-body · 16px fixed</span></div>
-      <div class="dg-type-row"><span style="font-size:var(--type-small); line-height:var(--type-small-lh);">Small text, for captions, buttons and list items.</span><span class="dg-type-meta">--type-small · 14px fixed</span></div>
+      <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-display); line-height:var(--type-display-lh); font-weight:400;">Hero headline</span><span class="dg-type-meta"><?php $dg_type_meta( 'display', 'Fontdiner Swanky' ); ?></span></div>
+      <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-h1); line-height:var(--type-h1-lh); font-weight:400;">Page title</span><span class="dg-type-meta"><?php $dg_type_meta( 'h1', 'Fontdiner Swanky' ); ?></span></div>
+      <div class="dg-type-row"><span style="font-size:var(--type-h2); line-height:var(--type-h2-lh); font-weight:var(--fw-black);">Section heading</span><span class="dg-type-meta"><?php $dg_type_meta( 'h2' ); ?></span></div>
+      <div class="dg-type-row"><span style="font-size:var(--type-h4); line-height:var(--type-h4-lh); font-weight:var(--fw-black);">Card title</span><span class="dg-type-meta"><?php $dg_type_meta( 'h4' ); ?></span></div>
+      <div class="dg-type-row"><span style="font-size:var(--type-lead); line-height:var(--type-lead-lh);">Lead paragraph, for openings and introductions.</span><span class="dg-type-meta"><?php $dg_type_meta( 'lead' ); ?></span></div>
+      <div class="dg-type-row"><span style="font-size:var(--type-body-lg); line-height:var(--type-body-lg-lh);">Intro paragraph, a step above body copy.</span><span class="dg-type-meta"><?php $dg_type_meta( 'body-lg' ); ?></span></div>
+      <div class="dg-type-row"><span style="font-size:var(--type-body); line-height:var(--type-body-lh);">Body copy, the standard reading size used everywhere else.</span><span class="dg-type-meta"><?php $dg_type_meta( 'body' ); ?></span></div>
+      <div class="dg-type-row"><span style="font-size:var(--type-small); line-height:var(--type-small-lh);">Small text, for captions, buttons and list items.</span><span class="dg-type-meta"><?php $dg_type_meta( 'small' ); ?></span></div>
     </div>
   </section>
 
@@ -307,12 +362,16 @@ get_header();
       el.style.background = fixedHex;
     }
     var hex = toHex(getComputedStyle(el).backgroundColor);
+    var note = el.getAttribute('data-note');
     var meta = document.createElement('div');
     meta.className = 'dg-swatch__meta';
+    // Note span only exists when data-note is actually set (the four
+    // Primary swatches deliberately have none, August 27, 2026 — see the
+    // comment above them) — an empty <span> left a blank line under those.
     meta.innerHTML = '<b>' + (el.getAttribute('data-label') || '') + '</b>' +
       '<code>' + hex + '</code>' +
       '<span class="dg-swatch__token">' + (token || '') + '</span>' +
-      '<span class="dg-swatch__note">' + (el.getAttribute('data-note') || '') + '</span>';
+      (note ? '<span class="dg-swatch__note">' + note + '</span>' : '');
     el.parentElement.appendChild(meta);
   });
 }());

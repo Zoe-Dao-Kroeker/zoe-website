@@ -435,7 +435,12 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   margin-top: var(--sp-24);
   padding: var(--sp-16) var(--sp-24);
   border-left: 3px solid var(--accent-deep);
-  background: var(--bg-accent);
+  /* Was --bg-accent (Blush) — an "Additional" colour Lara asked to keep
+     documentation-only, never on an actual page (August 27, 2026). It had
+     landed here anyway; caught in the August 27 colour/type audit and
+     swapped for --bg-raised, the same white every other card/callout on
+     the site already uses. */
+  background: var(--bg-raised);
   font-size: var(--type-small);
   border-radius: var(--radius-sm);
 }
@@ -700,6 +705,21 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   font-family: var(--font-sans); font-size: var(--type-micro); color: var(--fg-muted);
 }
 .dg-meta a { color: var(--accent-deep); }
+
+/* Plain-text summary for AI tools that only read visible text (the full
+   machine-readable export sits right after it in a JSON <script> block —
+   see page-design-guidelines.php). Styled as a utility note, not page
+   copy, so it doesn't read as part of the human-facing narrative. */
+.dg-ai-summary {
+  margin-top: var(--sp-24);
+  padding: var(--sp-16) var(--sp-24);
+  background: var(--fill-subtle);
+  border-radius: var(--radius-sm);
+  font-size: var(--type-small);
+  line-height: var(--type-small-lh);
+  color: var(--fg-muted);
+  max-width: 70ch;
+}
 
 .dg-section { padding: var(--sp-80) 0; border-bottom: 1px solid var(--border); }
 
