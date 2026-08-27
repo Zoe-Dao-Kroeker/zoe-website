@@ -328,11 +328,15 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .zoe-stat:nth-child(4n+2) { background: var(--zoe-magenta); }
 .zoe-stat:nth-child(4n+3) { background: var(--zoe-green); }
 .zoe-stat:nth-child(4n+4) { background: var(--zoe-blue); }
-.zoe-stat b { display: block; font-size: var(--type-h3); font-weight: var(--fw-black); color: var(--fg); }
+.zoe-stat b { display: block; font-size: var(--type-h3); font-weight: var(--fw-black); color: var(--fg-on-dark); }
 .zoe-stat span {
   font-family: var(--font-sans);
   font-size: var(--type-micro);
-  color: var(--fg);
+  /* Bumped to black weight — unset, this was inheriting the body's
+     regular/300 weight, which was a big part of why it read as washed
+     out even before white-on-colour contrast came into it. */
+  font-weight: var(--fw-black);
+  color: var(--fg-on-dark);
   letter-spacing: var(--track-tight);
   margin-top: var(--sp-4);
 }
