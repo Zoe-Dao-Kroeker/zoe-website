@@ -35,10 +35,10 @@ $zoe_ai_tokens = zoe_design_tokens_for_ai();
   <!-- ============================================================
        Header
        ============================================================ -->
-  <header class="dg-header">
+  <header class="dg-header zoe-bg-block zoe-bg-block--magenta">
     <div class="eyebrow">Zoe Dao-Kroeker</div>
     <h1 class="dg-h1">Design Guidelines</h1>
-    <p class="dg-lede">Colour, type, and the small decisions underneath them — read directly off this site's own stylesheet, so this page can't say something the site doesn't already do.</p>
+    <p class="dg-lede">This page documents the site's real colours and type, pulled directly from its stylesheet, not typed in by hand.</p>
     <p class="dg-tagline">&ldquo;I design how kids learn — and study what happens when AI joins the room.&rdquo;</p>
     <div class="dg-meta">
       <span>Draft</span><span>v1.0</span><span>Built by Lara Kroeker Interactive</span>
@@ -69,7 +69,7 @@ $zoe_ai_tokens = zoe_design_tokens_for_ai();
        ============================================================ -->
   <section class="dg-section" id="foundation">
     <div class="eyebrow">01 — Foundation</div>
-    <h2 class="zoe-section__heading">What this practice stands for.</h2>
+    <h2 class="zoe-section__heading">Purpose, vision, and mission.</h2>
 
     <div class="dg-pvm">
       <div class="dg-pvm__item">
@@ -101,12 +101,20 @@ $zoe_ai_tokens = zoe_design_tokens_for_ai();
        ============================================================ -->
   <section class="dg-section" id="logo">
     <div class="eyebrow">02 — Logo</div>
-    <h2 class="zoe-section__heading">One version, for now.</h2>
-    <p class="zoe-section__intro">No light/dark pair exists yet — this is the real file, not a placeholder for one that doesn't.</p>
-    <div class="dg-logo-card">
-      <img src="<?php echo esc_url( home_url( '/wp-content/uploads/2021/08/ZDK-Logo-File.webp' ) ); ?>" alt="Zoe Dao-Kroeker logo" style="max-height:120px;">
-      <div class="dg-ctas">
-        <a class="btn-pill" href="<?php echo esc_url( home_url( '/wp-content/uploads/2021/08/ZDK-Logo-File.webp' ) ); ?>" download>Download logo<span class="arr" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 11.5L11.5 2.5M11.5 2.5H4.5M11.5 2.5V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a>
+    <h2 class="zoe-section__heading">Logo files, light and dark.</h2>
+    <p class="zoe-section__intro">Two versions: one for light backgrounds, one for dark.</p>
+    <div class="dg-logo-row">
+      <div class="dg-logo-card">
+        <img src="<?php echo esc_url( home_url( '/wp-content/uploads/2026/08/ZDK-Logo-Light.png' ) ); ?>" alt="Zoe Dao-Kroeker logo, for light backgrounds" style="max-height:120px;">
+        <div class="dg-ctas">
+          <a class="btn-pill" href="<?php echo esc_url( home_url( '/wp-content/uploads/2026/08/ZDK-Logo-Light.png' ) ); ?>" download>For light backgrounds<span class="arr" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 11.5L11.5 2.5M11.5 2.5H4.5M11.5 2.5V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a>
+        </div>
+      </div>
+      <div class="dg-logo-card dg-logo-card--dark">
+        <img src="<?php echo esc_url( home_url( '/wp-content/uploads/2026/08/ZDK-Logo-Dark.png' ) ); ?>" alt="Zoe Dao-Kroeker logo, for dark backgrounds" style="max-height:120px;">
+        <div class="dg-ctas">
+          <a class="btn-ghost" href="<?php echo esc_url( home_url( '/wp-content/uploads/2026/08/ZDK-Logo-Dark.png' ) ); ?>" download>For dark backgrounds<svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+        </div>
       </div>
     </div>
   </section>
@@ -122,14 +130,31 @@ $zoe_ai_tokens = zoe_design_tokens_for_ai();
       [ 'file' => '/wp-content/uploads/2025/08/Skating-Robot.webp', 'alt' => 'Skating Robot project' ],
       [ 'file' => '/wp-content/uploads/2025/08/Cart-Pushing-Bot.webp', 'alt' => 'Cart Pushing Robot field trip guide' ],
   ];
+  // About page photos (August 27, 2026, Lara: "for photography add photos
+  // from the about page") — read live off the About page's own ACF fields
+  // rather than a second hardcoded list, so a new photo added there shows
+  // up here too. Skips rows with no image (the closing dark panel row has
+  // none) and the hero illustration (a drawn graphic, not a photo).
+  $dg_about_blocks = get_field( 'background_blocks', 12773 ) ?: [];
+  foreach ( $dg_about_blocks as $block ) {
+      if ( ! empty( $block['image']['url'] ) ) {
+          $dg_photos[] = [
+              'file' => $block['image']['url'],
+              'alt'  => $block['title'] ?? 'Photo from the About page',
+              'raw'  => true,
+          ];
+      }
+  }
   ?>
   <section class="dg-section" id="photography">
     <div class="eyebrow">03 — Photography</div>
-    <h2 class="zoe-section__heading">Real kits, not stock.</h2>
-    <p class="zoe-section__intro">Pulled from the actual STEM curriculum photography already in the media library — the same kits named on the Work page.</p>
+    <h2 class="zoe-section__heading">Photography from the site.</h2>
+    <p class="zoe-section__intro">Real photos already in use — STEM curriculum kits from the Work page, and people and process photos from the About page.</p>
     <div class="dg-photo-grid">
-      <?php foreach ( $dg_photos as $photo ) : ?>
-        <img src="<?php echo esc_url( home_url( $photo['file'] ) ); ?>" alt="<?php echo esc_attr( $photo['alt'] ); ?>" loading="lazy">
+      <?php foreach ( $dg_photos as $photo ) :
+          $src = ! empty( $photo['raw'] ) ? esc_url( $photo['file'] ) : esc_url( home_url( $photo['file'] ) );
+      ?>
+        <img src="<?php echo $src; ?>" alt="<?php echo esc_attr( $photo['alt'] ); ?>" loading="lazy">
       <?php endforeach; ?>
     </div>
   </section>
@@ -149,8 +174,8 @@ $zoe_ai_tokens = zoe_design_tokens_for_ai();
   ?>
   <section class="dg-section" id="icons">
     <div class="eyebrow">04 — Icons</div>
-    <h2 class="zoe-section__heading">Static, for utility and inline use.</h2>
-    <p class="zoe-section__intro">Phosphor, Light weight, always this suffix. A sample below, <?php echo (int) count( glob( $dg_icon_dir . '/*.svg' ) ); ?> in the full set.</p>
+    <h2 class="zoe-section__heading">Icon set.</h2>
+    <p class="zoe-section__intro">Phosphor icons, Light weight. A sample below — <?php echo (int) count( glob( $dg_icon_dir . '/*.svg' ) ); ?> icons in the full set.</p>
     <div class="dg-icon-grid">
       <?php foreach ( $dg_icon_sample as $icon ) :
           $icon_path = $dg_icon_dir . '/' . $icon . '-light.svg';
@@ -172,8 +197,8 @@ $zoe_ai_tokens = zoe_design_tokens_for_ai();
        ============================================================ -->
   <section class="dg-section" id="colour">
     <div class="eyebrow">05 — Colour</div>
-    <h2 class="zoe-section__heading">Four groups, always in this order.</h2>
-    <p class="zoe-section__intro">Every swatch below renders from its real CSS variable, and the hex printed under it is read live via <code>getComputedStyle()</code> — if the token file drifts, this page drifts with it.</p>
+    <h2 class="zoe-section__heading">Colour palette.</h2>
+    <p class="zoe-section__intro">Every swatch below shows its real colour and hex code, read live from the site's own stylesheet.</p>
 
     <div class="dg-swatch-group">
       <h3>Surface</h3>
@@ -228,8 +253,8 @@ $zoe_ai_tokens = zoe_design_tokens_for_ai();
        ============================================================ -->
   <section class="dg-section" id="type">
     <div class="eyebrow">06 — Type</div>
-    <h2 class="zoe-section__heading">Open Sans, Fontdiner Swanky.</h2>
-    <p class="zoe-section__intro">Two families, on purpose — Instrument Serif and JetBrains Mono (both carried over from LKI's system at first) were dropped August 24, 2026.</p>
+    <h2 class="zoe-section__heading">Fonts and type sizes.</h2>
+    <p class="zoe-section__intro">Two fonts, used across the whole site: Open Sans for everything, and Fontdiner Swanky for page titles and hero headlines only.</p>
 
     <div class="dg-type-families">
       <div><span class="dg-type-label">Display / H1 only</span><div class="dg-type-glyph" style="font-family: var(--font-display); font-weight: 400;">Aa</div><span class="dg-type-sub">Fontdiner Swanky · 400</span></div>
@@ -273,8 +298,8 @@ $zoe_ai_tokens = zoe_design_tokens_for_ai();
        ============================================================ -->
   <section class="dg-section" id="spacing">
     <div class="eyebrow">07 — Spacing</div>
-    <h2 class="zoe-section__heading">Space. Shape. Depth.</h2>
-    <p class="zoe-section__intro">Spacing sets the rhythm, radius gives every edge its character, elevation decides what sits above what.</p>
+    <h2 class="zoe-section__heading">Spacing, corners, and shadows.</h2>
+    <p class="zoe-section__intro">The spacing scale, corner-radius options, and shadow styles used across the site.</p>
 
     <h3 class="dg-sub">Spacing</h3>
     <div class="dg-spacing-row">
@@ -317,8 +342,8 @@ $zoe_ai_tokens = zoe_design_tokens_for_ai();
        ============================================================ -->
   <section class="dg-section" id="buttons">
     <div class="eyebrow">08 — Buttons</div>
-    <h2 class="zoe-section__heading">One dark pill. One flash of CTA yellow.</h2>
-    <p class="zoe-section__intro">Three levels of emphasis: a filled pill for the main action, an outline for the secondary one, a ghost link for everything else. Aim for one filled pill per view.</p>
+    <h2 class="zoe-section__heading">Buttons.</h2>
+    <p class="zoe-section__intro">Three styles: a filled pill for the main action on a page, an outline for a secondary action, and a plain text link for everything else.</p>
     <div class="dg-btn-demo">
       <div class="dg-btn-demo__panel">
         <div class="eyebrow">On light</div>

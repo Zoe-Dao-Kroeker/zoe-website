@@ -288,6 +288,12 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .zoe-bg-block--coral { background: var(--zoe-coral); }
 .zoe-bg-block--blue { background: var(--zoe-blue); }
 .zoe-bg-block--green { background: var(--zoe-green); }
+/* Magenta — the Design Guidelines page's own hero (August 27, 2026, Lara:
+   "add a BG to the hero area like on work/about/research"). Magenta was the
+   one Primary colour with no page-level identity yet (Work/About/Research
+   already claim Coral/Green/Blue) — giving it one here instead of picking
+   a colour that's already spoken for. */
+.zoe-bg-block--magenta { background: var(--zoe-magenta); }
 /* Neutral (off-white) text on all three — Lara's call, August 27, 2026 —
    in place of the dark text these previously forced. This is a harder
    contrast trade than dark text was: dark cleared 4.5:1+ against all
@@ -297,14 +303,33 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
    previously inherited --fg by default, which no longer applies). */
 .zoe-bg-block--coral .eyebrow, .zoe-bg-block--coral .zoe-hero__heading,
 .zoe-bg-block--blue .eyebrow, .zoe-bg-block--blue .zoe-hero__heading,
-.zoe-bg-block--green .eyebrow, .zoe-bg-block--green .zoe-hero__heading {
+.zoe-bg-block--green .eyebrow, .zoe-bg-block--green .zoe-hero__heading,
+.zoe-bg-block--magenta .eyebrow, .zoe-bg-block--magenta .zoe-hero__heading {
   color: var(--fg-on-dark);
 }
 .zoe-bg-block--coral .zoe-hero__intro,
 .zoe-bg-block--blue .zoe-hero__intro,
-.zoe-bg-block--green .zoe-hero__intro {
+.zoe-bg-block--green .zoe-hero__intro,
+.zoe-bg-block--magenta .zoe-hero__intro {
   color: var(--fg-on-dark-muted);
 }
+
+/* Design Guidelines header isn't a .zoe-hero (its own eyebrow/h1/lede/
+   tagline/meta shape, not the two-column hero grid), so it needs its own
+   on-dark overrides rather than inheriting the .zoe-hero__* ones above. */
+.dg-header.zoe-bg-block {
+  padding: var(--sp-56);
+  border-bottom: none;
+}
+.dg-header.zoe-bg-block .eyebrow,
+.dg-header.zoe-bg-block .dg-h1,
+.dg-header.zoe-bg-block .dg-tagline { color: var(--fg-on-dark); }
+.dg-header.zoe-bg-block .dg-lede { color: var(--fg-on-dark-muted); }
+.dg-header.zoe-bg-block .dg-meta {
+  color: var(--fg-on-dark-subtle);
+  border-top-color: var(--border-on-dark);
+}
+.dg-header.zoe-bg-block .dg-meta a { color: var(--fg-on-dark); }
 .zoe-hero__intro {
   color: var(--fg-muted);
   max-width: 60ch;
@@ -724,7 +749,11 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .dg-section { padding: var(--sp-80) 0; border-bottom: 1px solid var(--border); }
 
 .dg-pvm { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--sp-32); margin-top: var(--sp-24); }
-.dg-pvm__item { border-left: 3px solid var(--accent); padding-left: var(--sp-16); }
+/* Was a 3px solid Blue accent bar — changed to a hairline (August 27, 2026,
+   Lara: "make the lines hairline borders"), matching --border's actual
+   documented purpose ("hairline borders", per the Colour section's own
+   Grey 5 swatch) instead of a bold accent colour. */
+.dg-pvm__item { border-left: 1px solid var(--border); padding-left: var(--sp-16); }
 .dg-pvm__item h3 { font-size: var(--type-h4); margin-bottom: var(--sp-8); }
 .dg-pvm__item p { color: var(--fg-muted); font-size: var(--type-small); line-height: var(--type-small-lh); }
 
@@ -734,11 +763,15 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   padding: var(--sp-8) var(--sp-16); font-size: var(--type-small); color: var(--fg-muted);
 }
 
+.dg-logo-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--sp-24); margin-top: var(--sp-24); }
 .dg-logo-card {
   border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-raised);
   padding: var(--sp-56); display: flex; flex-direction: column; align-items: center; gap: var(--sp-24);
-  margin-top: var(--sp-24);
 }
+/* The "dark" logo file is a near-white wordmark, meant FOR dark backgrounds
+   -- shown on this site's own dark surface so it's actually visible, not
+   invisible-white-on-white the way it would be on the default card. */
+.dg-logo-card--dark { background: var(--bg-inverse); border-color: var(--border-on-dark); }
 
 .dg-photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--sp-16); margin-top: var(--sp-24); }
 .dg-photo-grid img { border-radius: var(--radius-md); aspect-ratio: 4/3; object-fit: cover; }
