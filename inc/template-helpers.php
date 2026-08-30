@@ -176,6 +176,12 @@ function zoe_design_tokens_for_ai() {
                 'max_px' => $r['max'],
                 'fluid'  => $r['fluid'],
                 'line_height' => $t[ '--type-' . $name . '-lh' ] ?? null,
+                // The size to use anywhere that isn't a browser — slides,
+                // documents, social templates, print. A clamp() is
+                // unusable in those tools; this is one number they accept.
+                // px * 0.75 = pt, taken from the max because that is the
+                // size the design is drawn at.
+                'pt_for_print_and_slides' => round( $r['max'] * 0.75, 1 ),
             ];
         }
     }
@@ -220,9 +226,21 @@ function zoe_design_tokens_for_ai() {
                 'display' => 'Fontdiner Swanky — H1 and hero headlines only, not the whole heading system',
             ],
             'weights' => [
-                'regular' => $t['--fw-regular'] ?? null,
-                'medium'  => $t['--fw-medium'] ?? null,
-                'bold'    => $t['--fw-bold'] ?? null,
+                'regular'  => $t['--fw-regular'] ?? null,
+                'medium'   => $t['--fw-medium'] ?? null,
+                'semibold' => $t['--fw-semibold'] ?? null,
+                'bold'     => $t['--fw-bold'] ?? null,
+                'black'    => $t['--fw-black'] ?? null,
+            ],
+            // Which weight each heading level actually renders at, so a
+            // deck or a document can reproduce the hierarchy rather than
+            // guessing from the numbers above.
+            'heading_weights' => [
+                'display' => 'black',
+                'h1'      => 'black',
+                'h2'      => 'bold',
+                'h3'      => 'semibold',
+                'h4'      => 'semibold',
             ],
             'scale_px' => $scale,
         ],

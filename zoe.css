@@ -29,16 +29,30 @@ h1, h2, h3, h4 {
   font-weight: var(--fw-black);
   letter-spacing: var(--track-heading);
 }
-/* Descending weight below h1, added Aug 30, 2026. Every heading level was
-   --fw-black (800), so h2 and h3 carried the same visual force as the page
-   title and the hierarchy rested entirely on size. h1 keeps 800; h2 steps
-   to 700 and h3 to 600.
+/* Descending weight below h1. Every heading level was --fw-black (800), so
+   h2 and h3 carried the same visual force as the page title and the
+   hierarchy rested entirely on size.
 
-   NOTE: h4 is deliberately untouched here and is still 800 — Lara asked
-   for h2 and h3 only. That leaves h4 heavier than the h3 above it, which
-   is an inversion worth resolving next time this file is open. */
+       h1  800  black      display / page title
+       h2  700  bold       section heading
+       h3  600  semibold   subheading
+       h4  600  semibold   card title
+
+   The ladder deliberately PLATEAUS at h4 rather than continuing to 500.
+   h4 renders at 16→18px, and at that size 500 sits one step from body
+   copy (400) and stops reading as a heading at all — weight has to do
+   the work that size no longer can. This is the standard shape: weight
+   descends while size is doing the separating, then holds once the text
+   gets small enough that it isn't. */
+/* The point-size equivalent under each type row. Quieter than the token
+   line above it, but present on every row — this is the number anyone
+   building a deck, a document or a social template actually needs, and
+   a clamp() gives them nothing. */
+.dg-type-portable { color: var(--fg-muted); font-size: var(--type-micro); }
+
 h2 { font-weight: var(--fw-bold); }
 h3 { font-weight: var(--fw-semibold); }
+h4 { font-weight: var(--fw-semibold); }
 /* Display font on h1 only (hero headings, page titles). h2 reverted to the
    sans the same day it was added — Fontdiner Swanky is a one-tier accent,
    not the whole heading system — so h2/h3/h4 all stay on the base rule

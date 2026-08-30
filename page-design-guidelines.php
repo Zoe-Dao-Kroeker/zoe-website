@@ -308,15 +308,29 @@ get_header();
     // August 27, 2026 audit). Can't go stale again since it's not text
     // anyone maintains by hand.
     $zoe_tokens = zoe_read_design_tokens();
+    /**
+     * Type row meta. Prints the CSS truth AND a portable equivalent.
+     *
+     * A clamp() cannot be typed into PowerPoint, Google Docs, Canva or a
+     * social template — those need one number. So every row also carries
+     * the size at full width in points, which is the value to use
+     * anywhere that isn't a browser. Points, not pixels, because that is
+     * the unit those tools actually ask for. px x 0.75 = pt.
+     *
+     * Using the MAX of a fluid range on purpose: that is the size the
+     * design is drawn at, and a slide or a document is a wide surface.
+     */
     $dg_type_meta = function ( $name, $font = '' ) use ( $zoe_tokens ) {
-        $r = zoe_type_range( $zoe_tokens[ '--type-' . $name ] ?? '' );
+        $r  = zoe_type_range( $zoe_tokens[ '--type-' . $name ] ?? '' );
+        $pt = round( $r['max'] * 0.75, 1 );
         printf(
-            '--type-%s &middot; %s&rarr;%spx %s%s',
+            '--type-%s &middot; %s&rarr;%spx %s%s<br><span class="dg-type-portable">%spt in slides &amp; docs</span>',
             esc_html( $name ),
             esc_html( $r['min'] ),
             esc_html( $r['max'] ),
             $r['fluid'] ? 'fluid' : 'fixed',
-            $font ? ' &middot; ' . esc_html( $font ) : ''
+            $font ? ' &middot; ' . esc_html( $font ) : '',
+            esc_html( rtrim( rtrim( number_format( $pt, 1 ), '0' ), '.' ) )
         );
     };
     ?>
