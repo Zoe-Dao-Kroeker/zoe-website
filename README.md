@@ -49,7 +49,7 @@ in place — see `/design-guidelines/` on staging for the self-checking colour/t
 | `search.php` / `searchform.php` | ✅ Real (text domain updated, no brand content) |
 | `home.php`, `single-post.php`, `archive.php`, `page.php`, `404.php`, `index.php` | ✅ Real, brand-agnostic — carried no Mel references to begin with |
 | `screenshot.jpg` | ✅ Real — a photo of Zoe, replacing Mel's |
-| `.github/workflows/deploy-staging.yml`, `.gitignore` | ✅ Real, generic (secrets-driven, no hardcoded paths) — **not actually used**: deploy is zip → `novamira/create-upload-link`, see `../../../WORKSPACE-novamira-setup.md` |
+| `.gitignore` | ✅ Real. The `.github/workflows/deploy-staging.yml` that used to sit beside it was **deleted August 30, 2026**: it never ran successfully once, never had repository secrets, and targeted staging — which is the authoring environment, not a deploy target. See "Deploying" below |
 
 ---
 
@@ -122,7 +122,15 @@ None of these block having the folder structure in place, which is what this sca
 
 ### Editing
 
-Local is the source of truth: `Zoe Dao-Kroeker/Website/zoe-theme/`. Edit here, then deploy.
+**Staging is where this site is authored.** Content, pages, and layout are edited directly on
+`https://stg-zoedaokroeker-staging.kinsta.cloud/`, and Lara pushes staging → live by hand through
+MyKinsta. Live is never edited directly.
+
+**This repo still owns every PHP and CSS file**, because Novamira cannot write them: both
+`novamira/write-file` and `novamira/edit-file` refuse `*.php` outside
+`wp-content/novamira-sandbox/`. Any change to `functions.php`, a page template, or `zoe.css` must
+be made here and shipped as a zip (see "Deploying"). Editing those on the server is not something
+the tooling permits — it is a hard limit, not a preference.
 
 ### Cache-busting will be manual and load-bearing, same as every theme in this workspace
 
@@ -138,9 +146,24 @@ this copy **is** Mel's file, not a divergence from one.
 
 ### Deploying
 
-🔴 **Blocked.** No Novamira connection and no staging environment confirmed yet for Zoe's site —
-see `ZOE-website-status.md` → "🔴 Blocking: no connection to this site". Do not write anything to
-a live or staging server until that's resolved and `home_url()` is confirmed.
+**There is no CI. Deploys are manual, in two hops.**
+
+**Hop 1 — repo → staging**, for PHP/CSS changes only:
+
+1. Confirm the target first: `novamira/execute-php` → `home_url()` must return the staging host.
+2. `git archive --format=zip -o <zip> HEAD` (drop `.gitignore`). Off Google Drive this takes
+   minutes, not seconds — run it in the background.
+3. `novamira/create-upload-link`. Uploads are confined to the web root, so use an unguessable
+   filename and move the zip out of the web root server-side before extracting.
+4. Verify `hash_file('sha256', ...)` against the local zip **before** extracting. Abort on mismatch.
+5. `ZipArchive::extractTo()` over the theme directory, then delete the zip.
+
+Extraction overwrites and adds — it never deletes. That is deliberate: the server can legitimately
+hold files this repo does not. **Never deploy this theme with `rsync --delete`.**
+
+**Hop 2 — staging → live:** Lara pushes the environment through MyKinsta by hand. This copies
+content, plugins, and theme wholesale, which is how the Novamira plugin ended up active on
+production.
 
 ---
 
