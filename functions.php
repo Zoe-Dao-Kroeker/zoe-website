@@ -56,7 +56,7 @@ add_action( 'after_setup_theme', function () {
 // IMPORTANT: bump ZOE_STYLE_VER on every zoe.css change. The browser and CDN
 // cache by ?ver= query string, not by file content, so a correct upload can
 // still render stale.
-define( 'ZOE_STYLE_VER', '0.39.0' );
+define( 'ZOE_STYLE_VER', '0.40.0' );
 
 add_action( 'wp_enqueue_scripts', function () {
     // Google Fonts — two families only. Sans is Open Sans (switched from
@@ -191,6 +191,37 @@ function zoe_llms_txt_link() {
 	);
 }
 add_action( 'wp_head', 'zoe_llms_txt_link' );
+
+/**
+ * Favicon / touch icons.
+ *
+ * The site had no favicon at all before August 30, 2026 -- WordPress's own
+ * site_icon option was 0, so browsers fell back to a blank page glyph.
+ *
+ * Source is the spinning-top mark from the logo (assets-logo/
+ * wired-outline-1525-spinning-toy.svg), not the full wordmark, which is
+ * unreadable below about 64px. The favicon copy is cropped tighter than the
+ * original (the source has ~17% dead margin on every side) and its strokes
+ * are thickened from 12 to 20 units, because at 16px the original weight
+ * renders under a pixel and the mark disappears.
+ *
+ * Set here rather than through the site_icon option so the icon ships with
+ * the theme and survives a staging -> live push without a media-library
+ * dependency.
+ */
+function zoe_favicon_links() {
+	$dir = get_theme_file_uri( 'assets-logo/favicon' );
+	$tags = array(
+		'<link rel="icon" href="%1$s/favicon.svg" type="image/svg+xml">',
+		'<link rel="icon" href="%1$s/favicon-32.png" sizes="32x32" type="image/png">',
+		'<link rel="apple-touch-icon" href="%1$s/favicon-180.png" sizes="180x180">',
+		'<link rel="shortcut icon" href="%1$s/favicon.ico" sizes="any">',
+	);
+	foreach ( $tags as $tag ) {
+		printf( $tag . "\n", esc_url( $dir ) );
+	}
+}
+add_action( 'wp_head', 'zoe_favicon_links' );
 
 /**
  * Tell browsers never to cache pages on the STAGING SERVER.

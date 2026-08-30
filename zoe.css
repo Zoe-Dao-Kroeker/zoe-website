@@ -912,13 +912,17 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 
 .dg-spacing-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--sp-24); }
 .dg-sp-item { display: flex; flex-direction: column; align-items: center; gap: var(--sp-8); }
-.dg-sp-bar { background: var(--bg-inverse); border-radius: var(--radius-sm); }
+/* Spacing and radius blocks share one fill — #E1DDDB (--zoe-grey-5, exposed
+   as --fill-subtle). Lara's call, August 30, 2026: the spacing blocks were
+   --bg-inverse espresso and the radius blocks --fill, a darker grey; both now
+   read the same soft tone so the two rows sit as one family. */
+.dg-sp-bar { background: var(--fill-subtle); border-radius: var(--radius-sm); }
 .dg-sp-item b { font-size: var(--type-small); }
 .dg-sp-item span { font-size: var(--type-micro); color: var(--fg-muted); text-align: center; max-width: 90px; }
 
 .dg-radius-row { display: flex; flex-wrap: wrap; gap: var(--sp-32); }
 .dg-radius-item { display: flex; flex-direction: column; align-items: center; gap: var(--sp-8); }
-.dg-radius-box { width: 64px; height: 64px; background: var(--fill); }
+.dg-radius-box { width: 64px; height: 64px; background: var(--fill-subtle); }
 .dg-radius-item b { font-size: var(--type-small); }
 .dg-radius-item span { font-size: var(--type-micro); color: var(--fg-muted); }
 
