@@ -739,7 +739,11 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   color: var(--accent-deep);
   font-weight: var(--fw-black);
 }
-.zoe-process__step h4 { font-size: var(--type-h3); margin: var(--sp-8) 0; }
+/* h3, not h4: these sit directly under the section's <h2>, so an <h4>
+   skipped a level in the document outline. Changed Aug 30, 2026 — same
+   job and now the same level as .zoe-timeline__title and
+   .zoe-card__title. */
+.zoe-process__step h3 { font-size: var(--type-h3); font-weight: var(--fw-bold); margin: var(--sp-8) 0; }
 .zoe-process__step p { color: var(--fg-muted); font-size: var(--type-small); line-height: var(--type-small-lh); }
 .zoe-section--dark .zoe-process__step h4 { color: var(--fg-on-dark); }
 .zoe-section--dark .zoe-process__step p { color: var(--fg-on-dark-muted); }

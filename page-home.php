@@ -58,7 +58,7 @@ if ( have_posts() ) :
         <?php while ( have_rows( 'process_steps' ) ) : the_row(); ?>
           <div class="zoe-process__step">
             <b><?php echo esc_html( get_sub_field( 'kicker' ) ); ?></b>
-            <h4><?php echo esc_html( get_sub_field( 'title' ) ); ?></h4>
+            <h3><?php echo esc_html( get_sub_field( 'title' ) ); ?></h3>
             <p><?php echo esc_html( get_sub_field( 'description' ) ); ?></p>
           </div>
         <?php endwhile; ?>

@@ -237,18 +237,26 @@ function zoe_design_tokens_for_ai() {
             // Which weight each heading level actually renders at, so a
             // deck or a document can reproduce the hierarchy rather than
             // guessing from the numbers above.
+            // Zoe's outline is h1 > h2 > h3. There is no <h4> on the site:
+            // the two that existed sat directly under an <h2>, skipping a
+            // level, and were corrected to <h3> Aug 30, 2026.
+            //
+            // --type-h4 is still a real SIZE, used by card titles and
+            // timeline rows — which are <h3> elements. So <h3> renders at
+            // two sizes here depending on the component, and that is
+            // deliberate: the heading LEVEL is about document structure,
+            // the type token is about scale. They are not the same axis.
             'heading_weights' => [
-                'h1'      => 'black',
-                'h2'      => 'bold',
-                'h3'      => 'semibold',
-                'h4'      => 'bold',
+                'h1' => 'regular',   // Fontdiner Swanky, one weight only
+                'h2' => 'bold',
+                'h3' => 'semibold',  // 700 where it titles a block: cards, timeline rows, process steps
             ],
+            'heading_elements_in_use' => [ 'h1', 'h2', 'h3' ],
             // h4 is BOLDER than h3 on purpose. h4 renders at 16-18px and is
             // used for card titles — a UI label competing with an eyebrow
             // and an excerpt inside a bordered box, not a subheading in
             // flowing prose. At that size weight has to do the work size
             // no longer can.
-            'heading_elements_in_use' => [ 'h1', 'h2', 'h3', 'h4' ],
             'scale_px' => $scale,
         ],
         'spacing_px' => $spacing,
