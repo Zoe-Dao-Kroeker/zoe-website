@@ -638,7 +638,22 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .zoe-timeline__row--reverse .zoe-timeline__copy { order: 2; }
 .zoe-timeline__row--reverse .zoe-timeline__media { order: 1; }
 .zoe-timeline__row:not(:has(.zoe-timeline__media)) .zoe-timeline__copy { grid-column: 1 / -1; max-width: 65ch; }
-.zoe-timeline__title { font-size: var(--type-h4); margin: var(--sp-8) 0 var(--sp-12); }
+/* Block titles sitting under an eyebrow — timeline rows, process steps and
+   cards all do the same job: a short statement that has to out-weigh the
+   eyebrow above it and the body copy below it. One treatment for all
+   three, --type-h3 at 700.
+
+   This row was --type-h4 at the inherited h3 weight (600) while the
+   equivalent block on the homepage was --type-h3 at 700, so the About
+   page's headlines read smaller and lighter than the same component
+   elsewhere and barely separated from their green eyebrow. Aug 30, 2026.
+
+   NOTE the element/token mismatch still to resolve: .zoe-timeline__title
+   is an <h3>, .zoe-process__step's is an <h4>, and both sit under an
+   <h2> section heading — so <h3> is the correct level for both and the
+   homepage one is wrong. Left alone here because it is a template
+   change, not a style one. */
+.zoe-timeline__title { font-size: var(--type-h3); font-weight: var(--fw-bold); margin: var(--sp-8) 0 var(--sp-12); }
 .zoe-timeline__media img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-lg); display: block; }
 @media (max-width: 760px) {
   .zoe-timeline__row { grid-template-columns: 1fr; }
