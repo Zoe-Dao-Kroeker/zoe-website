@@ -309,42 +309,47 @@ get_header();
     // anyone maintains by hand.
     $zoe_tokens = zoe_read_design_tokens();
     /**
-     * Type row meta. Prints the CSS truth AND a portable equivalent.
+     * Type row meta. Prints three things a reader actually needs:
      *
-     * A clamp() cannot be typed into PowerPoint, Google Docs, Canva or a
-     * social template — those need one number. So every row also carries
-     * the size at full width in points, which is the value to use
-     * anywhere that isn't a browser. Points, not pixels, because that is
-     * the unit those tools actually ask for. px x 0.75 = pt.
+     *   1. The HTML element the role maps to (H1-H4, P, SPAN). This is
+     *      the document outline, so it is an SEO fact, not decoration —
+     *      "Section heading" means nothing to a crawler, <h2> does.
+     *   2. The CSS truth, including the fluid range.
+     *   3. A portable size in BOTH px and pt, because a clamp() cannot be
+     *      typed into any tool that isn't a browser and those tools ask
+     *      for different units: Canva, Figma and social templates want
+     *      px; PowerPoint, Word and Google Docs want pt. px x 0.75 = pt.
      *
-     * Using the MAX of a fluid range on purpose: that is the size the
-     * design is drawn at, and a slide or a document is a wide surface.
+     * The portable size uses the MAX of a fluid range — that is the size
+     * the design is drawn at, and a slide or document is a wide surface.
      */
-    $dg_type_meta = function ( $name, $font = '' ) use ( $zoe_tokens ) {
+    $dg_type_meta = function ( $name, $tag = '', $font = '' ) use ( $zoe_tokens ) {
         $r  = zoe_type_range( $zoe_tokens[ '--type-' . $name ] ?? '' );
-        $pt = round( $r['max'] * 0.75, 1 );
+        $px = $r['max'];
+        $pt = rtrim( rtrim( number_format( round( $px * 0.75, 1 ), 1 ), '0' ), '.' );
         printf(
-            '--type-%s &middot; %s&rarr;%spx %s%s<br><span class="dg-type-portable">%spt in slides &amp; docs</span>',
+            '%s--type-%s &middot; %s&rarr;%spx %s%s<br><span class="dg-type-portable">%spx &middot; %spt &mdash; slides, docs &amp; social</span>',
+            $tag ? '<span class="dg-type-tag">' . esc_html( $tag ) . '</span> ' : '',
             esc_html( $name ),
             esc_html( $r['min'] ),
             esc_html( $r['max'] ),
             $r['fluid'] ? 'fluid' : 'fixed',
             $font ? ' &middot; ' . esc_html( $font ) : '',
-            esc_html( rtrim( rtrim( number_format( $pt, 1 ), '0' ), '.' ) )
+            esc_html( $px ),
+            esc_html( $pt )
         );
     };
     ?>
     <div class="dg-type-scale">
-      <div class="dg-type-row"><span class="eyebrow" style="margin:0">Eyebrow</span><span class="dg-type-meta"><?php $dg_type_meta( 'micro' ); ?></span></div>
-      <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-display); line-height:var(--type-display-lh); font-weight:400;">Hero headline</span><span class="dg-type-meta"><?php $dg_type_meta( 'display', 'Fontdiner Swanky' ); ?></span></div>
-      <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-h1); line-height:var(--type-h1-lh); font-weight:400;">Page title</span><span class="dg-type-meta"><?php $dg_type_meta( 'h1', 'Fontdiner Swanky' ); ?></span></div>
-      <div class="dg-type-row"><h2 style="font-size:var(--type-h2); line-height:var(--type-h2-lh);">Section heading</h2><span class="dg-type-meta"><?php $dg_type_meta( 'h2' ); ?></span></div>
-      <div class="dg-type-row"><h3 style="font-size:var(--type-h3); line-height:var(--type-h3-lh);">Subheading</h3><span class="dg-type-meta"><?php $dg_type_meta( 'h3' ); ?></span></div>
-      <div class="dg-type-row"><h4 style="font-size:var(--type-h4); line-height:var(--type-h4-lh);">Card title</h4><span class="dg-type-meta"><?php $dg_type_meta( 'h4' ); ?></span></div>
-      <div class="dg-type-row"><span style="font-size:var(--type-lead); line-height:var(--type-lead-lh); font-weight:var(--fw-regular);">Lead paragraph, for openings and introductions.</span><span class="dg-type-meta"><?php $dg_type_meta( 'lead' ); ?></span></div>
-      <div class="dg-type-row"><span style="font-size:var(--type-body-lg); line-height:var(--type-body-lg-lh); font-weight:var(--fw-regular);">Intro paragraph, a step above body copy.</span><span class="dg-type-meta"><?php $dg_type_meta( 'body-lg' ); ?></span></div>
-      <div class="dg-type-row"><span style="font-size:var(--type-body); line-height:var(--type-body-lh);">Body copy, the standard reading size used everywhere else.</span><span class="dg-type-meta"><?php $dg_type_meta( 'body' ); ?></span></div>
-      <div class="dg-type-row"><span style="font-size:var(--type-small); line-height:var(--type-small-lh);">Small text, for captions, buttons and list items.</span><span class="dg-type-meta"><?php $dg_type_meta( 'small' ); ?></span></div>
+      <div class="dg-type-row"><span class="eyebrow" style="margin:0">Eyebrow</span><span class="dg-type-meta"><?php $dg_type_meta( 'micro', 'SPAN' ); ?></span></div>
+      <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-display); line-height:var(--type-display-lh); font-weight:400;">Hero headline</span><span class="dg-type-meta"><?php $dg_type_meta( 'display', 'H1', 'Fontdiner Swanky' ); ?></span></div>
+      <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-h1); line-height:var(--type-h1-lh); font-weight:400;">Page title</span><span class="dg-type-meta"><?php $dg_type_meta( 'h1', 'H1', 'Fontdiner Swanky' ); ?></span></div>
+      <div class="dg-type-row"><h2 style="font-size:var(--type-h2); line-height:var(--type-h2-lh);">Section heading</h2><span class="dg-type-meta"><?php $dg_type_meta( 'h2', 'H2' ); ?></span></div>
+      <div class="dg-type-row"><h3 style="font-size:var(--type-h3); line-height:var(--type-h3-lh);">Subheading</h3><span class="dg-type-meta"><?php $dg_type_meta( 'h3', 'H3' ); ?></span></div>
+      <div class="dg-type-row"><h4 style="font-size:var(--type-h4); line-height:var(--type-h4-lh);">Card title</h4><span class="dg-type-meta"><?php $dg_type_meta( 'h4', 'H4' ); ?></span></div>
+      <div class="dg-type-row"><span style="font-size:var(--type-lead); line-height:var(--type-lead-lh); font-weight:var(--fw-regular);">Lead paragraph, for openings and introductions.</span><span class="dg-type-meta"><?php $dg_type_meta( 'lead', 'P' ); ?></span></div>
+      <div class="dg-type-row"><span style="font-size:var(--type-body); line-height:var(--type-body-lh);">Body copy, the standard reading size used everywhere else.</span><span class="dg-type-meta"><?php $dg_type_meta( 'body', 'P' ); ?></span></div>
+      <div class="dg-type-row"><span style="font-size:var(--type-small); line-height:var(--type-small-lh);">Small text, for captions, buttons and list items.</span><span class="dg-type-meta"><?php $dg_type_meta( 'small', 'P' ); ?></span></div>
     </div>
   </section>
 

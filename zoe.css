@@ -50,6 +50,23 @@ h1, h2, h3, h4 {
    a clamp() gives them nothing. */
 .dg-type-portable { color: var(--fg-muted); font-size: var(--type-micro); }
 
+/* The HTML element each type role maps to. Deliberately prominent rather
+   than buried in the token string: the document outline is an SEO fact,
+   and "Section heading" tells a crawler nothing that <h2> doesn't tell
+   it better. Monospace so it reads as markup, not prose. */
+.dg-type-tag {
+  display: inline-block;
+  min-width: 3.2em;
+  margin-right: var(--sp-8);
+  padding: 1px 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--type-micro);
+  color: var(--fg);
+  text-align: center;
+}
+
 h2 { font-weight: var(--fw-bold); }
 h3 { font-weight: var(--fw-semibold); }
 h4 { font-weight: var(--fw-semibold); }
