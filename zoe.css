@@ -936,7 +936,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
    phone, where at full size it used to overflow its column. */
 .dg-spacing-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(56px, 1fr));
   gap: var(--sp-24) var(--sp-16);
   /* align-items must stay stretch. With end, items bottom-align, so the three
      with two-line captions stand 21px taller and drag their block and number
@@ -948,10 +948,11 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 }
 .dg-sp-item {
   display: grid;
-  /* Band / number / caption. The caption row takes 1fr so any surplus height
-     from a stretched item lands there, leaving the first two rows fixed —
-     blocks bottom out together, numbers sit on one line. */
-  grid-template-rows: var(--dg-sp-band) auto 1fr;
+  /* Band / number only. The per-block captions became one sentence below
+     the row (August 30, 2026) -- each wrapped to one or two lines, and that
+     uneven height was what knocked blocks and numbers out of line. With
+     nothing left to wrap, two fixed bands align exactly. */
+  grid-template-rows: var(--dg-sp-band) auto;
   justify-items: center;
   gap: var(--sp-8);
   min-width: 0;
@@ -969,7 +970,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   max-width: 100%;
 }
 .dg-sp-item b { font-size: var(--type-small); }
-.dg-sp-item span { font-size: var(--type-micro); color: var(--fg-muted); text-align: center; max-width: 100%; align-self: start; }
+.dg-scale-note { font-size: var(--type-small); line-height: var(--type-small-lh); color: var(--fg-muted); max-width: 70ch; margin-top: var(--sp-24); }
 
 .dg-radius-row {
   display: grid;

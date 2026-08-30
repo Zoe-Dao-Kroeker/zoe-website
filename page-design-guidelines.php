@@ -357,10 +357,24 @@ get_header();
                 // which is how the 120 block used to overflow its column on a phone. ?>
           <div class="dg-sp-bar" style="--dg-sp-step: <?php echo (int) $step[0]; ?>;"></div>
           <b><?php echo esc_html( $step[0] ); ?></b>
-          <span><?php echo esc_html( $step[1] ); ?></span>
         </div>
       <?php endforeach; ?>
     </div>
+    <?php
+    // The per-block captions moved into this one sentence (Lara, August 30,
+    // 2026) so the blocks and their numbers line up on a clean baseline --
+    // captions wrapped to one or two lines each, which was the thing forcing
+    // the row out of alignment. Built from $dg_sp rather than typed out, so
+    // editing the scale above rewrites this sentence too and the two cannot
+    // drift apart.
+    $dg_sp_prose = [];
+    foreach ( $dg_sp as $step ) {
+        $dg_sp_prose[] = $step[0] . ' ' . strtolower( $step[1] );
+    }
+    $dg_sp_last  = array_pop( $dg_sp_prose );
+    $dg_sp_words = implode( ', ', $dg_sp_prose ) . ', and ' . $dg_sp_last;
+    ?>
+    <p class="dg-scale-note">Ten steps, each with a job: <?php echo esc_html( $dg_sp_words ); ?>.</p>
 
     <h3 class="dg-sub">Radius</h3>
     <div class="dg-radius-row">
