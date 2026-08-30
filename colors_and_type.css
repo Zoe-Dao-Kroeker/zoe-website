@@ -171,7 +171,7 @@
   --fw-regular: 300;
   --fw-body: 400;
   --fw-medium: 500;
-  --fw-semibold: 500;
+  --fw-semibold: 600;   /* Was 500, a duplicate of --fw-medium and misnamed for it. Corrected Aug 30, 2026 — 600 is loaded from Google Fonts and had no token exposing it. Zero call sites at the time, so nothing moved. */
   --fw-bold: 700;
   --fw-black: 800;
 

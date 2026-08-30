@@ -298,7 +298,7 @@ get_header();
 
     <div class="dg-type-families">
       <div><span class="dg-type-label">Display / H1 only</span><div class="dg-type-glyph" style="font-family: var(--font-display); font-weight: 400;">Aa</div><span class="dg-type-sub">Fontdiner Swanky · 400</span></div>
-      <div><span class="dg-type-label">UI / body / H2+</span><div class="dg-type-glyph" style="font-family: var(--font-sans); font-weight: var(--fw-black);">Aa</div><span class="dg-type-sub">Open Sans · Light 300 (lead/intro) · Body 400 · Bold 700 · Black 800 (headings)</span></div>
+      <div><span class="dg-type-label">UI / body / H2+</span><div class="dg-type-glyph" style="font-family: var(--font-sans); font-weight: var(--fw-black);">Aa</div><span class="dg-type-sub">Open Sans &middot; Light 300 (lead/intro) &middot; Body 400 &middot; Semibold 600 (h3) &middot; Bold 700 (h2) &middot; Black 800 (h1, h4)</span></div>
     </div>
 
     <?php
@@ -324,9 +324,9 @@ get_header();
       <div class="dg-type-row"><span class="eyebrow" style="margin:0">Eyebrow</span><span class="dg-type-meta">--type-micro · 12px fixed, tracked</span></div>
       <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-display); line-height:var(--type-display-lh); font-weight:400;">Hero headline</span><span class="dg-type-meta"><?php $dg_type_meta( 'display', 'Fontdiner Swanky' ); ?></span></div>
       <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-h1); line-height:var(--type-h1-lh); font-weight:400;">Page title</span><span class="dg-type-meta"><?php $dg_type_meta( 'h1', 'Fontdiner Swanky' ); ?></span></div>
-      <div class="dg-type-row"><span style="font-size:var(--type-h2); line-height:var(--type-h2-lh); font-weight:var(--fw-black);">Section heading</span><span class="dg-type-meta"><?php $dg_type_meta( 'h2' ); ?></span></div>
-      <div class="dg-type-row"><span style="font-size:var(--type-h3); line-height:var(--type-h3-lh); font-weight:var(--fw-black);">Subheading</span><span class="dg-type-meta"><?php $dg_type_meta( 'h3' ); ?></span></div>
-      <div class="dg-type-row"><span style="font-size:var(--type-h4); line-height:var(--type-h4-lh); font-weight:var(--fw-black);">Card title</span><span class="dg-type-meta"><?php $dg_type_meta( 'h4' ); ?></span></div>
+      <div class="dg-type-row"><h2 style="font-size:var(--type-h2); line-height:var(--type-h2-lh);">Section heading</h2><span class="dg-type-meta"><?php $dg_type_meta( 'h2' ); ?></span></div>
+      <div class="dg-type-row"><h3 style="font-size:var(--type-h3); line-height:var(--type-h3-lh);">Subheading</h3><span class="dg-type-meta"><?php $dg_type_meta( 'h3' ); ?></span></div>
+      <div class="dg-type-row"><h4 style="font-size:var(--type-h4); line-height:var(--type-h4-lh);">Card title</h4><span class="dg-type-meta"><?php $dg_type_meta( 'h4' ); ?></span></div>
       <div class="dg-type-row"><span style="font-size:var(--type-lead); line-height:var(--type-lead-lh); font-weight:var(--fw-regular);">Lead paragraph, for openings and introductions.</span><span class="dg-type-meta"><?php $dg_type_meta( 'lead' ); ?></span></div>
       <div class="dg-type-row"><span style="font-size:var(--type-body-lg); line-height:var(--type-body-lg-lh); font-weight:var(--fw-regular);">Intro paragraph, a step above body copy.</span><span class="dg-type-meta"><?php $dg_type_meta( 'body-lg' ); ?></span></div>
       <div class="dg-type-row"><span style="font-size:var(--type-body); line-height:var(--type-body-lh);">Body copy, the standard reading size used everywhere else.</span><span class="dg-type-meta"><?php $dg_type_meta( 'body' ); ?></span></div>
