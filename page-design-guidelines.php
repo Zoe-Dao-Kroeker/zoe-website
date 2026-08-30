@@ -160,7 +160,47 @@ get_header();
   </section>
 
   <!-- ============================================================
-       04 — Icons
+       04 — Illustration
+       ============================================================ -->
+  <?php
+  // Read these out of the media library rather than hardcoding a list, same
+  // rule as Photography above: this page documents what the site actually
+  // uses, so a new illustration uploaded for a page appears here on its own.
+  // Matches the "... hero illustration" naming the existing art already uses.
+  $dg_illos = get_posts( [
+      'post_type'      => 'attachment',
+      'post_mime_type' => 'image',
+      'post_status'    => 'inherit',
+      'posts_per_page' => 12,
+      's'              => 'illustration',
+      'orderby'        => 'title',
+      'order'          => 'ASC',
+  ] );
+  ?>
+  <?php if ( $dg_illos ) : ?>
+  <section class="dg-section" id="illustration">
+    <div class="eyebrow">04 — Illustration</div>
+    <h2 class="zoe-section__heading">Illustration.</h2>
+    <p class="zoe-section__intro">The drawn character illustrations, one per page hero. Flat vector, consistent character and palette throughout, each on a transparent ground so it can sit on any of the page colours.</p>
+    <div class="dg-illo-grid">
+      <?php foreach ( $dg_illos as $dg_illo ) :
+          $dg_illo_src = wp_get_attachment_image_url( $dg_illo->ID, 'large' );
+          if ( ! $dg_illo_src ) {
+              continue;
+          }
+          $dg_illo_alt = get_post_meta( $dg_illo->ID, '_wp_attachment_image_alt', true );
+      ?>
+        <figure class="dg-illo">
+          <img src="<?php echo esc_url( $dg_illo_src ); ?>" alt="<?php echo esc_attr( $dg_illo_alt ? $dg_illo_alt : $dg_illo->post_title ); ?>" loading="lazy">
+          <figcaption><?php echo esc_html( $dg_illo->post_title ); ?></figcaption>
+        </figure>
+      <?php endforeach; ?>
+    </div>
+  </section>
+  <?php endif; ?>
+
+  <!-- ============================================================
+       05 — Icons
        ============================================================ -->
   <?php
   $dg_icon_dir = get_theme_file_path( 'assets-icons/System Icons' );
@@ -173,7 +213,7 @@ get_header();
   ];
   ?>
   <section class="dg-section" id="icons">
-    <div class="eyebrow">04 — Icons</div>
+    <div class="eyebrow">05 — Icons</div>
     <h2 class="zoe-section__heading">Icon set.</h2>
     <p class="zoe-section__intro">Phosphor icons, Light weight. A sample below — <?php echo (int) count( glob( $dg_icon_dir . '/*.svg' ) ); ?> icons in the full set.</p>
     <div class="dg-icon-grid">
@@ -193,10 +233,10 @@ get_header();
   </section>
 
   <!-- ============================================================
-       05 — Colour
+       06 — Colour
        ============================================================ -->
   <section class="dg-section" id="colour">
-    <div class="eyebrow">05 — Colour</div>
+    <div class="eyebrow">06 — Colour</div>
     <h2 class="zoe-section__heading">Colour palette.</h2>
     <p class="zoe-section__intro">Every swatch below shows its real colour and hex code, read live from the site's own stylesheet.</p>
 
@@ -249,10 +289,10 @@ get_header();
   </section>
 
   <!-- ============================================================
-       06 — Type
+       07 — Type
        ============================================================ -->
   <section class="dg-section" id="type">
-    <div class="eyebrow">06 — Type</div>
+    <div class="eyebrow">07 — Type</div>
     <h2 class="zoe-section__heading">Fonts and type sizes.</h2>
     <p class="zoe-section__intro">Two fonts, used across the whole site: Open Sans for everything, and Fontdiner Swanky for page titles and hero headlines only.</p>
 
@@ -294,10 +334,10 @@ get_header();
   </section>
 
   <!-- ============================================================
-       07 — Spacing
+       08 — Spacing
        ============================================================ -->
   <section class="dg-section" id="spacing">
-    <div class="eyebrow">07 — Spacing</div>
+    <div class="eyebrow">08 — Spacing</div>
     <h2 class="zoe-section__heading">Spacing, corners, and shadows.</h2>
     <p class="zoe-section__intro">The spacing scale, corner-radius options, and shadow styles used across the site.</p>
 
@@ -312,7 +352,10 @@ get_header();
       foreach ( $dg_sp as $step ) :
       ?>
         <div class="dg-sp-item">
-          <div class="dg-sp-bar" style="width: <?php echo max( 4, (int) $step[0] * 0.9 ); ?>px; height: <?php echo max( 4, (int) $step[0] * 0.9 ); ?>px;"></div>
+          <?php // Emit the raw step as a custom property and let CSS size the block.
+                // Inline width/height would beat the mobile media query on specificity,
+                // which is how the 120 block used to overflow its column on a phone. ?>
+          <div class="dg-sp-bar" style="--dg-sp-step: <?php echo (int) $step[0]; ?>;"></div>
           <b><?php echo esc_html( $step[0] ); ?></b>
           <span><?php echo esc_html( $step[1] ); ?></span>
         </div>
@@ -338,10 +381,10 @@ get_header();
   </section>
 
   <!-- ============================================================
-       08 — Buttons
+       09 — Buttons
        ============================================================ -->
   <section class="dg-section" id="buttons">
-    <div class="eyebrow">08 — Buttons</div>
+    <div class="eyebrow">09 — Buttons</div>
     <h2 class="zoe-section__heading">Buttons.</h2>
     <p class="zoe-section__intro">Three styles: a filled pill for the main action on a page, an outline for a secondary action, and a plain text link for everything else.</p>
     <div class="dg-btn-demo">

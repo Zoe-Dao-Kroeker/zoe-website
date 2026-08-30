@@ -850,6 +850,14 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
    invisible-white-on-white the way it would be on the default card. */
 .dg-logo-card--dark { background: var(--bg-inverse); border-color: var(--border-on-dark); }
 
+/* Illustration grid (section 04). The art is transparent-ground, so it gets
+   the same soft --fill-subtle bed as the spacing blocks rather than floating
+   on the page cream with no edge. */
+.dg-illo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--sp-24); margin-top: var(--sp-24); }
+.dg-illo { margin: 0; }
+.dg-illo img { width: 100%; height: auto; display: block; border-radius: var(--radius-lg); background: var(--fill-subtle); }
+.dg-illo figcaption { font-size: var(--type-micro); color: var(--fg-muted); margin-top: var(--sp-8); text-align: center; }
+
 .dg-photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--sp-16); margin-top: var(--sp-24); }
 .dg-photo-grid img { border-radius: var(--radius-md); aspect-ratio: 4/3; object-fit: cover; }
 
@@ -910,20 +918,80 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 
 .dg-sub { font-size: var(--type-h3); margin: var(--sp-48) 0 var(--sp-16); }
 
-.dg-spacing-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--sp-24); }
-.dg-sp-item { display: flex; flex-direction: column; align-items: center; gap: var(--sp-8); }
+/* Spacing + radius scales, reworked August 30, 2026 (Lara: "make sure these
+   boxes look good on desktop AND mobile" / "align bottom so that they are
+   even").
+
+   Both rows were flex with align-items:flex-end, which aligns each item's
+   BOTTOM edge. Because the captions wrap to different line counts ("Large
+   card padding" takes two lines, "Section breaks" one), that pushed some
+   numbers a whole line higher than their neighbours. Grid with three explicit
+   bands fixes it: every block bottoms out on the same line, every number sits
+   on one line, every caption starts at the same height, regardless of how the
+   caption wraps.
+
+   --dg-sp-scale is what makes the blocks responsive. The step value arrives
+   from PHP as --dg-sp-step and is multiplied here, so a media query can shrink
+   the whole scale at once. The 120 block is 108px on desktop and 54px on a
+   phone, where at full size it used to overflow its column. */
+.dg-spacing-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
+  gap: var(--sp-24) var(--sp-16);
+  /* align-items must stay stretch. With end, items bottom-align, so the three
+     with two-line captions stand 21px taller and drag their block and number
+     up with them — the exact misalignment this rework is fixing. Stretch makes
+     every item the same height; the fixed band below does the aligning. */
+  align-items: stretch;
+  --dg-sp-scale: 0.62;
+  --dg-sp-band: 76px;
+}
+.dg-sp-item {
+  display: grid;
+  /* Band / number / caption. The caption row takes 1fr so any surplus height
+     from a stretched item lands there, leaving the first two rows fixed —
+     blocks bottom out together, numbers sit on one line. */
+  grid-template-rows: var(--dg-sp-band) auto 1fr;
+  justify-items: center;
+  gap: var(--sp-8);
+  min-width: 0;
+}
 /* Spacing and radius blocks share one fill — #E1DDDB (--zoe-grey-5, exposed
    as --fill-subtle). Lara's call, August 30, 2026: the spacing blocks were
    --bg-inverse espresso and the radius blocks --fill, a darker grey; both now
    read the same soft tone so the two rows sit as one family. */
-.dg-sp-bar { background: var(--fill-subtle); border-radius: var(--radius-sm); }
+.dg-sp-bar {
+  background: var(--fill-subtle);
+  border-radius: var(--radius-sm);
+  align-self: end;
+  width: max(4px, calc(var(--dg-sp-step) * var(--dg-sp-scale) * 1px));
+  height: max(4px, calc(var(--dg-sp-step) * var(--dg-sp-scale) * 1px));
+  max-width: 100%;
+}
 .dg-sp-item b { font-size: var(--type-small); }
-.dg-sp-item span { font-size: var(--type-micro); color: var(--fg-muted); text-align: center; max-width: 90px; }
+.dg-sp-item span { font-size: var(--type-micro); color: var(--fg-muted); text-align: center; max-width: 100%; align-self: start; }
 
-.dg-radius-row { display: flex; flex-wrap: wrap; gap: var(--sp-32); }
-.dg-radius-item { display: flex; flex-direction: column; align-items: center; gap: var(--sp-8); }
-.dg-radius-box { width: 64px; height: 64px; background: var(--fill-subtle); }
+.dg-radius-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
+  gap: var(--sp-24) var(--sp-16);
+  align-items: stretch;
+}
+.dg-radius-item {
+  display: grid;
+  grid-template-rows: 64px auto 1fr;
+  justify-items: center;
+  gap: var(--sp-8);
+  min-width: 0;
+}
+.dg-radius-box { width: 64px; height: 64px; max-width: 100%; background: var(--fill-subtle); align-self: end; }
 .dg-radius-item b { font-size: var(--type-small); }
-.dg-radius-item span { font-size: var(--type-micro); color: var(--fg-muted); }
+.dg-radius-item span { font-size: var(--type-micro); color: var(--fg-muted); text-align: center; align-self: start; }
+
+@media (max-width: 760px) {
+  .dg-spacing-row { --dg-sp-scale: 0.42; --dg-sp-band: 52px; grid-template-columns: repeat(auto-fit, minmax(64px, 1fr)); }
+  .dg-radius-item { grid-template-rows: 48px auto auto; }
+  .dg-radius-box { width: 48px; height: 48px; }
+}
 
 .dg-btn-demo__panel { padding: var(--sp-32); border: 1px solid var(--border); border-radius: var(--radius-md); margin-top: var(--sp-16); }
