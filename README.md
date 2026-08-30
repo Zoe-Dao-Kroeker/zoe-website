@@ -151,8 +151,13 @@ this copy **is** Mel's file, not a divergence from one.
 **Hop 1 — repo → staging**, for PHP/CSS changes only:
 
 1. Confirm the target first: `novamira/execute-php` → `home_url()` must return the staging host.
-2. `git archive --format=zip -o <zip> HEAD` (drop `.gitignore`). Off Google Drive this takes
-   minutes, not seconds — run it in the background.
+2. `git archive --format=zip -o <zip> HEAD`, then **delete `README.md` and `.gitignore` from the
+   zip before uploading** — see the warning below. Off Google Drive this takes minutes, not
+   seconds; run it in the background.
+
+   ```bash
+   git archive --format=zip -o theme.zip HEAD && zip -d theme.zip README.md .gitignore
+   ```
 3. `novamira/create-upload-link`. Uploads are confined to the web root, so use an unguessable
    filename and move the zip out of the web root server-side before extracting.
 4. Verify `hash_file('sha256', ...)` against the local zip **before** extracting. Abort on mismatch.
@@ -160,6 +165,16 @@ this copy **is** Mel's file, not a divergence from one.
 
 Extraction overwrites and adds — it never deletes. That is deliberate: the server can legitimately
 hold files this repo does not. **Never deploy this theme with `rsync --delete`.**
+
+⚠️ **Never ship this README to a server.** Everything in the theme directory is served
+publicly: `wp-content/themes/zoe-theme/README.md` returned HTTP 200 to anonymous requests on both
+staging and live until August 30, 2026, when it was deleted from staging. This file documents the
+deploy procedure, the staging host, and the Novamira setup — none of which belongs on a public
+portfolio site. It is documentation for whoever works in this repo, not a theme asset. Dotfiles
+are already blocked (403) and directory listing is off, so `README.md` is the one tracked file
+that needs excluding by hand.
+
+The copy on live is still public and will clear on the next MyKinsta staging → live push.
 
 **Hop 2 — staging → live:** Lara pushes the environment through MyKinsta by hand. This copies
 content, plugins, and theme wholesale, which is how the Novamira plugin ended up active on
