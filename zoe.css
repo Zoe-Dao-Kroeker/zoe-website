@@ -20,7 +20,7 @@ body {
      sizes (Lara, August 27, 2026). --fw-regular stays 300 and is still
      used explicitly by lead/intro-sized text, which she wants to keep
      light. */
-  font-weight: var(--fw-body);
+  font-weight: var(--fw-regular);
 }
 
 h1, h2, h3, h4 {
@@ -50,6 +50,8 @@ h1, h2, h3, h4 {
    a clamp() gives them nothing. */
 .dg-type-portable { color: var(--fg-muted); font-size: var(--type-micro); }
 
+.dg-weight-scale { margin-top: var(--sp-24); }
+
 /* The HTML element each type role maps to. Deliberately prominent rather
    than buried in the token string: the document outline is an SEO fact,
    and "Section heading" tells a crawler nothing that <h2> doesn't tell
@@ -78,7 +80,7 @@ h4 { font-weight: var(--fw-bold); }   /* same reasoning as .zoe-card__title: at 
    would fight a hand-lettered face. */
 h1 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--fw-regular);   /* Fontdiner Swanky ships one weight; 400 is it */
   letter-spacing: normal;
 }
 p { margin: 0; }
@@ -405,7 +407,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   margin-top: var(--sp-20);
   font-size: var(--type-lead);
   line-height: var(--type-lead-lh);
-  font-weight: var(--fw-regular);
+  font-weight: var(--fw-light);
 }
 .zoe-hero__media img { border-radius: var(--radius-lg); }
 
@@ -484,7 +486,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 /* font-weight pinned explicitly — without it this would silently pick up
    body's new 400 default; lead-sized intro copy stays --fw-regular (300)
    on purpose (Lara, August 27, 2026). */
-.zoe-section__intro { color: var(--fg-muted); max-width: 65ch; font-size: var(--type-lead); line-height: var(--type-lead-lh); font-weight: var(--fw-regular); }
+.zoe-section__intro { color: var(--fg-muted); max-width: 65ch; font-size: var(--type-lead); line-height: var(--type-lead-lh); font-weight: var(--fw-light); }
 .zoe-section--center .zoe-section__intro { margin: 0 auto; }
 
 /* single-portfolio.php — the project itself on the left, a "browse other
@@ -754,8 +756,9 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
    copied from larakroekerinteractive.com's own closing "Let's talk"
    section (same idea: a full-bleed dark strip, an eyebrow, one big
    statement, one button), repainted in Zoe's own tokens rather than
-   LKI's navy/pink. --type-display was otherwise unused outside the
-   guidelines page's own specimen row; this is its first real job. The
+   LKI's navy/pink. This section was briefly sized with the old
+   --type-display token, which has since been deleted -- it ended up on
+   --type-h2 (see below) and nothing else ever referenced it. The
    button is its own colour treatment (amber fill, not the usual dark
    pill) since the surrounding section is already dark — .btn-pill's
    default dark-on-dark would have no separation here. */
@@ -772,8 +775,8 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .zoe-closing-cta__heading {
   font-family: var(--font-sans);
   font-weight: var(--fw-black);
-  /* --type-h2 — Lara's call, after --type-display, --type-h1, and
-     --type-h4 were each tried in turn. */
+  /* --type-h2 — Lara's call, after the old --type-display, --type-h1
+     and --type-h4 were each tried in turn. */
   font-size: var(--type-h2);
   line-height: var(--type-h2-lh);
   letter-spacing: var(--track-heading);
@@ -846,7 +849,7 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 
 .dg-header { padding: var(--sp-80) 0 var(--sp-48); border-bottom: 1px solid var(--border); }
 .dg-h1 { font-size: var(--type-h1); line-height: var(--type-h1-lh); max-width: 16ch; margin: var(--sp-16) 0; }
-.dg-lede { color: var(--fg-muted); max-width: 60ch; font-size: var(--type-lead); line-height: var(--type-lead-lh); font-weight: var(--fw-regular); }
+.dg-lede { color: var(--fg-muted); max-width: 60ch; font-size: var(--type-lead); line-height: var(--type-lead-lh); font-weight: var(--fw-light); }
 /* Draft / Built by / Sources — three labelled columns, the workspace
    pattern (WORKSPACE-design-guidelines-ai-readability.md). Was a flat
    row of spans reading "Draft | v1.0 | Built by ..." with the version
@@ -956,6 +959,9 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 
 .dg-type-families { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--sp-32); padding-bottom: var(--sp-32); border-bottom: 1px solid var(--border); }
 .dg-type-label { font-family: var(--font-sans); font-size: var(--type-micro); text-transform: uppercase; letter-spacing: var(--track-tight); color: var(--fg-muted); }
+/* 64px is a one-off specimen size for the glyph card, not a type role —
+   deliberately not tokenised, since a token used once by one decorative
+   element is scale for its own sake. */
 .dg-type-glyph { font-size: 64px; margin: var(--sp-8) 0; }
 .dg-type-sub { font-family: var(--font-sans); font-size: var(--type-micro); color: var(--fg-muted); }
 

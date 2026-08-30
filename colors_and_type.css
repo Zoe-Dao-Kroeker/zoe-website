@@ -167,13 +167,16 @@
      inline <strong> emphasis inside body copy pairs with the new 400
      baseline instead of jumping straight to --fw-black's 800, which stays
      the heavier tier for headings/labels. */
-  --fw-light: 300;
-  --fw-regular: 300;
-  --fw-body: 400;
-  --fw-medium: 500;
-  --fw-semibold: 600;   /* Was 500, a duplicate of --fw-medium and misnamed for it. Corrected Aug 30, 2026 — 600 is loaded from Google Fonts and had no token exposing it. Zero call sites at the time, so nothing moved. */
-  --fw-bold: 700;
-  --fw-black: 800;
+  /* Five weights, each named for the weight it actually is.
+     Corrected Aug 30, 2026: --fw-regular was 300 (which is Light, not
+     Regular) and --fw-body was 400 (which IS Regular). --fw-medium (500)
+     and the old duplicate --fw-light both had zero call sites. Every
+     token below is used, and the name matches the number. */
+  --fw-light: 300;      /* lead paragraphs, intros */
+  --fw-regular: 400;    /* body copy */
+  --fw-semibold: 600;   /* h3 */
+  --fw-bold: 700;       /* h2, h4, card titles */
+  --fw-black: 800;      /* the heaviest — used most, on nav and emphasis */
 
   /* Sized down and given more leading August 27, 2026 (was 2.6→4.8rem at
      1.06 line-height — Lara's call, "hero and page title text smaller,
