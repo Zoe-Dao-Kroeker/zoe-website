@@ -15,19 +15,23 @@
  * from the rendered element via getComputedStyle(), not typed in. If
  * colors_and_type.css drifts, this page drifts with it.
  *
- * AI-readable export (added August 27, 2026, same audit that found the
- * .zoe-note colour bug and the stale h1 label below): the swatch hex values
- * only exist once JS runs getComputedStyle() in a real browser — a tool that
- * just fetches this URL's HTML sees none of them. zoe_design_tokens_for_ai()
- * (inc/template-helpers.php) reads colors_and_type.css directly and prints
- * a plain JSON block server-side, so any AI tool given this page's URL gets
- * real values with no JS execution required. See the <script type=
- * "application/json"> block right after this header, and the plain-English
- * paragraph above it for tools that only read visible text.
+ * AI-readable export: the swatch hex values only exist once JS runs
+ * getComputedStyle() in a real browser — a tool that just fetches this
+ * URL's HTML sees none of them. zoe_design_tokens_for_ai()
+ * (inc/template-helpers.php) reads colors_and_type.css directly, so the
+ * export carries real values with no JS execution required.
+ *
+ * Aug 30, 2026: that export moved OFF this page and onto two routes,
+ * /llms.txt and /design-guidelines/?ai=1 (see zoe_serve_ai_export() in
+ * functions.php), matching every other brand in the workspace. The
+ * visible "For AI tools:" paragraph and the <script type=
+ * "application/json"> island that used to sit here were removed with
+ * it — nothing on the page is addressed to a machine any more. The rule
+ * now is that if a model can't find a value, that's a gap in the
+ * guidelines for humans too, and gets fixed there.
  */
 
 get_header();
-$zoe_ai_tokens = zoe_design_tokens_for_ai();
 ?>
 
 <main class="zoe-main dg" id="main">
@@ -38,30 +42,29 @@ $zoe_ai_tokens = zoe_design_tokens_for_ai();
   <header class="dg-header zoe-bg-block zoe-bg-block--magenta">
     <div class="eyebrow">Zoe Dao-Kroeker</div>
     <h1 class="dg-h1">Design Guidelines</h1>
-    <p class="dg-lede">This page documents the site's real colours and type, pulled directly from its stylesheet, not typed in by hand.</p>
+    <p class="dg-lede">The source of truth for the Zoe Dao-Kroeker visual identity &mdash; colour, type, logos, photography, icons, spacing, and the rules around them. Follow these whenever you create or update anything for the site.</p>
+    <p class="dg-ai-line">Built to be read by people and AI alike &mdash; a plain-text version is at <a href="<?php echo esc_url( home_url( '/llms.txt' ) ); ?>">/llms.txt</a>.</p>
+
     <div class="dg-meta">
-      <span>Draft</span><span>v1.0</span><span>Built by Lara Kroeker Interactive</span>
-      <span>Sources: <a href="<?php echo esc_url( home_url( '/wp-content/themes/zoe-theme/colors_and_type.css' ) ); ?>">colors_and_type.css</a></span>
+      <div class="dg-meta__item">
+        <p class="dg-meta__label">Draft</p>
+        <p class="dg-meta__value">v<?php echo esc_html( wp_get_theme()->get( 'Version' ) ); ?> (Aug 2026)</p>
+      </div>
+      <div class="dg-meta__item">
+        <p class="dg-meta__label">Built by</p>
+        <p class="dg-meta__value">Lara Kroeker</p>
+      </div>
+      <div class="dg-meta__item">
+        <p class="dg-meta__label">Sources</p>
+        <p class="dg-meta__value">
+          <a href="<?php echo esc_url( get_stylesheet_directory_uri() . '/colors_and_type.css' ); ?>">Token file</a> &middot;
+          <a href="<?php echo esc_url( home_url( '/llms.txt' ) ); ?>">Plain text for AI</a> &middot;
+          <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Live site</a>
+        </p>
+      </div>
     </div>
   </header>
 
-  <!-- ============================================================
-       For AI tools reading this page: plain-text summary first (for a
-       tool that only reads visible text), then a full machine-readable
-       JSON block right after (for anything that parses page source).
-       Both are generated from colors_and_type.css, not hand-typed.
-       ============================================================ -->
-  <p class="dg-ai-summary">
-    For AI tools: this site's core palette is Dark <?php echo esc_html( $zoe_ai_tokens['colors']['primitives']['dark'] ?? '' ); ?>,
-    Coral <?php echo esc_html( $zoe_ai_tokens['colors']['primitives']['coral'] ?? '' ); ?>,
-    Magenta <?php echo esc_html( $zoe_ai_tokens['colors']['primitives']['magenta'] ?? '' ); ?>,
-    Green <?php echo esc_html( $zoe_ai_tokens['colors']['primitives']['green'] ?? '' ); ?>,
-    Blue <?php echo esc_html( $zoe_ai_tokens['colors']['primitives']['blue'] ?? '' ); ?>,
-    and CTA amber <?php echo esc_html( $zoe_ai_tokens['colors']['primitives']['cta'] ?? '' ); ?>. Body/UI type is Open Sans;
-    Fontdiner Swanky is used for H1s and hero headlines only. Full colour, type,
-    spacing and radius values are in the JSON block below this paragraph.
-  </p>
-  <script type="application/json" id="zoe-design-tokens"><?php echo wp_json_encode( $zoe_ai_tokens, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ); ?></script>
 
   <!-- ============================================================
        01 — Foundation

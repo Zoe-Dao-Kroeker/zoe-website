@@ -106,3 +106,113 @@ add_action( 'wp_head', function () {
 // needs a filter depends on the decision about the `portfolio` CPT vs.
 // categorised posts, still open.
 
+
+/**
+ * Serve the machine-readable design guidelines on two routes.
+ *
+ * /llms.txt                 — the convention an AI tool looks for by name.
+ * /design-guidelines/?ai=1  — the same content off the URL a person hands out.
+ *
+ * One body, two routes. Standardised across the workspace Aug 30, 2026
+ * so every brand answers the same way.
+ *
+ * This replaces what used to sit ON the guidelines page: a visible "For
+ * AI tools:" paragraph plus a <script type="application/json"> island.
+ * Both were removed. The paragraph existed because this theme computes
+ * swatch hex in the BROWSER via getComputedStyle, so a tool fetching the
+ * URL without running JS saw no values — a real problem, solved in the
+ * wrong place. Nothing on the page is addressed to a machine now; the
+ * export carries it instead.
+ *
+ * zoe_design_tokens_for_ai() is reused unchanged. It is the richest of
+ * the brand exports — roles, fluid type ranges with line-heights,
+ * spacing and radius — so it is worth keeping as-is rather than
+ * flattening it to match the simpler themes.
+ *
+ * Served off `init` so it needs no rewrite flush.
+ */
+function zoe_serve_ai_export() {
+	$path = strtok( isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '', '?' );
+
+	$is_llms = ( '/llms.txt' === $path );
+	$is_ai   = ( isset( $_GET['ai'] ) && '/design-guidelines/' === rtrim( $path, '/' ) . '/' );
+
+	if ( ! $is_llms && ! $is_ai ) {
+		return;
+	}
+
+	$tokens     = zoe_design_tokens_for_ai();
+	$token_file = get_stylesheet_directory() . '/colors_and_type.css';
+	$updated    = is_readable( $token_file ) ? gmdate( 'F j, Y', filemtime( $token_file ) ) : 'unknown';
+
+	$out   = array();
+	$out[] = '# Zoe Dao-Kroeker — Design Guidelines (machine-readable)';
+	$out[] = '';
+	$out[] = 'Generated live from colors_and_type.css, last changed ' . $updated . '.';
+	$out[] = 'Human version: ' . home_url( '/design-guidelines/' );
+	$out[] = '';
+	$out[] = '## Type usage';
+	$out[] = '';
+	$out[] = 'Open Sans — body copy, UI, and every heading level except the H1/hero display face.';
+	$out[] = 'Fontdiner Swanky — H1 and hero headlines ONLY, not the whole heading system.';
+	$out[] = '';
+	$out[] = '## Known gaps';
+	$out[] = '';
+	$out[] = 'Stated plainly so nothing here gets invented to fill them:';
+	$out[] = '- Voice and tone are NOT documented for this site. Do not infer a house style';
+	$out[] = '  from existing copy.';
+	$out[] = '- Contrast ratios are computed in the browser on the human page and are not';
+	$out[] = '  reproduced in this export.';
+	$out[] = '';
+	$out[] = '## Tokens';
+	$out[] = '';
+	$out[] = 'Full token set below, generated from colors_and_type.css — the single source of';
+	$out[] = 'truth. Do not use any colour, font, weight, size or spacing value not listed here.';
+	$out[] = '';
+	$out[] = '```json';
+	$out[] = wp_json_encode( $tokens, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+	$out[] = '```';
+	$out[] = '';
+
+	nocache_headers();
+	header( 'Content-Type: text/plain; charset=utf-8' );
+	echo implode( "\n", $out ) . "\n";
+	exit;
+}
+add_action( 'init', 'zoe_serve_ai_export', 0 );
+
+/**
+ * Point AI tools and browsers at the plain-text guidelines.
+ */
+function zoe_llms_txt_link() {
+	printf(
+		'<link rel="alternate" type="text/plain" href="%s" title="Design guidelines, plain text">' . "\n",
+		esc_url( home_url( '/llms.txt' ) )
+	);
+}
+add_action( 'wp_head', 'zoe_llms_txt_link' );
+
+/**
+ * Tell browsers never to cache pages on the STAGING SERVER.
+ *
+ * Ported from the KSA theme Aug 30, 2026. Staging sends no cache-control
+ * header, so browsers cache the page and reviews happen against stale
+ * markup — and a cached old page styled by new CSS looks like broken
+ * design rather than a stale page, which sends you hunting a bug that
+ * does not exist. Scoped to the Kinsta staging host; production keeps
+ * its caching.
+ */
+function zoe_no_browser_cache_on_staging() {
+	if ( is_admin() ) {
+		return;
+	}
+
+	$host = isset( $_SERVER['HTTP_HOST'] ) ? strtolower( $_SERVER['HTTP_HOST'] ) : '';
+	if ( false === strpos( $host, 'kinsta.cloud' ) ) {
+		return;
+	}
+
+	nocache_headers();
+	header( 'Cache-Control: no-store, no-cache, must-revalidate, max-age=0' );
+}
+add_action( 'template_redirect', 'zoe_no_browser_cache_on_staging' );
