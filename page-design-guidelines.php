@@ -39,7 +39,7 @@ get_header();
   <!-- ============================================================
        Header
        ============================================================ -->
-  <header class="dg-header zoe-bg-block zoe-bg-block--magenta">
+  <header class="dg-header zoe-bg-block zoe-bg-block--dark">
     <div class="eyebrow">Zoe Dao-Kroeker</div>
     <h1 class="dg-h1">Design Guidelines</h1>
     <p class="dg-lede">The source of truth for the Zoe Dao-Kroeker visual identity &mdash; colour, type, logos, photography, icons, spacing, and the rules around them. Follow these whenever you create or update anything for the site.</p>
@@ -125,13 +125,11 @@ get_header();
        03 — Photography
        ============================================================ -->
   <?php
-  $dg_photos = [
-      [ 'file' => '/wp-content/uploads/2025/08/Line-Following-Robot.webp', 'alt' => 'Line Following Robot kit' ],
-      [ 'file' => '/wp-content/uploads/2025/08/Mecanum-Drive-Car.webp', 'alt' => 'Mecanum Drive Car kit' ],
-      [ 'file' => '/wp-content/uploads/2025/08/Electric-Piano.webp', 'alt' => 'Electric Piano circuit build' ],
-      [ 'file' => '/wp-content/uploads/2025/08/Skating-Robot.webp', 'alt' => 'Skating Robot project' ],
-      [ 'file' => '/wp-content/uploads/2025/08/Cart-Pushing-Bot.webp', 'alt' => 'Cart Pushing Robot field trip guide' ],
-  ];
+  // Product shots of the STEM curriculum kits (Line Following Robot, Mecanum
+  // Drive Car, Electric Piano, Skating Robot, Cart Pushing Bot) were removed
+  // August 30, 2026 at Lara's request. This list is now populated purely from
+  // the About page below — no hardcoded photos.
+  $dg_photos = [];
   // About page photos (August 27, 2026, Lara: "for photography add photos
   // from the about page") — read live off the About page's own ACF fields
   // rather than a second hardcoded list, so a new photo added there shows
@@ -151,7 +149,7 @@ get_header();
   <section class="dg-section" id="photography">
     <div class="eyebrow">03 — Photography</div>
     <h2 class="zoe-section__heading">Photography from the site.</h2>
-    <p class="zoe-section__intro">Real photos already in use — STEM curriculum kits from the Work page, and people and process photos from the About page.</p>
+    <p class="zoe-section__intro">Real photos already in use &mdash; the people and process photos from the About page.</p>
     <div class="dg-photo-grid">
       <?php foreach ( $dg_photos as $photo ) :
           $src = ! empty( $photo['raw'] ) ? esc_url( $photo['file'] ) : esc_url( home_url( $photo['file'] ) );

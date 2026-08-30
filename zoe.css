@@ -311,12 +311,13 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .zoe-bg-block--coral { background: var(--zoe-coral); }
 .zoe-bg-block--blue { background: var(--zoe-blue); }
 .zoe-bg-block--green { background: var(--zoe-green); }
-/* Magenta — the Design Guidelines page's own hero (August 27, 2026, Lara:
-   "add a BG to the hero area like on work/about/research"). Magenta was the
-   one Primary colour with no page-level identity yet (Work/About/Research
-   already claim Coral/Green/Blue) — giving it one here instead of picking
-   a colour that's already spoken for. */
-.zoe-bg-block--magenta { background: var(--zoe-magenta); }
+/* Dark — the Design Guidelines page's own header. Was magenta from
+   August 27, 2026 until August 30, 2026, when Lara asked for the warm
+   espresso surface instead. Reads --bg-inverse (which is --zoe-dark,
+   #2B1810) rather than hardcoding the hex, so this block tracks the token
+   the guidelines page itself documents. The magenta variant went with it:
+   nothing else used it. */
+.zoe-bg-block--dark { background: var(--bg-inverse); }
 /* Neutral (off-white) text on all three — Lara's call, August 27, 2026 —
    in place of the dark text these previously forced. This is a harder
    contrast trade than dark text was: dark cleared 4.5:1+ against all
@@ -327,13 +328,13 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 .zoe-bg-block--coral .eyebrow, .zoe-bg-block--coral .zoe-hero__heading,
 .zoe-bg-block--blue .eyebrow, .zoe-bg-block--blue .zoe-hero__heading,
 .zoe-bg-block--green .eyebrow, .zoe-bg-block--green .zoe-hero__heading,
-.zoe-bg-block--magenta .eyebrow, .zoe-bg-block--magenta .zoe-hero__heading {
+.zoe-bg-block--dark .eyebrow, .zoe-bg-block--dark .zoe-hero__heading {
   color: var(--fg-on-dark);
 }
 .zoe-bg-block--coral .zoe-hero__intro,
 .zoe-bg-block--blue .zoe-hero__intro,
 .zoe-bg-block--green .zoe-hero__intro,
-.zoe-bg-block--magenta .zoe-hero__intro {
+.zoe-bg-block--dark .zoe-hero__intro {
   color: var(--fg-on-dark-muted);
 }
 
