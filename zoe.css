@@ -970,7 +970,9 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   max-width: 100%;
 }
 .dg-sp-item b { font-size: var(--type-small); }
-.dg-scale-note { font-size: var(--type-small); line-height: var(--type-small-lh); color: var(--fg-muted); max-width: 70ch; margin-top: var(--sp-24); }
+/* Sits between a .dg-sub heading and its specimen row, so it needs a tight
+   top margin and real breathing room underneath, not the other way round. */
+.dg-scale-note { font-size: var(--type-small); line-height: var(--type-small-lh); color: var(--fg-muted); max-width: 70ch; margin: var(--sp-8) 0 var(--sp-24); }
 
 .dg-radius-row {
   display: grid;

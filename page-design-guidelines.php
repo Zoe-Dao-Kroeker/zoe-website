@@ -325,6 +325,7 @@ get_header();
       <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-display); line-height:var(--type-display-lh); font-weight:400;">Hero headline</span><span class="dg-type-meta"><?php $dg_type_meta( 'display', 'Fontdiner Swanky' ); ?></span></div>
       <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-h1); line-height:var(--type-h1-lh); font-weight:400;">Page title</span><span class="dg-type-meta"><?php $dg_type_meta( 'h1', 'Fontdiner Swanky' ); ?></span></div>
       <div class="dg-type-row"><span style="font-size:var(--type-h2); line-height:var(--type-h2-lh); font-weight:var(--fw-black);">Section heading</span><span class="dg-type-meta"><?php $dg_type_meta( 'h2' ); ?></span></div>
+      <div class="dg-type-row"><span style="font-size:var(--type-h3); line-height:var(--type-h3-lh); font-weight:var(--fw-black);">Subheading</span><span class="dg-type-meta"><?php $dg_type_meta( 'h3' ); ?></span></div>
       <div class="dg-type-row"><span style="font-size:var(--type-h4); line-height:var(--type-h4-lh); font-weight:var(--fw-black);">Card title</span><span class="dg-type-meta"><?php $dg_type_meta( 'h4' ); ?></span></div>
       <div class="dg-type-row"><span style="font-size:var(--type-lead); line-height:var(--type-lead-lh); font-weight:var(--fw-regular);">Lead paragraph, for openings and introductions.</span><span class="dg-type-meta"><?php $dg_type_meta( 'lead' ); ?></span></div>
       <div class="dg-type-row"><span style="font-size:var(--type-body-lg); line-height:var(--type-body-lg-lh); font-weight:var(--fw-regular);">Intro paragraph, a step above body copy.</span><span class="dg-type-meta"><?php $dg_type_meta( 'body-lg' ); ?></span></div>
@@ -342,13 +343,28 @@ get_header();
     <p class="zoe-section__intro">The spacing scale, corner-radius options, and shadow styles used across the site.</p>
 
     <h3 class="dg-sub">Spacing</h3>
-    <div class="dg-spacing-row">
-      <?php
-      $dg_sp = [
+    <?php
+    // Defined before the row so the sentence can be printed above the blocks
+    // while still being generated from the same array that draws them. The
+    // per-block captions became this one sentence (Lara, August 30, 2026):
+    // they wrapped to one or two lines each, which was what knocked the blocks
+    // and their numbers off a shared baseline. Generated, not typed, so
+    // editing the scale rewrites the prose with it.
+    $dg_sp = [
           [ '120', 'Section breaks' ], [ '80', 'Section padding' ], [ '64', 'Large card padding' ],
           [ '48', 'Between blocks' ], [ '32', 'Grid gutters' ], [ '24', 'Card padding' ],
           [ '16', 'Paragraph rhythm' ], [ '12', 'Label to field' ], [ '8', 'Inside components' ], [ '4', 'Hairline gaps' ],
-      ];
+    ];
+    $dg_sp_prose = [];
+    foreach ( $dg_sp as $step ) {
+        $dg_sp_prose[] = $step[0] . ' ' . strtolower( $step[1] );
+    }
+    $dg_sp_last  = array_pop( $dg_sp_prose );
+    $dg_sp_words = implode( ', ', $dg_sp_prose ) . ', and ' . $dg_sp_last;
+    ?>
+    <p class="dg-scale-note">Ten steps, each with a job: <?php echo esc_html( $dg_sp_words ); ?>.</p>
+    <div class="dg-spacing-row">
+      <?php
       foreach ( $dg_sp as $step ) :
       ?>
         <div class="dg-sp-item">
@@ -360,23 +376,9 @@ get_header();
         </div>
       <?php endforeach; ?>
     </div>
-    <?php
-    // The per-block captions moved into this one sentence (Lara, August 30,
-    // 2026) so the blocks and their numbers line up on a clean baseline --
-    // captions wrapped to one or two lines each, which was the thing forcing
-    // the row out of alignment. Built from $dg_sp rather than typed out, so
-    // editing the scale above rewrites this sentence too and the two cannot
-    // drift apart.
-    $dg_sp_prose = [];
-    foreach ( $dg_sp as $step ) {
-        $dg_sp_prose[] = $step[0] . ' ' . strtolower( $step[1] );
-    }
-    $dg_sp_last  = array_pop( $dg_sp_prose );
-    $dg_sp_words = implode( ', ', $dg_sp_prose ) . ', and ' . $dg_sp_last;
-    ?>
-    <p class="dg-scale-note">Ten steps, each with a job: <?php echo esc_html( $dg_sp_words ); ?>.</p>
 
     <h3 class="dg-sub">Radius</h3>
+    <p class="dg-scale-note">Six steps, and the rule is that bigger surfaces take rounder corners: 0 for square edges, 6px on dense UI, 14px on cards, 20px on image wells, 32px on large panels like the hero blocks, and a full pill for buttons and tags.</p>
     <div class="dg-radius-row">
       <div class="dg-radius-item"><div class="dg-radius-box" style="border-radius: var(--radius-none);"></div><b>0</b><span>Square</span></div>
       <div class="dg-radius-item"><div class="dg-radius-box" style="border-radius: var(--radius-sm);"></div><b>6px</b><span>Dense UI</span></div>
