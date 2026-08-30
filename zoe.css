@@ -69,7 +69,7 @@ h1, h2, h3, h4 {
 
 h2 { font-weight: var(--fw-bold); }
 h3 { font-weight: var(--fw-semibold); }
-h4 { font-weight: var(--fw-semibold); }
+h4 { font-weight: var(--fw-bold); }   /* same reasoning as .zoe-card__title: at 16-18px a heading needs weight to hold presence */
 /* Display font on h1 only (hero headings, page titles). h2 reverted to the
    sans the same day it was added — Fontdiner Swanky is a one-tier accent,
    not the whole heading system — so h2/h3/h4 all stay on the base rule
@@ -581,7 +581,16 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
   color: var(--accent-deep);
   font-weight: var(--fw-black);
 }
-.zoe-card__title { font-size: var(--type-h4); line-height: var(--type-h4-lh); margin: var(--sp-8) 0; }
+/* Card titles sit at --type-h4 size (16-18px) but are <h3> elements, so
+   they were inheriting the h3 weight (600) and reading light. A card
+   title is a UI label competing with an eyebrow and an excerpt inside a
+   bordered box, not a subheading inside flowing prose — it needs more
+   weight than an h3 in body copy, at a smaller size. Bumped to 700
+   Aug 30, 2026.
+
+   Scoped to the component rather than raising the global h3 weight,
+   which would flatten h2 and h3 into the same 700 and lose the ladder. */
+.zoe-card__title { font-size: var(--type-h4); line-height: var(--type-h4-lh); font-weight: var(--fw-bold); margin: var(--sp-8) 0; }
 .zoe-card__description { color: var(--fg-muted); font-size: var(--type-small); line-height: var(--type-small-lh); }
 /* A card called out from its siblings — About's one time-sensitive
    facilitation item so far, but usable anywhere zoe_acf_card_subfields()

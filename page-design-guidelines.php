@@ -342,7 +342,6 @@ get_header();
     ?>
     <div class="dg-type-scale">
       <div class="dg-type-row"><span class="eyebrow" style="margin:0">Eyebrow</span><span class="dg-type-meta"><?php $dg_type_meta( 'micro', 'SPAN' ); ?></span></div>
-      <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-display); line-height:var(--type-display-lh); font-weight:400;">Hero headline</span><span class="dg-type-meta"><?php $dg_type_meta( 'display', 'H1', 'Fontdiner Swanky' ); ?></span></div>
       <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-h1); line-height:var(--type-h1-lh); font-weight:400;">Page title</span><span class="dg-type-meta"><?php $dg_type_meta( 'h1', 'H1', 'Fontdiner Swanky' ); ?></span></div>
       <div class="dg-type-row"><h2 style="font-size:var(--type-h2); line-height:var(--type-h2-lh);">Section heading</h2><span class="dg-type-meta"><?php $dg_type_meta( 'h2', 'H2' ); ?></span></div>
       <div class="dg-type-row"><h3 style="font-size:var(--type-h3); line-height:var(--type-h3-lh);">Subheading</h3><span class="dg-type-meta"><?php $dg_type_meta( 'h3', 'H3' ); ?></span></div>

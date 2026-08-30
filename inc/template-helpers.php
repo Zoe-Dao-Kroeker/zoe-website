@@ -166,7 +166,9 @@ function zoe_design_tokens_for_ai() {
         }
     }
 
-    $type_names = [ 'display', 'h1', 'h2', 'h3', 'h4', 'lead', 'body-lg', 'body', 'small', 'micro' ];
+    // 'display' and 'body-lg' removed Aug 30, 2026 — both had zero call
+    // sites outside their own specimen rows. Eight real roles.
+    $type_names = [ 'h1', 'h2', 'h3', 'h4', 'lead', 'body', 'small', 'micro' ];
     $scale = [];
     foreach ( $type_names as $name ) {
         if ( isset( $t[ '--type-' . $name ] ) ) {
@@ -236,12 +238,17 @@ function zoe_design_tokens_for_ai() {
             // deck or a document can reproduce the hierarchy rather than
             // guessing from the numbers above.
             'heading_weights' => [
-                'display' => 'black',
                 'h1'      => 'black',
                 'h2'      => 'bold',
                 'h3'      => 'semibold',
-                'h4'      => 'semibold',
+                'h4'      => 'bold',
             ],
+            // h4 is BOLDER than h3 on purpose. h4 renders at 16-18px and is
+            // used for card titles — a UI label competing with an eyebrow
+            // and an excerpt inside a bordered box, not a subheading in
+            // flowing prose. At that size weight has to do the work size
+            // no longer can.
+            'heading_elements_in_use' => [ 'h1', 'h2', 'h3', 'h4' ],
             'scale_px' => $scale,
         ],
         'spacing_px' => $spacing,

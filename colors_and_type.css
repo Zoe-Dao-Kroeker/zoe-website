@@ -175,7 +175,6 @@
   --fw-bold: 700;
   --fw-black: 800;
 
-  --type-display: clamp(2.5rem, 1.3rem + 4vw, 4.75rem);
   /* Sized down and given more leading August 27, 2026 (was 2.6→4.8rem at
      1.06 line-height — Lara's call, "hero and page title text smaller,
      more leading"). Drives every hero heading and the Design Guidelines
@@ -189,7 +188,6 @@
   --type-small: 0.875rem;
   --type-micro: 0.75rem;
 
-  --type-display-lh: 1.02;
   --type-h1-lh: 1.25;
   --type-h2-lh: 1.08;
   --type-h3-lh: 1.25;
