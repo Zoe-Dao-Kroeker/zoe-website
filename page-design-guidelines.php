@@ -294,11 +294,10 @@ get_header();
   <section class="dg-section" id="type">
     <div class="eyebrow">07 — Type</div>
     <h2 class="zoe-section__heading">Fonts and type sizes.</h2>
-    <p class="zoe-section__intro">Two fonts, used across the whole site: Open Sans for everything, and Fontdiner Swanky for page titles and hero headlines only.</p>
+    <p class="zoe-section__intro">One font, used across the whole site: Open Sans for page titles, headings, body copy and UI.</p>
 
     <div class="dg-type-families">
-      <div><span class="dg-type-label">Display / H1 only</span><div class="dg-type-glyph" style="font-family: var(--font-display); font-weight: var(--fw-regular);">Aa</div><span class="dg-type-sub">Fontdiner Swanky · 400</span></div>
-      <div><span class="dg-type-label">UI / body / H2+</span><div class="dg-type-glyph" style="font-family: var(--font-sans); font-weight: var(--fw-black);">Aa</div><span class="dg-type-sub">Open Sans &middot; Light 300 (lead/intro) &middot; Body 400 &middot; Semibold 600 (h3) &middot; Bold 700 (h2) &middot; Black 800 (h1, h4)</span></div>
+      <div><span class="dg-type-label">Headings / body / UI</span><div class="dg-type-glyph" style="font-family: var(--font-sans); font-weight: var(--fw-black);">Aa</div><span class="dg-type-sub">Open Sans &middot; Light 300 (lead/intro) &middot; Body 400 &middot; Semibold 600 (h3) &middot; Bold 700 (h2) &middot; Black 800 (h1, h4)</span></div>
     </div>
 
     <?php
@@ -342,7 +341,7 @@ get_header();
     ?>
     <div class="dg-type-scale">
       <div class="dg-type-row"><span class="eyebrow" style="margin:0">Eyebrow</span><span class="dg-type-meta"><?php $dg_type_meta( 'micro', 'SPAN' ); ?></span></div>
-      <div class="dg-type-row"><span style="font-family:var(--font-display); font-size:var(--type-h1); line-height:var(--type-h1-lh); font-weight:var(--fw-regular);">Page title</span><span class="dg-type-meta"><?php $dg_type_meta( 'h1', 'H1', 'Fontdiner Swanky' ); ?></span></div>
+      <div class="dg-type-row"><h1 style="font-size:var(--type-h1); line-height:var(--type-h1-lh);">Page title</h1><span class="dg-type-meta"><?php $dg_type_meta( 'h1', 'H1', 'Open Sans' ); ?></span></div>
       <div class="dg-type-row"><h2 style="font-size:var(--type-h2); line-height:var(--type-h2-lh);">Section heading</h2><span class="dg-type-meta"><?php $dg_type_meta( 'h2', 'H2' ); ?></span></div>
       <div class="dg-type-row"><h3 style="font-size:var(--type-h3); line-height:var(--type-h3-lh);">Subheading</h3><span class="dg-type-meta"><?php $dg_type_meta( 'h3', 'H3' ); ?></span></div>
       <div class="dg-type-row"><h3 style="font-size:var(--type-h4); line-height:var(--type-h4-lh);">Card title</h3><span class="dg-type-meta"><?php $dg_type_meta( 'h4', 'H3' ); ?></span></div>
@@ -363,7 +362,7 @@ get_header();
      */
     $zoe_weights = array(
       array( 'light',    'Light',    'Lead paragraphs and intros' ),
-      array( 'regular',  'Regular',  'Body copy, and the H1 display face' ),
+      array( 'regular',  'Regular',  'Body copy' ),
       array( 'semibold', 'Semibold', 'H3 subheadings' ),
       array( 'bold',     'Bold',     'H2, H4, card titles' ),
       array( 'black',    'Black',    'Nav, emphasis, the heaviest level' ),

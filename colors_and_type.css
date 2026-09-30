@@ -74,7 +74,7 @@
    from LKI as structure, not a brand colour — Lara asked for this site's
    system to be set up exactly the same as LKI's. Type itself has diverged,
    all Lara's calls on August 24, 2026: sans is Open Sans, not Inter;
-   Fontdiner Swanky is a new h1-only display face; and LKI's third and
+   Fontdiner Swanky was tried as an h1-only face and dropped Sept 30, 2026; and LKI's third and
    fourth families — Instrument Serif (editorial accent) and JetBrains Mono
    — are dropped entirely. Every former mono/serif usage (eyebrows, stat
    labels, card tags, the footer copyright line, swatch metadata) now reads
@@ -149,10 +149,6 @@
 
   /* ── Type ───────────────────────────────────────────────────────────── */
   --font-sans: "Open Sans", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-  /* Display — h1 only (hero headings, page titles), Lara's pick, August 24,
-     2026. h2 (section headings) reverted to --font-sans the same day —
-     Fontdiner Swanky is a one-tier accent, not the whole heading system. */
-  --font-display: "Fontdiner Swanky", cursive;
 
   /* Open Sans's real weight range tops out at 800 (no 900) — fw-black
      points there instead of 900 to avoid the browser synthesizing a fake

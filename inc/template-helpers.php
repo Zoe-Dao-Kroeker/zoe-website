@@ -224,8 +224,7 @@ function zoe_design_tokens_for_ai() {
         ],
         'type'   => [
             'fonts' => [
-                'sans'    => 'Open Sans — body copy, UI, and every heading level except the H1/hero display face',
-                'display' => 'Fontdiner Swanky — H1 and hero headlines only, not the whole heading system',
+                'sans'    => 'Open Sans — body copy, UI, and every heading level, H1 included',
             ],
             'weights' => [
                 'regular'  => $t['--fw-regular'] ?? null,
@@ -247,7 +246,7 @@ function zoe_design_tokens_for_ai() {
             // deliberate: the heading LEVEL is about document structure,
             // the type token is about scale. They are not the same axis.
             'heading_weights' => [
-                'h1' => 'regular',   // Fontdiner Swanky, one weight only
+                'h1' => 'black',     // 800
                 'h2' => 'bold',
                 'h3' => 'semibold',  // 700 where it titles a block: cards, timeline rows, process steps
             ],

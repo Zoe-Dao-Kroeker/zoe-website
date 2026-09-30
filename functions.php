@@ -56,16 +56,17 @@ add_action( 'after_setup_theme', function () {
 // IMPORTANT: bump ZOE_STYLE_VER on every zoe.css change. The browser and CDN
 // cache by ?ver= query string, not by file content, so a correct upload can
 // still render stale.
-define( 'ZOE_STYLE_VER', '0.49.0' );
+define( 'ZOE_STYLE_VER', '0.50.0' );
 
 add_action( 'wp_enqueue_scripts', function () {
-    // Google Fonts — two families only. Sans is Open Sans (switched from
-    // Inter, August 24, 2026); Fontdiner Swanky is h1 only, not the whole
-    // heading system. Instrument Serif and JetBrains Mono, both from the
-    // original LKI-copied system, were dropped the same day.
+    // Google Fonts — one family only. Open Sans (switched from Inter,
+    // August 24, 2026) is used for everything, h1 included. Fontdiner
+    // Swanky, the short-lived h1 display face, was dropped September 30,
+    // 2026. Instrument Serif and JetBrains Mono, both from the original
+    // LKI-copied system, were dropped August 24.
     wp_enqueue_style(
         'zoe-google-fonts',
-        'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Fontdiner+Swanky&display=swap',
+        'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap',
         [],
         null
     );
@@ -153,8 +154,7 @@ function zoe_serve_ai_export() {
 	$out[] = '';
 	$out[] = '## Type usage';
 	$out[] = '';
-	$out[] = 'Open Sans — body copy, UI, and every heading level except the H1/hero display face.';
-	$out[] = 'Fontdiner Swanky — H1 and hero headlines ONLY, not the whole heading system.';
+	$out[] = 'Open Sans — body copy, UI, and every heading level, H1 included.';
 	$out[] = '';
 	$out[] = '## Known gaps';
 	$out[] = '';
